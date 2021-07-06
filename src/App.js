@@ -5,18 +5,9 @@ import NavBar from "./components/NavBar.js";
 import "./App.css";
 
 const Home = lazy(() => import("./components/Home.js"));
-const About = lazy(() => import("./components/About.js"));
 const SinglePost = lazy(() => import("./components/SinglePost.js"));
 const Posts = lazy(() => import("./components/Posts.js"));
-const Audio = lazy(() => import("./components/Audio.js"));
-const Worldbuilder = lazy(() => import("./components/Worldbuilder.js"));
-const Skeleton = lazy(() => import("./components/Skeleton.js"));
 const Projects = lazy(() => import("./components/Projects.js"));
-const Playground = lazy(() => import("./components/Playground.js"));
-const ContentRedistribution = lazy(() =>
-  import("./components/ContentRedistribution.js")
-);
-const Play4UsNow = lazy(() => import("./components/Play4.js"));
 
 function App() {
   return (
@@ -31,9 +22,7 @@ function App() {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route path="/about">
-                <About />
-              </Route>
+
               <Route path="/projects/:slug">
                 <SinglePost />
               </Route>
@@ -42,24 +31,6 @@ function App() {
               </Route>
               <Route path="/projects">
                 <Projects />
-              </Route>
-              <Route path="/audio-visualiser">
-                <Audio />
-              </Route>
-              <Route path="/worldbuilder">
-                <Worldbuilder />
-              </Route>
-              <Route path="/skeleton">
-                <Skeleton />
-              </Route>
-              <Route path="/playground">
-                <Playground />
-              </Route>
-              <Route path="/Content-Redistribution">
-                <ContentRedistribution />
-              </Route>
-              <Route path="/play4usnow">
-                <Play4UsNow />
               </Route>
             </Switch>
           </Suspense>

@@ -20,24 +20,6 @@ export default function NavBar() {
           <NavLink className="standard-button" to="/about">
             About us
           </NavLink>
-          <NavLink className="standard-button" to="/audio-visualiser">
-            Audio Visualizer
-          </NavLink>
-          <NavLink className="standard-button" to="/worldbuilder">
-            World Builder
-          </NavLink>
-          <NavLink className="standard-button" to="/skeleton">
-            Skeleton
-          </NavLink>
-          <NavLink className="standard-button" to="/playground">
-            Playground
-          </NavLink>
-          <NavLink className="standard-button" to="/Content-Redistribution">
-            Content Redistribution
-          </NavLink>
-          <NavLink className="standard-button" to="/play4usnow">
-            Play 4 Us Now
-          </NavLink>
         </div>
       </nav>
       <div
