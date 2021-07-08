@@ -16,23 +16,30 @@ function urlFor(source) {
 }
 
 export default function Projects() {
-  const [postData, setPost] = useState(null);
+  const [allPosts, setAllPosts] = useState(null);
+
+  const [sortedPosts, setSortedPosts] = useState(null);
 
   const [tags, setTags] = useState([]);
+
+  const [currentTags, setCurrentTags] = useState([]);
 
   useEffect(() => {
     sanityClient
       .fetch(
-        '*[_type == "project"]{title,slug,mainImage{asset->{_id,url}, alt},imagesGallery, tags}'
+        '*[_type == "project"]{title,slug,mainImage{asset->{_id,url}, hotspot, alt},imagesGallery, tags}'
       )
       .then((data) => {
-        setPost(data);
+        setAllPosts(data);
+        setSortedPosts(data);
         var tags = [];
         for (let index = 0; index < data.length; index++) {
-          const project = data[index];
-          if (project.tags != null && Array.isArray(project.tags)) {
-            for (let index = 0; index < project.tags.length; index++) {
-              const tag = project.tags[index];
+          const post = data[index];
+          console.log(post.mainImage);
+          post.value = 0;
+          if (post.tags != null && Array.isArray(post.tags)) {
+            for (let index = 0; index < post.tags.length; index++) {
+              const tag = post.tags[index];
               tags.push(tag);
             }
           }
@@ -44,43 +51,119 @@ export default function Projects() {
       .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    if (currentTags.length > 0) {
+      const tempSortedPosts = [];
+
+      ///loop through all posts
+      for (let index = 0; index < allPosts.length; index++) {
+        const post = allPosts[index];
+        let post_score = 0;
+
+        ///check the posts tags
+        for (let index = 0; index < post.tags.length; index++) {
+          const tag = post.tags[index];
+
+          ///compare post tags to currentTags
+          if (currentTags.includes(tag)) {
+            //set post_score depending on how many currentTags the post is matching
+            post_score = post_score + 1;
+          }
+        }
+        if (post_score > 0) {
+          post.value = post_score;
+          tempSortedPosts.push(post);
+        }
+      }
+      tempSortedPosts.sort((a, b) => b.value - a.value);
+
+      console.log("SORTED", tempSortedPosts);
+
+      setSortedPosts(tempSortedPosts);
+    } else {
+      setSortedPosts(allPosts);
+    }
+  }, [currentTags, allPosts]);
+
+  function setTag(tag) {
+    if (!currentTags.includes(tag.tag)) {
+      const tempTags = [...currentTags];
+      tempTags.push(tag.tag);
+      setCurrentTags(tempTags);
+      document.getElementById("tag_" + tag.tag).classList.add("active");
+    } else if (currentTags.includes(tag.tag)) {
+      var tagIndex = currentTags.indexOf(tag.tag);
+      currentTags.splice(tagIndex, 1);
+      const tempTags = [...currentTags];
+      document.getElementById("tag_" + tag.tag).classList.remove("active");
+
+      setCurrentTags(tempTags);
+    }
+  }
+
   return (
     <>
-      {tags.map((tag, index) => (
-        <button id={"tag" + index + ""}> {tag} </button>
-      ))}
-      <div className="content-container">
-        <section className="grid grid-cols-2">
-          {postData &&
-            postData.map((post, index) => (
-              <article key={post.slug.current} className="teaser">
-                <Link
-                  to={"/projects/" + post.slug.current}
-                  key={post.slug.current}
-                  className="w-full teaser-link"
-                >
-                  <h3>{post.title}</h3>
-                  <div className="flex-row">
-                    <img
-                      src={post.mainImage.asset.url}
-                      alt={post.mainImage.alt}
-                      className="w-full teaser-image"
-                    />
-                    {post.imagesGallery &&
-                      post.imagesGallery.map((image, index) => (
-                        <img
-                          src={urlFor(image).url()}
-                          alt={image}
-                          key={index}
-                          className="w-full teaser-image"
-                        />
-                      ))}
-                  </div>
-                </Link>
-              </article>
-            ))}
-        </section>
+      <div className="tag_grid">
+        {tags.map((tag, index) => (
+          <button
+            className="tag_button"
+            key={index}
+            id={"tag_" + tag + ""}
+            onClick={() => {
+              setTag({ tag });
+            }}
+          >
+            {" "}
+            {tag}{" "}
+          </button>
+        ))}
       </div>
+      <section className="post_grid">
+        {sortedPosts &&
+          sortedPosts.map((post, index) => (
+            <article key={post.slug.current} className="post_card">
+              <Link
+                to={"/" + post.slug.current}
+                key={post.slug.current}
+                className="w-full teaser-link"
+              >
+                <div className="details">
+                  <h3>{post.title}</h3>
+                  {post.tags.map((tag, index) => (
+                    <button
+                      className="tag_button"
+                      key={index}
+                      id={"tag_" + tag + ""}
+                      onClick={() => {
+                        setTag({ tag });
+                      }}
+                    >
+                      {" "}
+                      {tag}{" "}
+                    </button>
+                  ))}
+                </div>
+
+                {post.mainImage.hotspot ? (
+                  <img
+                    src={urlFor(post.mainImage.asset.url)}
+                    alt={post.mainImage.alt}
+                    style={{
+                      objectPosition: `${post.mainImage.hotspot.x * 100}% ${
+                        post.mainImage.hotspot.y * 100
+                      }%`,
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={urlFor(post.mainImage.asset.url)}
+                    alt={post.mainImage.alt}
+                  />
+                )}
+              </Link>
+            </article>
+          ))}
+      </section>
     </>
   );
 }

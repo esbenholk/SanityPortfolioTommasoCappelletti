@@ -37,7 +37,11 @@ export default {
         },
       ],
     },
-    { name: "description", type: "text" },
+    {
+      name: "body",
+      title: "Body",
+      type: "blockContent",
+    },
     {
       name: "projectType",
       title: "Project Type",
