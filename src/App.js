@@ -1,7 +1,7 @@
 /* eslint-disable no-lone-blocks */
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import NavBar from "./components/NavBar.js";
+// import NavBar from "./components/NavBar.js";
 import "./App.css";
 
 const SinglePost = lazy(() => import("./components/SinglePost.js"));
