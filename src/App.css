@@ -2,8 +2,7 @@
 
 :root {
   /* Set neon color */
-  --neon-text-color: #f40;
-  --neon-border-color: #08f;
+  --normalPadding: 2%;
 }
 
 * {
@@ -31,6 +30,10 @@ body {
   overflow-x: hidden;
 }
 
+img {
+  max-width: 100%;
+}
+
 a {
   text-decoration: none;
 }
@@ -46,23 +49,30 @@ a.visited {
 .tag_button {
   border: 2px solid black;
   padding: 5px;
-  margin: 5px;
+  margin-right: 5px;
   background-color: white;
 }
 .tag_button.active {
   background-color: greenyellow;
 }
+.tag_grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: var(--normalPadding);
+}
 .post_grid {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: var(--normalPadding);
 }
 .post_card {
   position: relative;
   border: 2px solid black;
-  flex-grow: -1;
-  width: 33%;
+  flex-grow: 1;
   min-height: 600px;
   max-width: 100%;
   min-width: 300px;
@@ -87,34 +97,30 @@ a.visited {
 }
 
 nav {
-  flex-grow: 1;
-  z-index: 9999999999;
-  max-width: 450px;
-}
-
-.flex-row {
-  display: flex;
-  flex-wrap: wrap;
-}
-.fixed-left-top {
   position: fixed;
+  top: 0;
   left: 0;
-  top: 0;
-  z-index: 1;
-}
-.fixed-right-top {
-  position: fixed;
   right: 0;
-  top: 0;
-  z-index: 1;
+  z-index: 9999999999;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.tiny {
-  max-height: 92px;
-  margin-bottom: -10px;
+.logo_container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.tiny:last-child {
-  margin-left: -30px;
+.logo_container img {
+  max-height: 100px;
+  position: absolute;
+  z-index: -1;
+}
+.logo_container p {
+  white-space: nowrap;
 }
 
 .standard-button {
@@ -128,10 +134,7 @@ nav {
   font-family: "Pathway Gothic One", sans-serif;
 }
 
-.arrow {
-  position: absolute;
-  right: 0;
-  top: 23px;
-  transform: scaleX(-1);
-  height: 80px;
+.headline,
+.mainImage {
+  padding: var(--normalPadding);
 }

@@ -17,6 +17,11 @@ export default {
       },
     },
     {
+      name: "year",
+      title: "Year",
+      type: "number",
+    },
+    {
       name: "mainImage",
       title: "Main image",
       type: "image",
@@ -43,17 +48,10 @@ export default {
       type: "blockContent",
     },
     {
-      name: "projectType",
-      title: "Project Type",
-      type: "string",
-      options: {
-        list: [
-          { value: "exhibition", title: "Exhibition" },
-          { value: "poster", title: "Poster" },
-          { value: "artwork", title: "Artwork" },
-          { value: "website", title: "Website" },
-        ],
-      },
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [{ type: "reference", to: { type: "category" } }],
     },
     {
       name: "Link",
