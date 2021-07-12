@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import sanityClient from "../../client";
-import { useParams } from "react-router-dom";
-import BlockContent from "@sanity/block-content-to-react";
+
 import { Link } from "react-router-dom";
 
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 import imageUrlBuilder from "@sanity/image-url";
 

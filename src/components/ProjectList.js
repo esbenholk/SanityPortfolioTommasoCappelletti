@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import sanityClient from "../client";
 
@@ -14,18 +14,60 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-///fix call for categories in project ngrok
-{
-  /* <p>{project.categories ? project.categories[0] : "undefined"}</p> */
+function toggleHover(e) {
+  const thumbnail = e.target.parentNode.getElementsByTagName("img")[0];
+
+  if (thumbnail.classList.contains("hidden")) {
+    thumbnail.classList.remove("hidden");
+    thumbnail.classList.add("visible");
+  } else if (thumbnail.classList.contains("visible")) {
+    thumbnail.classList.remove("visible");
+    thumbnail.classList.add("hidden");
+  }
+  console.log("thumbnail", thumbnail, thumbnail.class);
 }
 
 export default function Projects({ projectList }) {
   return (
-    <div>
+    <div className="projectList">
       {projectList &&
         projectList.map((project, index) => (
-          <div key={index}>
-            <p>{project.title ? project.title : "undefined"}</p>
+          <div key={index} className="projectList-item">
+            <p className="category">
+              {project.categories[0]
+                ? project.categories[0].title
+                : "undefined"}
+            </p>
+            <div onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+              {" "}
+              <a href={"/projects/" + project.slug.current}>
+                {project.title ? project.title : "undefined"}
+              </a>
+              {project.mainImage.hotspot ? (
+                <img
+                  src={urlFor(project.mainImage.asset.url)
+                    .width(500)
+                    .height(300)
+                    .url()}
+                  alt={project.mainImage.alt}
+                  style={{
+                    objectPosition: `${project.mainImage.hotspot.x * 100}% ${
+                      project.mainImage.hotspot.y * 100
+                    }%`,
+                  }}
+                  className="thumbnail hidden"
+                />
+              ) : (
+                <img
+                  src={urlFor(project.mainImage.asset.url)
+                    .width(500)
+                    .height(300)
+                    .url()}
+                  alt={project.mainImage.alt}
+                  className="thumbnail hidden"
+                />
+              )}
+            </div>
             <p>{project.year ? project.year : "undefined"}</p>
           </div>
         ))}

@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     sanityClient
       .fetch(
-        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, year, categories}'
+        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, year ,slug, categories[]->{title}, tags}'
       )
       .then((data) => {
         console.log(data);
@@ -46,7 +46,9 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route exact path="/">
-              {siteSettings && <LandingPage info={siteSettings} />}
+              {siteSettings && (
+                <LandingPage info={siteSettings} projectList={projectList} />
+              )}
             </Route>
             <Route path="/projects/:slug">
               <SinglePost />

@@ -1,24 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import sanityClient from "../../client";
-
-import imageUrlBuilder from "@sanity/image-url";
-
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 import PostCard from "./postCard.js";
 
-// Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(sanityClient);
-
-// Then we like to make a simple function like this that gives the
-// builder an image and returns the builder for you to specify additional
-// parameters:
-function urlFor(source) {
-  return builder.image(source);
-}
-
-export default function Projects() {
+export default function Projects({ projectList }) {
   const [allPosts, setAllPosts] = useState(null);
 
   const [sortedPosts, setSortedPosts] = useState(null);
@@ -28,31 +14,24 @@ export default function Projects() {
   const [currentTags, setCurrentTags] = useState([]);
 
   useEffect(() => {
-    sanityClient
-      .fetch(
-        '*[_type == "project"]{title,slug,mainImage{asset->{_id,url}, hotspot, alt}, tags}'
-      )
-      .then((data) => {
-        setAllPosts(data);
-        setSortedPosts(data);
-        var tags = [];
-        for (let index = 0; index < data.length; index++) {
-          const post = data[index];
-          console.log(post.mainImage);
-          post.value = 0;
-          if (post.tags != null && Array.isArray(post.tags)) {
-            for (let index = 0; index < post.tags.length; index++) {
-              const tag = post.tags[index];
-              tags.push(tag);
-            }
-          }
+    setAllPosts(projectList);
+    setSortedPosts(projectList);
+    var tags = [];
+    for (let index = 0; index < projectList.length; index++) {
+      const post = projectList[index];
+      console.log(post.mainImage);
+      post.value = 0;
+      if (post.tags != null && Array.isArray(post.tags)) {
+        for (let index = 0; index < post.tags.length; index++) {
+          const tag = post.tags[index];
+          tags.push(tag);
         }
+      }
+    }
 
-        let sortedTags = [...new Set(tags)];
-        setTags(sortedTags);
-      })
-      .catch(console.error);
-  }, []);
+    let sortedTags = [...new Set(tags)];
+    setTags(sortedTags);
+  }, [projectList]);
 
   useEffect(() => {
     if (currentTags.length > 0) {

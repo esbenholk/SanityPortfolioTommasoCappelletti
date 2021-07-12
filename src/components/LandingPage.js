@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import sanityClient from "../client";
 
@@ -18,16 +18,20 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-export default function LandingPage({ info }) {
+export default function LandingPage({ info, projectList }) {
   const { scrollYProgress } = useViewportScroll();
   const x = useTransform(scrollYProgress, [0, 1], [0, -3000]);
   return (
     <motion.div layout>
-      <img className="mainImage" src={info.mainImage.asset.url} alt="" />
+      <img
+        className="mainImage"
+        src={urlFor(info.mainImage.asset.url)}
+        alt=""
+      />
       <motion.h1 style={{ x }} className="headline">
         {info.title}
       </motion.h1>
-      <Projects />
+      <Projects projectList={projectList} />
     </motion.div>
   );
 }
