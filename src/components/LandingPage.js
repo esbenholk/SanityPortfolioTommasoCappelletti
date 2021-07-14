@@ -4,7 +4,7 @@ import sanityClient from "../client";
 
 import imageUrlBuilder from "@sanity/image-url";
 
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 import Projects from "./blocks/Projects.js";
 
@@ -19,18 +19,21 @@ function urlFor(source) {
 }
 
 export default function LandingPage({ info, projectList }) {
-  const { scrollYProgress } = useViewportScroll();
-  const x = useTransform(scrollYProgress, [0, 1], [0, -3000]);
   return (
-    <motion.div layout>
+    <motion.div
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.h1 className="headline">{info.title}</motion.h1>
+
       <img
         className="mainImage"
         src={urlFor(info.mainImage.asset.url)}
         alt=""
       />
-      <motion.h1 style={{ x }} className="headline">
-        {info.title}
-      </motion.h1>
+
       <Projects projectList={projectList} />
     </motion.div>
   );

@@ -5,6 +5,7 @@ import BlockContent from "@sanity/block-content-to-react";
 import PostCard from "./blocks/postCard.js";
 
 import imageUrlBuilder from "@sanity/image-url";
+import { motion } from "framer-motion";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
@@ -58,7 +59,12 @@ export default function SinglePost() {
   if (!singlePost) return <div>Loading...</div>;
 
   return (
-    <main>
+    <motion.div
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <article>
         {singlePost.mainImage.hotspot ? (
           <img
@@ -94,6 +100,6 @@ export default function SinglePost() {
             <PostCard post={post} key={index} />
           ))}
       </div>
-    </main>
+    </motion.div>
   );
 }

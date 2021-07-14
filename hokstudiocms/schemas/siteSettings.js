@@ -19,6 +19,21 @@ export default {
       },
     },
     {
+      name: "featuredProjects",
+      title: "Projects in Landing Page Slider",
+      description:
+        "input project names to create Slider of Featured Projects, which replaces Main Image",
+
+      type: "array",
+      of: [
+        {
+          name: "projectName",
+          title: "Project Name",
+          type: "string",
+        },
+      ],
+    },
+    {
       name: "logo",
       title: "Logo",
       type: "image",
@@ -38,6 +53,30 @@ export default {
       name: "body",
       title: "Body",
       type: "blockContent",
+    },
+    {
+      name: "socialMediaHandles",
+      title: "Social Media Handles",
+      type: "array",
+      of: [
+        {
+          title: "Social Media Handle",
+          name: "socialMediaHandle",
+          type: "object",
+          fields: [
+            {
+              title: "URL",
+              name: "url",
+              type: "url",
+            },
+            {
+              name: "logo",
+              title: "Logo",
+              type: "image",
+            },
+          ],
+        },
+      ],
     },
   ],
 };

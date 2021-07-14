@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-import { motion } from "framer-motion";
+import Masonry from "react-masonry-css";
 
 import PostCard from "./postCard.js";
+
+const breakpointColumnsObj = {
+  default: 3,
+  1100: 2,
+  600: 1,
+};
 
 export default function Projects({ projectList }) {
   const [allPosts, setAllPosts] = useState(null);
@@ -10,32 +16,51 @@ export default function Projects({ projectList }) {
   const [sortedPosts, setSortedPosts] = useState(null);
 
   const [tags, setTags] = useState([]);
-
   const [currentTags, setCurrentTags] = useState([]);
+
+  const [categories, setCategories] = useState([]);
+  const [currentCategories, setCurrentCategories] = useState([]);
 
   useEffect(() => {
     setAllPosts(projectList);
     setSortedPosts(projectList);
     var tags = [];
+    var categories = [];
+
     for (let index = 0; index < projectList.length; index++) {
       const post = projectList[index];
       console.log(post.mainImage);
       post.value = 0;
+
       if (post.tags != null && Array.isArray(post.tags)) {
         for (let index = 0; index < post.tags.length; index++) {
           const tag = post.tags[index];
           tags.push(tag);
         }
       }
+      if (post.categories != null && Array.isArray(post.categories)) {
+        for (let index = 0; index < post.categories.length; index++) {
+          const category = post.categories[index];
+          categories.push(category.title);
+        }
+      }
     }
 
     let sortedTags = [...new Set(tags)];
     setTags(sortedTags);
+
+    let sortedCategories = [...new Set(categories)];
+    setCategories(sortedCategories);
   }, [projectList]);
 
   useEffect(() => {
-    if (currentTags.length > 0) {
+    if (currentTags.length > 0 || currentCategories.length > 0) {
       const tempSortedPosts = [];
+      console.log(
+        "search criteria has been updated",
+        currentCategories,
+        currentTags
+      );
 
       ///loop through all posts
       for (let index = 0; index < allPosts.length; index++) {
@@ -43,13 +68,29 @@ export default function Projects({ projectList }) {
         let post_score = 0;
 
         ///check the posts tags
-        for (let index = 0; index < post.tags.length; index++) {
-          const tag = post.tags[index];
+        if (post.tags) {
+          for (let index = 0; index < post.tags.length; index++) {
+            const tag = post.tags[index];
 
-          ///compare post tags to currentTags
-          if (currentTags.includes(tag)) {
-            //set post_score depending on how many currentTags the post is matching
-            post_score = post_score + 1;
+            ///compare post tags to currentTags
+            if (currentTags.includes(tag)) {
+              //set post_score depending on how many currentTags the post is matching
+              post_score = post_score + 1;
+            }
+          }
+        }
+
+        if (post.categories) {
+          for (let index = 0; index < post.categories.length; index++) {
+            const category = post.categories[index];
+            console.log("checks post categories", category);
+
+            ///compare post tags to currentTags
+            if (currentCategories.includes(category.title)) {
+              //set post_score depending on how many currentTags the post is matching
+              post_score = post_score + 1;
+              console.log("post matches a category");
+            }
           }
         }
         if (post_score > 0) {
@@ -59,13 +100,11 @@ export default function Projects({ projectList }) {
       }
       tempSortedPosts.sort((a, b) => b.value - a.value);
 
-      console.log("SORTED", tempSortedPosts);
-
       setSortedPosts(tempSortedPosts);
     } else {
       setSortedPosts(allPosts);
     }
-  }, [currentTags, allPosts]);
+  }, [currentTags, allPosts, currentCategories]);
 
   function setTag(tag) {
     if (!currentTags.includes(tag.tag)) {
@@ -83,12 +122,48 @@ export default function Projects({ projectList }) {
     }
   }
 
+  function setCategory(category) {
+    console.log("sorting from category", category, currentCategories);
+    if (!currentCategories.includes(category.category)) {
+      const tempCategories = [...currentCategories];
+      tempCategories.push(category.category);
+      setCurrentCategories(tempCategories);
+      document
+        .getElementById("category_" + category.category)
+        .classList.add("active");
+    } else if (currentCategories.includes(category.category)) {
+      var categoryIndex = currentCategories.indexOf(category.category);
+      currentCategories.splice(categoryIndex, 1);
+      const tempCategories = [...currentCategories];
+      document
+        .getElementById("category_" + category.category)
+        .classList.remove("active");
+
+      setCurrentCategories(tempCategories);
+    }
+  }
+
   return (
     <div>
       <div className="tag_grid">
+        {categories.map((category, index) => (
+          <button
+            className="tag_button standard-button"
+            key={index}
+            id={"category_" + category + ""}
+            onClick={() => {
+              setCategory({ category });
+            }}
+          >
+            {" "}
+            {category}{" "}
+          </button>
+        ))}
+      </div>
+      <div className="tag_grid">
         {tags.map((tag, index) => (
           <button
-            className="tag_button"
+            className="tag_button standard-button"
             key={index}
             id={"tag_" + tag + ""}
             onClick={() => {
@@ -101,12 +176,16 @@ export default function Projects({ projectList }) {
         ))}
       </div>
 
-      <motion.div layout className="post_grid">
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
         {sortedPosts &&
           sortedPosts.map((post, index) => (
             <PostCard post={post} key={index} />
-          ))}
-      </motion.div>
+          ))}{" "}
+      </Masonry>
     </div>
   );
 }

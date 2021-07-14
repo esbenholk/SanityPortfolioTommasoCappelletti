@@ -4,41 +4,46 @@ import sanityClient from "../client";
 
 import imageUrlBuilder from "@sanity/image-url";
 
+import { motion } from "framer-motion";
+
+import { toggleHover } from "./functions/toggleHover";
+
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
 
-// Then we like to make a simple function like this that gives the
-// builder an image and returns the builder for you to specify additional
-// parameters:
 function urlFor(source) {
   return builder.image(source);
 }
-
-function toggleHover(e) {
-  const thumbnail = e.target.parentNode.getElementsByTagName("img")[0];
-
-  if (thumbnail.classList.contains("hidden")) {
-    thumbnail.classList.remove("hidden");
-    thumbnail.classList.add("visible");
-  } else if (thumbnail.classList.contains("visible")) {
-    thumbnail.classList.remove("visible");
-    thumbnail.classList.add("hidden");
-  }
-  console.log("thumbnail", thumbnail, thumbnail.class);
+function hover(e) {
+  toggleHover({ e });
 }
 
 export default function Projects({ projectList }) {
   return (
-    <div className="projectList">
+    <motion.div
+      className="projectList"
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       {projectList &&
         projectList.map((project, index) => (
           <div key={index} className="projectList-item">
-            <p className="category">
-              {project.categories[0]
-                ? project.categories[0].title
-                : "undefined"}
-            </p>
-            <div onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+            <div className="categories">
+              {project.categories &&
+                project.categories.map((category, index) => (
+                  <a
+                    key={index}
+                    id={"category_" + category.title + ""}
+                    href={category.title}
+                  >
+                    {category.title}
+                    {index + 1 !== project.categories.length ? "," : null}
+                  </a>
+                ))}
+            </div>
+            <div onMouseEnter={hover} onMouseLeave={hover}>
               {" "}
               <a href={"/projects/" + project.slug.current}>
                 {project.title ? project.title : "undefined"}
@@ -55,7 +60,7 @@ export default function Projects({ projectList }) {
                       project.mainImage.hotspot.y * 100
                     }%`,
                   }}
-                  className="thumbnail hidden"
+                  className="thumbnail seeOnHover hidden"
                 />
               ) : (
                 <img
@@ -64,13 +69,13 @@ export default function Projects({ projectList }) {
                     .height(300)
                     .url()}
                   alt={project.mainImage.alt}
-                  className="thumbnail hidden"
+                  className="thumbnail seeOnHover hidden"
                 />
               )}
             </div>
             <p>{project.year ? project.year : "undefined"}</p>
           </div>
         ))}
-    </div>
+    </motion.div>
   );
 }

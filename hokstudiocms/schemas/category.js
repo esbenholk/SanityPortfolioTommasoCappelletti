@@ -15,5 +15,14 @@ export default {
       title: "Description",
       type: "text",
     },
+    {
+      name: "slug",
+      type: "slug",
+      title: "Slug",
+      options: {
+        // add a button to generate slug from the title field
+        source: "title",
+      },
+    },
   ],
 };

@@ -6,9 +6,14 @@ import "./App.css";
 import sanityClient from "./client";
 import Header from "./components/Header.js";
 
+import { AnimatePresence } from "framer-motion";
+import Footer from "./components/Footer";
+
 const SinglePost = lazy(() => import("./components/SinglePost.js"));
 const LandingPage = lazy(() => import("./components/LandingPage.js"));
 const ProjectList = lazy(() => import("./components/ProjectList.js"));
+const Category = lazy(() => import("./components/Category.js"));
+const Home = lazy(() => import("./components/Home.js"));
 
 function App() {
   const [siteSettings, setSiteSettings] = useState();
@@ -17,21 +22,17 @@ function App() {
   useEffect(() => {
     sanityClient
       .fetch(
-        '*[_type == "siteSettings"]{title,mainImage{asset->{_id,url}, hotspot, alt}, logo{asset->{_id,url}}, about, contact}'
+        '*[_type == "siteSettings"]{title,mainImage{asset->{_id,url}, hotspot, alt}, logo{asset->{_id,url}}, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url}}'
       )
       .then((data) => {
         setSiteSettings(data[0]);
       })
       .catch(console.error);
-  }, []);
-
-  useEffect(() => {
     sanityClient
       .fetch(
-        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, year ,slug, categories[]->{title}, tags}'
+        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, year ,slug, categories[]->{title}, tags, color, recap}'
       )
       .then((data) => {
-        console.log(data);
         data.sort((a, b) => b.year - a.year);
         setProjectList(data);
       })
@@ -40,25 +41,40 @@ function App() {
 
   return (
     <main>
-      <BrowserRouter>
-        {siteSettings && <Header info={siteSettings} />}
-
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <Route exact path="/">
-              {siteSettings && (
-                <LandingPage info={siteSettings} projectList={projectList} />
-              )}
-            </Route>
-            <Route path="/projects/:slug">
-              <SinglePost />
-            </Route>
-            <Route path="/projects">
-              <ProjectList projectList={projectList} />
-            </Route>
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
+      <Suspense fallback={null}>
+        <BrowserRouter>
+          {siteSettings && <Header info={siteSettings} />}
+          <AnimatePresence>
+            <div className="mainContainer">
+              <Switch>
+                <Route exact path="/">
+                  {siteSettings && (
+                    <LandingPage
+                      info={siteSettings}
+                      projectList={projectList}
+                    />
+                  )}
+                </Route>
+                <Route path="/projects/:slug">
+                  <SinglePost />
+                </Route>
+                <Route path="/projects">
+                  <ProjectList projectList={projectList} />
+                </Route>
+                <Route path="/about">
+                  <Home />
+                </Route>
+                <Route path="/:slug">
+                  <Category />
+                </Route>
+              </Switch>
+            </div>
+          </AnimatePresence>
+          {siteSettings && (
+            <Footer info={siteSettings} projectList={projectList} />
+          )}
+        </BrowserRouter>
+      </Suspense>
     </main>
   );
 }

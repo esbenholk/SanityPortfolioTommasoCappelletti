@@ -22,6 +22,12 @@ export default {
       type: "number",
     },
     {
+      name: "color",
+      title: "Color",
+      description: "input HEX Color Code",
+      type: "string",
+    },
+    {
       name: "mainImage",
       title: "Main image",
       type: "image",
@@ -41,6 +47,11 @@ export default {
           },
         },
       ],
+    },
+    {
+      name: "recap",
+      title: "Recap",
+      type: "blockContent",
     },
     {
       name: "body",
