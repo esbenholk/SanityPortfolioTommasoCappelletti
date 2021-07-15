@@ -1,39 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Footer({ info, projectList }) {
-  const [tags, setTags] = useState([]);
+import AppContext from "../globalState";
 
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    var tags = [];
-    var categories = [];
-    if (projectList) {
-      for (let index = 0; index < projectList.length; index++) {
-        const post = projectList[index];
-
-        if (post.tags != null && Array.isArray(post.tags)) {
-          for (let index = 0; index < post.tags.length; index++) {
-            const tag = post.tags[index];
-            tags.push(tag);
-          }
-        }
-        if (post.categories != null && Array.isArray(post.categories)) {
-          for (let index = 0; index < post.categories.length; index++) {
-            const category = post.categories[index];
-            categories.push(category.title);
-          }
-        }
-      }
-
-      let sortedTags = [...new Set(tags)];
-      setTags(sortedTags);
-
-      let sortedCategories = [...new Set(categories)];
-      setCategories(sortedCategories);
-    }
-  }, [projectList]);
+export default function Footer() {
+  const myContext = useContext(AppContext);
+  const info = myContext.siteSettings;
+  const tags = myContext.tags;
+  const categories = myContext.categories;
 
   return (
     <footer>

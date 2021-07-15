@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import sanityClient from "../client";
 
@@ -8,17 +8,41 @@ import { motion } from "framer-motion";
 
 import Projects from "./blocks/Projects.js";
 
-// Get a pre-configured url-builder from your sanity client
+import AppContext from "../globalState";
+
+import FeaturedCard from "./blocks/featuredCard";
+
+import CustomCarousel from "./blocks/Carousel";
+
+import ProductCard from "./blocks/productCard";
+
 const builder = imageUrlBuilder(sanityClient);
 
-// Then we like to make a simple function like this that gives the
-// builder an image and returns the builder for you to specify additional
-// parameters:
 function urlFor(source) {
   return builder.image(source);
 }
 
-export default function LandingPage({ info, projectList }) {
+export default function LandingPage() {
+  const myContext = useContext(AppContext);
+  const info = myContext.siteSettings;
+  const projectList = myContext.projectList;
+
+  const [featuredProjects, setFeaturedProjects] = useState([]);
+
+  useEffect(() => {
+    if (myContext.hasFeaturedPosts === true) {
+      const featuredProjects = [];
+      for (let index = 0; index < projectList.length; index++) {
+        const post = projectList[index];
+        if (info.featuredProjects.includes(post.title)) {
+          featuredProjects.push(post);
+        }
+      }
+      console.log(featuredProjects);
+      setFeaturedProjects(featuredProjects);
+    }
+  }, [myContext.hasFeaturedPosts, projectList, info.featuredProjects]);
+
   return (
     <motion.div
       layout
@@ -26,15 +50,29 @@ export default function LandingPage({ info, projectList }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <motion.h1 className="headline">{info.title}</motion.h1>
+      <motion.h1 className="headline flex-column">{info.title}</motion.h1>
 
-      <img
-        className="mainImage"
-        src={urlFor(info.mainImage.asset.url)}
-        alt=""
-      />
+      {myContext.hasFeaturedPosts && featuredProjects ? (
+        <CustomCarousel>
+          {featuredProjects.map((post, index) => (
+            <FeaturedCard post={post} key={index} />
+          ))}
+        </CustomCarousel>
+      ) : (
+        <img
+          className="mainImage"
+          src={urlFor(info.mainImage.asset.url)}
+          alt=""
+        />
+      )}
 
       <Projects projectList={projectList} />
+
+      <div className="horizontalScroll">
+        {projectList.map((post, index) => (
+          <ProductCard post={post} key={index} />
+        ))}
+      </div>
     </motion.div>
   );
 }

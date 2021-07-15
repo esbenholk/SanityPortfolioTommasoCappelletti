@@ -47,7 +47,7 @@ export default function PostCard({ post }) {
             <div className="flex-row">
               {post.tags &&
                 post.tags.map((tag, index) => (
-                  <p className="tag" key={index} id={"tag_" + tag + ""}>
+                  <p className="tag" key={index}>
                     {tag}
                     {index + 1 !== post.tags.length ? "," : null}
                   </p>
@@ -67,11 +67,7 @@ export default function PostCard({ post }) {
           <div className="flex-row">
             {post.categories &&
               post.categories.map((category, index) => (
-                <p
-                  className="standard-button"
-                  key={index}
-                  id={"category_" + category.title + ""}
-                >
+                <p className="standard-button" key={index}>
                   {" "}
                   {category.title}{" "}
                 </p>
@@ -82,7 +78,11 @@ export default function PostCard({ post }) {
             key={post.slug.current}
             className="w-full teaser-link"
           >
-            <h3>check out the project</h3>
+            <img
+              src="assets/Arrowright.svg"
+              className="arrow"
+              alt="right arrow button"
+            />
           </Link>
         </div>
       )}

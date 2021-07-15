@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Header({ info }) {
-  console.log("info", info);
+import AppContext from "../globalState";
+
+export default function Header() {
+  const myContext = useContext(AppContext);
+  const info = myContext.siteSettings;
   return (
     <nav>
       <NavLink className="standard-button" to="/projects">

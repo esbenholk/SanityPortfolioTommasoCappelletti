@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Masonry from "react-masonry-css";
 
 import PostCard from "./postCard.js";
+
+import AppContext from "../../globalState";
 
 const breakpointColumnsObj = {
   default: 3,
@@ -10,15 +12,18 @@ const breakpointColumnsObj = {
   600: 1,
 };
 
-export default function Projects({ projectList }) {
-  const [allPosts, setAllPosts] = useState(null);
+export default function Projects() {
+  const myContext = useContext(AppContext);
+  const projectList = myContext.projectList;
+
+  const [allPosts, setAllPosts] = useState(projectList);
 
   const [sortedPosts, setSortedPosts] = useState(null);
 
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(myContext.tags);
   const [currentTags, setCurrentTags] = useState([]);
 
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(myContext.categories);
   const [currentCategories, setCurrentCategories] = useState([]);
 
   useEffect(() => {
@@ -83,13 +88,13 @@ export default function Projects({ projectList }) {
         if (post.categories) {
           for (let index = 0; index < post.categories.length; index++) {
             const category = post.categories[index];
-            console.log("checks post categories", category);
+            // console.log("checks post categories", category);
 
             ///compare post tags to currentTags
             if (currentCategories.includes(category.title)) {
               //set post_score depending on how many currentTags the post is matching
               post_score = post_score + 1;
-              console.log("post matches a category");
+              // console.log("post matches a category");
             }
           }
         }
@@ -112,6 +117,10 @@ export default function Projects({ projectList }) {
       tempTags.push(tag.tag);
       setCurrentTags(tempTags);
       document.getElementById("tag_" + tag.tag).classList.add("active");
+      console.log(
+        "should make tag active",
+        document.getElementById("tag_" + tag.tag)
+      );
     } else if (currentTags.includes(tag.tag)) {
       var tagIndex = currentTags.indexOf(tag.tag);
       currentTags.splice(tagIndex, 1);
@@ -128,6 +137,10 @@ export default function Projects({ projectList }) {
       const tempCategories = [...currentCategories];
       tempCategories.push(category.category);
       setCurrentCategories(tempCategories);
+      console.log(
+        "should make category active",
+        document.getElementById("category_" + category.category)
+      );
       document
         .getElementById("category_" + category.category)
         .classList.add("active");
@@ -144,36 +157,36 @@ export default function Projects({ projectList }) {
   }
 
   return (
-    <div>
-      <div className="tag_grid">
-        {categories.map((category, index) => (
-          <button
-            className="tag_button standard-button"
-            key={index}
-            id={"category_" + category + ""}
-            onClick={() => {
-              setCategory({ category });
-            }}
-          >
-            {" "}
-            {category}{" "}
-          </button>
-        ))}
-      </div>
-      <div className="tag_grid">
-        {tags.map((tag, index) => (
-          <button
-            className="tag_button standard-button"
-            key={index}
-            id={"tag_" + tag + ""}
-            onClick={() => {
-              setTag({ tag });
-            }}
-          >
-            {" "}
-            {tag}{" "}
-          </button>
-        ))}
+    <div className="regContainer">
+      <div className="regContainer">
+        <div className="tag_grid horizontalScroll">
+          {categories.map((category, index) => (
+            <button
+              className="tag_button standard-button"
+              key={index}
+              id={"category_" + category + ""}
+              onClick={() => {
+                setCategory({ category });
+              }}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <div className="tag_grid horizontalScroll">
+          {tags.map((tag, index) => (
+            <button
+              className="tag_button standard-button"
+              key={index}
+              id={"tag_" + tag + ""}
+              onClick={() => {
+                setTag({ tag });
+              }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
       </div>
 
       <Masonry
@@ -184,7 +197,7 @@ export default function Projects({ projectList }) {
         {sortedPosts &&
           sortedPosts.map((post, index) => (
             <PostCard post={post} key={index} />
-          ))}{" "}
+          ))}
       </Masonry>
     </div>
   );

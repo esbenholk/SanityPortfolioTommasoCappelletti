@@ -36,6 +36,14 @@ export default {
       },
     },
     {
+      name: "productImage",
+      title: "Product image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: "imagesGallery",
       title: "Images gallery",
       type: "array",
