@@ -26,7 +26,7 @@ export default function ProductCard({ post }) {
     <div className="product_card">
       <Link
         to={"/projects/" + post.slug.current}
-        key={post.slug.current}
+        key={post.slug.current + "productCard"}
         className="w-full teaser-link"
       >
         {post.productImage ? (
