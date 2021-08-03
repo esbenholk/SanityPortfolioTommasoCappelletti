@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import sanityClient from "../../client";
 
 import { Link } from "react-router-dom";
@@ -15,8 +15,6 @@ function urlFor(source) {
 }
 
 export default function ProductCard({ post }) {
-  const [isShown, setIsShown] = useState(false);
-
   var color;
   if (post.color) {
     color = "#" + post.color;
@@ -25,11 +23,7 @@ export default function ProductCard({ post }) {
   }
 
   return (
-    <div
-      className="product_card"
-      onMouseEnter={() => setIsShown(true)}
-      onMouseLeave={() => setIsShown(false)}
-    >
+    <div className="product_card">
       <Link
         to={"/projects/" + post.slug.current}
         key={post.slug.current}
@@ -80,7 +74,7 @@ export default function ProductCard({ post }) {
         )}
       </Link>
 
-      <div className="details">
+      <div className="details" style={{ color: color }}>
         <h3>{post.title}</h3>
 
         <div className="flex-row">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import sanityClient from "../../client";
 
 import { Link } from "react-router-dom";
@@ -15,8 +15,6 @@ function urlFor(source) {
 }
 
 export default function FeaturedCard({ post }) {
-  const [isShown, setIsShown] = useState(false);
-
   var color;
   if (post.color) {
     color = "#" + post.color;
@@ -25,11 +23,7 @@ export default function FeaturedCard({ post }) {
   }
 
   return (
-    <div
-      className="featured_post_card flex-row"
-      onMouseEnter={() => setIsShown(true)}
-      onMouseLeave={() => setIsShown(false)}
-    >
+    <div className="featured_post_card flex-row">
       {post.mainImage.hotspot ? (
         <img
           src={urlFor(post.mainImage.asset.url)}
