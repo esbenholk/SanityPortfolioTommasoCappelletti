@@ -38,10 +38,9 @@ export default function LandingPage() {
           featuredProjects.push(post);
         }
       }
-      console.log(featuredProjects);
       setFeaturedProjects(featuredProjects);
     }
-  }, [myContext.hasFeaturedPosts, projectList, info.featuredProjects]);
+  }, [myContext.hasFeaturedPosts, projectList, info]);
 
   return (
     <motion.div
@@ -50,14 +49,17 @@ export default function LandingPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <motion.h1 className="headline flex-column">{info.title}</motion.h1>
+      <motion.h1 className="headline flex-column">{info.greeting}</motion.h1>
 
       {myContext.hasFeaturedPosts && featuredProjects ? (
-        <CustomCarousel>
-          {featuredProjects.map((post, index) => (
-            <FeaturedCard post={post} key={index} />
-          ))}
-        </CustomCarousel>
+        <>
+          <h1>HAS FEATURED PROJECTS</h1>
+          <CustomCarousel>
+            {featuredProjects.map((post, index) => (
+              <FeaturedCard post={post} key={index} />
+            ))}
+          </CustomCarousel>
+        </>
       ) : (
         <img
           className="mainImage"

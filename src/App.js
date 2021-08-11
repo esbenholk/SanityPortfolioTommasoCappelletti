@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     sanityClient
       .fetch(
-        '*[_type == "siteSettings"]{title,mainImage{asset->{_id,url}, hotspot, alt}, logo{asset->{_id,url}}, featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url}}'
+        '*[_type == "siteSettings"]{title, greeting, mainImage{asset->{_id,url}, hotspot, alt}, logo{asset->{_id,url}}, featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url}}'
       )
       .then((data) => {
         setSiteSettings(data[0]);
