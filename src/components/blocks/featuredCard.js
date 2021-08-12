@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 import imageUrlBuilder from "@sanity/image-url";
 
-import BlockContent from "@sanity/block-content-to-react";
-
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
 

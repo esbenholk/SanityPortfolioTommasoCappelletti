@@ -5,8 +5,6 @@ import AppContext from "../globalState";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
 
-import SearchBar from "./blocks/SearchBar";
-
 import DropDownMenu from "./blocks/DropDownMenu";
 
 export default function Header() {
@@ -15,8 +13,6 @@ export default function Header() {
   const categories = myContext.categories;
 
   const { width } = useWindowDimensions();
-
-  console.log("header", myContext);
 
   return (
     <>
