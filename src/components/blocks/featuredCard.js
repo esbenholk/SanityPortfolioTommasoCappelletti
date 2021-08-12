@@ -17,13 +17,13 @@ function urlFor(source) {
 export default function FeaturedCard({ post }) {
   var color;
   if (post.color) {
-    color = "#" + post.color;
+    color = post.color;
   } else {
     color = "#FFFFFF";
   }
 
   return (
-    <div className="featured_post_card flex-row">
+    <div className="featured_post_card">
       {post.mainImage.hotspot ? (
         <img
           src={urlFor(post.mainImage.asset.url)}
@@ -66,20 +66,10 @@ export default function FeaturedCard({ post }) {
               ))}
           </div>
 
-          {post.recap && (
-            <div className="recap">
-              <BlockContent
-                blocks={post.recap}
-                projectId="swdt1dj3"
-                dataset="production"
-              />
-            </div>
-          )}
-
           <div className="flex-row post_category_list">
             {post.categories &&
               post.categories.map((category, index) => (
-                <p className="standard-button" key={index}>
+                <p className="standardTransparent-button" key={index}>
                   {" "}
                   {category.title}{" "}
                 </p>

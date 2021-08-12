@@ -50,25 +50,52 @@ export default function LandingPage() {
       exit={{ opacity: 0 }}
     >
       <motion.h1 className="headline flex-column">{info.greeting}</motion.h1>
-
-      {myContext.hasFeaturedPosts && featuredProjects ? (
+      {info.mainImage ? (
         <>
-          <h1>HAS FEATURED PROJECTS</h1>
-          <CustomCarousel>
-            {featuredProjects.map((post, index) => (
-              <FeaturedCard post={post} key={index} />
-            ))}
-          </CustomCarousel>
-        </>
-      ) : (
-        <img
-          className="mainImage"
-          src={urlFor(info.mainImage.asset.url)}
-          alt=""
-        />
-      )}
+          {info.mainImage.hotspot ? (
+            <img
+              src={urlFor(info.mainImage.asset.url)}
+              alt={info.mainImage.alt}
+              style={{
+                objectPosition: `${info.mainImage.hotspot.x * 100}% ${
+                  info.mainImage.hotspot.y * 100
+                }%`,
+              }}
+              className="mainImage"
+            />
+          ) : (
+            <img
+              src={urlFor(info.mainImage.asset.url)}
+              alt={info.mainImage.alt}
+              className="mainImage"
+            />
+          )}
 
-      <Projects projectList={projectList} />
+          {myContext.hasFeaturedPosts && featuredProjects ? (
+            <div className="regContainer">
+              <motion.h1 className="headline flex-column">
+                Latest Projects
+              </motion.h1>
+
+              <CustomCarousel>
+                {featuredProjects.map((post, index) => (
+                  <FeaturedCard post={post} key={index} />
+                ))}
+              </CustomCarousel>
+            </div>
+          ) : null}
+        </>
+      ) : null}
+
+      {projectList ? (
+        <div className="regContainer">
+          <motion.h1 className="flex-column">More skills and ideas</motion.h1>
+          <motion.h1 className="subheadline flex-column">
+            What do you want to see more of?
+          </motion.h1>
+          <Projects projectList={projectList} />
+        </div>
+      ) : null}
 
       <div className="horizontalScroll">
         {projectList.map((post, index) => (

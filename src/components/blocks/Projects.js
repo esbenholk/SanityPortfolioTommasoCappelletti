@@ -157,36 +157,34 @@ export default function Projects() {
   }
 
   return (
-    <div className="regContainer">
-      <div className="regContainer">
-        <div className="tag_grid horizontalScroll">
-          {categories.map((category, index) => (
-            <button
-              className="tag_button standard-button"
-              key={index}
-              id={"category_" + category + ""}
-              onClick={() => {
-                setCategory({ category });
-              }}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-        <div className="tag_grid horizontalScroll">
-          {tags.map((tag, index) => (
-            <button
-              className="tag_button standard-button"
-              key={index}
-              id={"tag_" + tag + ""}
-              onClick={() => {
-                setTag({ tag });
-              }}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
+    <div className="projects">
+      <div className="tag_grid horizontalScroll">
+        {categories.map((category, index) => (
+          <button
+            className="tag_button standard-button"
+            key={index}
+            id={"category_" + category + ""}
+            onClick={() => {
+              setCategory({ category });
+            }}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      <div className="tag_grid horizontalScroll">
+        {tags.map((tag, index) => (
+          <button
+            className="tag_button standard-button"
+            key={index}
+            id={"tag_" + tag + ""}
+            onClick={() => {
+              setTag({ tag });
+            }}
+          >
+            {tag}
+          </button>
+        ))}
       </div>
 
       <Masonry

@@ -87,16 +87,6 @@ export default function ProductCard({ post }) {
             ))}
         </div>
 
-        {post.recap && (
-          <div className="recap">
-            <BlockContent
-              blocks={post.recap}
-              projectId="swdt1dj3"
-              dataset="production"
-            />
-          </div>
-        )}
-
         <div className="flex-row post_category_list">
           {post.categories &&
             post.categories.map((category, index) => (

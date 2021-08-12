@@ -7,6 +7,8 @@ import useWindowDimensions from "./functions/useWindowDimensions";
 
 import SearchBar from "./blocks/SearchBar";
 
+import DropDownMenu from "./blocks/DropDownMenu";
+
 export default function Header() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
@@ -18,9 +20,9 @@ export default function Header() {
 
   return (
     <>
-      {width > 700 ? (
+      {width > 900 ? (
         <nav>
-          <div className="flex-row menu">
+          <div className="flex-row menu no-wrap">
             <NavLink to="/">
               {info.logo && (
                 <img className="logo" src={info.logo.asset.url} alt="" />
@@ -34,7 +36,7 @@ export default function Header() {
             </NavLink>
           </div>
 
-          <SearchBar categories={categories}></SearchBar>
+          <DropDownMenu categories={categories} />
 
           <div className="flex-row no-wrap rightMenu">
             {info.socialMediaHandles &&
@@ -66,32 +68,34 @@ export default function Header() {
       ) : (
         <>
           <nav>
-            <SearchBar categories={categories}></SearchBar>
-
             <div className="flex-row menu">
-              <NavLink to="/">
-                {info.logo && (
-                  <img className="logo" src={info.logo.asset.url} alt="" />
-                )}
-              </NavLink>
+              <div className="flex-row">
+                <NavLink to="/">
+                  {info.logo && (
+                    <img className="logo" src={info.logo.asset.url} alt="" />
+                  )}
+                </NavLink>
+              </div>
+
+              <div className="flex-row no-wrap  rightMenu">
+                <NavLink to="/about">
+                  <h2 className="header-object">About</h2>
+                </NavLink>
+                <NavLink to="/projects">
+                  <h2 className="header-object"> Projects</h2>
+                </NavLink>
+                <NavLink to="/projects">
+                  <img
+                    className="social_media_icon header-object"
+                    src="\assets\awesome-shopping-cart.png"
+                    alt="shopping cart"
+                    style={{ height: "36px", width: "40px !important" }}
+                  />
+                </NavLink>
+              </div>
             </div>
 
-            <div className="flex-row no-wrap  rightMenu">
-              <NavLink to="/about">
-                <h2 className="header-object">About</h2>
-              </NavLink>
-              <NavLink to="/projects">
-                <h2 className="header-object"> Projects</h2>
-              </NavLink>
-              <NavLink to="/projects">
-                <img
-                  className="social_media_icon header-object"
-                  src="\assets\awesome-shopping-cart.png"
-                  alt="shopping cart"
-                  style={{ height: "36px", width: "40px !important" }}
-                />
-              </NavLink>
-            </div>
+            <DropDownMenu categories={categories} />
           </nav>
         </>
       )}

@@ -19,7 +19,7 @@ export default function PostCard({ post }) {
 
   var color;
   if (post.color) {
-    color = "#" + post.color;
+    color = post.color;
   } else {
     color = "#FFFFFF";
   }
@@ -53,21 +53,11 @@ export default function PostCard({ post }) {
                   </p>
                 ))}
             </div>
-
-            {post.recap && (
-              <div className="recap">
-                <BlockContent
-                  blocks={post.recap}
-                  projectId="swdt1dj3"
-                  dataset="production"
-                />
-              </div>
-            )}
           </div>
           <div className="flex-row">
             {post.categories &&
               post.categories.map((category, index) => (
-                <p className="standard-button" key={index}>
+                <p className="standardTransparent-button" key={index}>
                   {" "}
                   {category.title}{" "}
                 </p>
