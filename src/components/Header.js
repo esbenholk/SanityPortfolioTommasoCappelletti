@@ -32,26 +32,10 @@ export default function Header() {
             </NavLink>
           </div>
 
-          <DropDownMenu categories={categories} />
+          <div className="no-wrap rightMenu">
+            <DropDownMenu categories={categories} />
 
-          <div className="flex-row no-wrap rightMenu">
-            {info.socialMediaHandles &&
-              info.socialMediaHandles.map((handle, index) => (
-                <a
-                  href={handle.url}
-                  className="tag_button"
-                  key={index}
-                  id={"category_" + handle.url + ""}
-                >
-                  <img
-                    className="social_media_icon header-object"
-                    src={handle.logo.asset.url}
-                    alt=""
-                    style={{ height: "31px" }}
-                  />
-                </a>
-              ))}
-            <NavLink to="/projects">
+            <NavLink to="/projects" className="basket">
               <img
                 className="social_media_icon header-object"
                 src="\assets\awesome-shopping-cart.png"

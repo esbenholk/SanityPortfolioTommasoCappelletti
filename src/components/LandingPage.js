@@ -16,6 +16,8 @@ import CustomCarousel from "./blocks/Carousel";
 
 import ProductCard from "./blocks/productCard";
 
+import useWindowDimensions from "./functions/useWindowDimensions";
+
 const builder = imageUrlBuilder(sanityClient);
 
 function urlFor(source) {
@@ -26,6 +28,8 @@ export default function LandingPage() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
   const projectList = myContext.projectList;
+
+  const { width } = useWindowDimensions();
 
   const [featuredProjects, setFeaturedProjects] = useState([]);
 
@@ -77,11 +81,19 @@ export default function LandingPage() {
                 Latest Projects
               </motion.h1>
 
-              <CustomCarousel>
-                {featuredProjects.map((post, index) => (
-                  <FeaturedCard post={post} key={index} />
-                ))}
-              </CustomCarousel>
+              {width > 900 ? (
+                <CustomCarousel>
+                  {featuredProjects.map((post, index) => (
+                    <FeaturedCard post={post} key={index} />
+                  ))}
+                </CustomCarousel>
+              ) : (
+                <div className="horizontalScroll">
+                  {featuredProjects.map((post, index) => (
+                    <FeaturedCard post={post} key={index} />
+                  ))}
+                </div>
+              )}
             </div>
           ) : null}
         </>
