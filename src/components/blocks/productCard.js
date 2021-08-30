@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import sanityClient from "../../client";
 
 import { Link } from "react-router-dom";
@@ -13,6 +13,8 @@ function urlFor(source) {
 }
 
 export default function ProductCard({ post }) {
+  const [isShown, setIsShown] = useState(false);
+
   var color;
   if (post.color) {
     color = post.color;
@@ -26,28 +28,51 @@ export default function ProductCard({ post }) {
         to={"/projects/" + post.slug.current}
         key={post.slug.current + "productCard"}
         className="w-full teaser-link"
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}
       >
         {post.productImage ? (
-          <>
-            {post.productImage.hotspot ? (
-              <img
-                src={urlFor(post.productImage.asset.url)}
-                alt={post.mainImage.alt}
-                style={{
-                  objectPosition: `${post.productImage.hotspot.x * 100}% ${
-                    post.mainImage.hotspot.y * 100
-                  }%`,
-                }}
-                className="product_card_image"
-              />
+          <div className="product_card_image">
+            {isShown ? (
+              <>
+                {post.mainImage.hotspot ? (
+                  <img
+                    src={urlFor(post.mainImage.asset.url)}
+                    alt={post.mainImage.alt}
+                    style={{
+                      objectPosition: `${post.mainImage.hotspot.x * 100}% ${
+                        post.mainImage.hotspot.y * 100
+                      }%`,
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={urlFor(post.mainImage.asset.url)}
+                    alt={post.mainImage.alt}
+                  />
+                )}
+              </>
             ) : (
-              <img
-                src={urlFor(post.productImage.asset.url)}
-                alt={post.productImage.alt}
-                className="featured_post_card_image"
-              />
+              <>
+                {post.productImage.hotspot && post.mainImage ? (
+                  <img
+                    src={urlFor(post.productImage.asset.url)}
+                    alt={post.mainImage.alt}
+                    style={{
+                      objectPosition: `${post.productImage.hotspot.x * 100}% ${
+                        post.mainImage.hotspot.y * 100
+                      }%`,
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={urlFor(post.productImage.asset.url)}
+                    alt={post.productImage.alt}
+                  />
+                )}
+              </>
             )}
-          </>
+          </div>
         ) : (
           <>
             {post.mainImage.hotspot ? (
@@ -73,7 +98,7 @@ export default function ProductCard({ post }) {
       </Link>
 
       <div className="details" style={{ color: color }}>
-        <h3>{post.title}</h3>
+        <h1>{post.title}</h1>
 
         <div className="flex-row">
           {post.tags &&
@@ -84,29 +109,16 @@ export default function ProductCard({ post }) {
               </p>
             ))}
         </div>
-
-        <div className="flex-row post_category_list">
-          {post.categories &&
-            post.categories.map((category, index) => (
-              <p className="standard-button" key={index}>
-                {" "}
-                {category.title}{" "}
-              </p>
-            ))}
-        </div>
+        {post.abbreviated_year ? (
+          <>
+            <div className="year_price flex-row align-top">
+              <p>Y'</p>
+              <p>{post.abbreviated_year}</p>
+            </div>
+          </>
+        ) : null}
+        {post.star_rating ? <p className="stars">{post.star_rating}</p> : null}
       </div>
-
-      <Link
-        to={"/projects/" + post.slug.current}
-        key={post.slug.current}
-        className="w-full teaser-link"
-      >
-        <img
-          src="assets/Arrowright.svg"
-          className="arrow"
-          alt="right arrow button"
-        />
-      </Link>
     </div>
   );
 }

@@ -43,7 +43,7 @@ function App() {
 
     sanityClient
       .fetch(
-        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year ,slug, categories[]->{title}, tags, color, recap}'
+        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title}, tags, color, recap}'
       )
       .then((data) => {
         data.sort((a, b) => b.year - a.year);

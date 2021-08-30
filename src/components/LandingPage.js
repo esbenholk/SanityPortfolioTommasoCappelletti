@@ -109,10 +109,14 @@ export default function LandingPage() {
         </div>
       ) : null}
 
-      <div className="horizontalScroll">
-        {projectList.map((post, index) => (
-          <ProductCard post={post} key={index} />
-        ))}
+      <div className="regContainer">
+        <motion.h1 className="flex-column">Others also viewed</motion.h1>
+
+        <div className="horizontalScroll">
+          {projectList.map((post, index) => (
+            <ProductCard post={post} key={index} />
+          ))}
+        </div>
       </div>
     </motion.div>
   );

@@ -4,6 +4,7 @@ import sanityClient from "../../client";
 import { Link } from "react-router-dom";
 
 import imageUrlBuilder from "@sanity/image-url";
+import useWindowDimensions from "../functions/useWindowDimensions";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
@@ -14,6 +15,8 @@ function urlFor(source) {
 
 export default function PostCard({ post }) {
   const [isShown, setIsShown] = useState(false);
+
+  const { width } = useWindowDimensions();
 
   var color;
   if (post.color) {
@@ -28,7 +31,7 @@ export default function PostCard({ post }) {
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
     >
-      {isShown && (
+      {width > 700 && isShown ? (
         <div
           className="post_card_overlay seeOnHover"
           style={{ backgroundColor: color }}
@@ -73,7 +76,7 @@ export default function PostCard({ post }) {
             />
           </Link>
         </div>
-      )}
+      ) : null}
 
       {post.mainImage.hotspot ? (
         <img

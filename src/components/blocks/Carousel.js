@@ -21,8 +21,12 @@ export default function CustomCarousel({ children }) {
             className="featuredCardArrow prevArrow"
           >
             <img
-              style={{ height: "30px", width: "30px" }}
-              src={`assets/Arrowright.svg`}
+              style={{
+                height: "55px",
+                width: "55px",
+                transform: "rotate(180deg)",
+              }}
+              src={`assets/arrow_in_circle.svg`}
               alt="prevArrow"
             />
           </button>
@@ -35,8 +39,8 @@ export default function CustomCarousel({ children }) {
             className="featuredCardArrow nextArrow"
           >
             <img
-              style={{ height: "30px", width: "30px" }}
-              src={`assets/Arrowright.svg`}
+              style={{ height: "55px", width: "55px" }}
+              src={`assets/arrow_in_circle.svg`}
               alt="nextArrow"
             />
           </button>

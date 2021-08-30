@@ -9,7 +9,7 @@ import AppContext from "../../globalState";
 const breakpointColumnsObj = {
   default: 3,
   1100: 2,
-  600: 1,
+  600: 2,
 };
 
 export default function Projects() {
