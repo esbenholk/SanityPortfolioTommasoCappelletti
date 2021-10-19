@@ -13,7 +13,7 @@ export default function CustomCarousel({ children }) {
       showStatus={false}
       showThumbs={false}
       autoPlay={false}
-      className="featured_post_container"
+      className="featured_post_container fullWidthPadded"
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev && (
           <button

@@ -11,6 +11,7 @@ export default function Header() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
   const categories = myContext.categories;
+  const mainRef = myContext.mainRef;
 
   const { width } = useWindowDimensions();
 
@@ -18,29 +19,28 @@ export default function Header() {
     <>
       {width > 900 ? (
         <nav>
-          <div className="flex-row menu no-wrap">
-            <NavLink to="/">
+          <div className="flex-row menu no-wrap header-flex-row">
+            <NavLink to="/" className="logo">
               {info.logo && (
-                <img className="logo" src={info.logo.asset.url} alt="" />
+                <img src={info.logo.asset.url} alt="" className="logo" />
               )}
             </NavLink>
             <NavLink to="/about">
               <h2 className="header-object">About</h2>
             </NavLink>
             <NavLink to="/projects">
-              <h2 className="header-object"> Projects</h2>
+              <h2 className="header-object">Projects</h2>
             </NavLink>
           </div>
 
           <div className="no-wrap rightMenu">
-            <DropDownMenu categories={categories} />
+            <DropDownMenu categories={categories} mainRef={mainRef} />
 
             <NavLink to="/projects" className="basket">
               <img
-                className="social_media_icon header-object"
+                className="social_media_icon header-object basketIcon"
                 src="\assets\awesome-shopping-cart.png"
                 alt="shopping cart"
-                style={{ height: "36px", width: "40px" }}
               />
             </NavLink>
           </div>
@@ -50,9 +50,9 @@ export default function Header() {
           <nav>
             <div className="flex-row menu">
               <div className="flex-row">
-                <NavLink to="/">
+                <NavLink to="/" className="logo">
                   {info.logo && (
-                    <img className="logo" src={info.logo.asset.url} alt="" />
+                    <img src={info.logo.asset.url} alt="" className="logo" />
                   )}
                 </NavLink>
               </div>
@@ -66,16 +66,15 @@ export default function Header() {
                 </NavLink>
                 <NavLink to="/projects">
                   <img
-                    className="social_media_icon header-object"
+                    className="social_media_icon header-object basketIcon"
                     src="\assets\awesome-shopping-cart.png"
                     alt="shopping cart"
-                    style={{ height: "36px", width: "40px !important" }}
                   />
                 </NavLink>
               </div>
             </div>
 
-            <DropDownMenu categories={categories} />
+            <DropDownMenu categories={categories} mainRef={mainRef} />
           </nav>
         </>
       )}

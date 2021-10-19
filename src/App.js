@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState, createRef } from "react";
 // import NavBar from "./components/NavBar.js";
 import "./App.css";
 import sanityClient from "./client";
@@ -28,10 +28,12 @@ function App() {
 
   const [hasFeaturedPosts, setHasFeaturedPosts] = useState(false);
 
+  const mainRef = createRef();
+
   useEffect(() => {
     sanityClient
       .fetch(
-        '*[_type == "siteSettings"]{title, greeting, mainImage{asset->{_id,url}, hotspot, alt}, logo{asset->{_id,url}}, featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url}}'
+        '*[_type == "siteSettings"]{title, greeting, mainImage{asset->{_id,url}, hotspot, alt}, authorImage{asset->{_id,url}, hotspot, alt},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}}'
       )
       .then((data) => {
         setSiteSettings(data[0]);
@@ -88,6 +90,7 @@ function App() {
     tags: tags,
     categories: categories,
     hasFeaturedPosts: hasFeaturedPosts,
+    mainRef: mainRef,
     setSiteSettings,
     setProjectList,
     setBasket,
@@ -103,7 +106,7 @@ function App() {
           <BrowserRouter>
             {siteSettings && <Header />}
             <AnimatePresence>
-              <div className="mainContainer">
+              <div className="mainContainer" ref={mainRef}>
                 <Switch>
                   <Route exact path="/">
                     {siteSettings && (
@@ -120,7 +123,7 @@ function App() {
                     <ProjectList projectList={projectList} />
                   </Route>
                   <Route path="/about">
-                    <Home />
+                    <Home info={siteSettings} projectList={projectList} />
                   </Route>
                   <Route path="/:slug">
                     <Category />

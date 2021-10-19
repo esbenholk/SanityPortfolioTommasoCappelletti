@@ -8,7 +8,7 @@ import AppContext from "../../globalState";
 
 const breakpointColumnsObj = {
   default: 3,
-  1100: 2,
+  1300: 2,
   600: 2,
 };
 
@@ -158,10 +158,10 @@ export default function Projects() {
 
   return (
     <div className="projects">
-      <div className="tag_grid horizontalScroll">
+      <div className="tag_grid horizontalScroll overscrollPadded">
         {categories.map((category, index) => (
           <button
-            className="tag_button standard-button"
+            className="tag_button standard-button "
             key={index}
             id={"category_" + category + ""}
             onClick={() => {
@@ -172,7 +172,7 @@ export default function Projects() {
           </button>
         ))}
       </div>
-      <div className="tag_grid horizontalScroll">
+      <div className="tag_grid horizontalScroll overscrollPadded">
         {tags.map((tag, index) => (
           <button
             className="tag_button standard-button"
@@ -189,7 +189,7 @@ export default function Projects() {
 
       <Masonry
         breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
+        className="my-masonry-grid fullWidthPadded"
         columnClassName="my-masonry-grid_column"
       >
         {sortedPosts &&

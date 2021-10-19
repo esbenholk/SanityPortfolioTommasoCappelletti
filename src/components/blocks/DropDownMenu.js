@@ -29,7 +29,11 @@ class DropDownMenu extends React.Component {
               <p style={{ paddingLeft: "40px" }}>Looking for a designer?</p>
             </div>
           ) : (
-            <div className="flex-row no-wrap">
+            <div className="flex-row no-wrap justifyBetween">
+              <p style={{ paddingLeft: "43px" }}>
+                {" "}
+                Which skill are you looking for?
+              </p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -51,10 +55,6 @@ class DropDownMenu extends React.Component {
                   />
                 </g>
               </svg>
-              <p style={{ paddingLeft: "40px" }}>
-                {" "}
-                Which skill are you looking for?
-              </p>
             </div>
           )}
         </div>
@@ -64,6 +64,12 @@ class DropDownMenu extends React.Component {
   }
 
   handleClick = () => {
+    if (this.state.isOpen) {
+      this.props.mainRef.current.style.backgroundColor = "white";
+    } else {
+      this.props.mainRef.current.style.backgroundColor = "#dbdbdb";
+    }
+
     this.setState({
       isOpen: !this.state.isOpen,
     });
@@ -78,6 +84,11 @@ class DropDownMenu extends React.Component {
   itemList = (props) => {
     const list = props.map((item) => (
       <div className="dropdown__item" key={item.toString()}>
+        <img
+          src="/assets/SearchIcon.svg"
+          alt="search icon"
+          style={{ height: "13px" }}
+        ></img>
         <a key={item.toString()} href={item}>
           {item}
         </a>

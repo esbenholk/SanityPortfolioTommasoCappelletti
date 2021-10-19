@@ -1,76 +1,113 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import BlockContent from "@sanity/block-content-to-react";
+import useWindowDimensions from "./functions/useWindowDimensions";
 
 import AppContext from "../globalState";
+
+import ProductCard from "./blocks/productCard";
+
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
-  const tags = myContext.tags;
-  const categories = myContext.categories;
+  const projectList = myContext.projectList;
+
+  const { width } = useWindowDimensions();
 
   return (
-    <footer>
-      <div className="flex-row to-column">
-        <div className="flex-column footer_link_column">
-          <NavLink to="/">
-            {info.logo && (
-              <img className="logo" src={info.logo.asset.url} alt="" />
-            )}
-          </NavLink>
-        </div>
+    <div>
+      <div className="regContainer">
+        <motion.h1 className="flex-column fullWidthPadded">
+          Others also viewed
+        </motion.h1>
 
-        <div className="flex-column footer_link_column">
-          <p>This is us</p>
-          <NavLink to="/projects">Projects</NavLink>
-          <NavLink to="/about">About us</NavLink>
-          <NavLink to="/onsale">On Sale</NavLink>
-        </div>
-
-        <div className="flex-column footer_link_column">
-          <p>Things that we like</p>
-          {tags &&
-            tags.map((tag, index) => (
-              <p className="tag_button" key={index} id={"tag_" + tag + ""}>
-                {" "}
-                {tag}{" "}
-              </p>
+        {projectList ? (
+          <div className="overscrollPadded horizontalScroll2">
+            {projectList.map((post, index) => (
+              <ProductCard post={post} key={index} />
             ))}
-        </div>
-        <div className="flex-column footer_link_column">
-          <p>Things that we do</p>
-          {categories &&
-            categories.map((category, index) => (
-              <a
-                href={category}
-                className="tag_button"
-                key={index}
-                id={"category_" + category + index}
-              >
-                {" "}
-                {category}{" "}
-              </a>
-            ))}
-        </div>
+          </div>
+        ) : null}
       </div>
+      <footer>
+        <div className="flex-row justifyBetween footer_top">
+          <div className="flex-row ">
+            <NavLink to="/">
+              {info.logo && (
+                <img
+                  className="logo footerLogo"
+                  src={info.footerlogo.asset.url}
+                  alt=""
+                />
+              )}
+            </NavLink>
 
-      <div className="flex-row">
-        {info.socialMediaHandles &&
-          info.socialMediaHandles.map((handle, index) => (
-            <a
-              href={handle.url}
-              className="tag_button"
-              key={index}
-              id={"category_" + handle.url + ""}
-            >
-              <img
-                className="social_media_icon"
-                src={handle.logo.asset.url}
-                alt=""
+            {width > 1200 ? (
+              <div className="flex-row">
+                <NavLink to="/about">
+                  <h2 className="header-object footer-object">About</h2>
+                </NavLink>
+                <NavLink to="/projects">
+                  <h2 className="header-object footer-object">Projects</h2>
+                </NavLink>
+                <NavLink to="/projects">
+                  <h2 className="header-object footer-object">On Sale</h2>
+                </NavLink>{" "}
+              </div>
+            ) : null}
+          </div>
+
+          {width > 1200 ? (
+            <div className="flex-row">
+              {info.socialMediaHandles &&
+                info.socialMediaHandles.map((handle, index) => (
+                  <a
+                    href={handle.url}
+                    key={index}
+                    id={"category_" + handle.url + ""}
+                  >
+                    <img
+                      className="footer_social_media_icon"
+                      src={handle.logo.asset.url}
+                      alt=""
+                    />
+                  </a>
+                ))}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="footer_bottom">
+          {width > 1200 && info.contact ? (
+            <div className="blockContent">
+              <BlockContent
+                blocks={info.contact}
+                projectId="swdt1dj3"
+                dataset="production"
               />
-            </a>
-          ))}
-      </div>
-    </footer>
+            </div>
+          ) : (
+            <div className="flex-row">
+              {info.socialMediaHandles &&
+                info.socialMediaHandles.map((handle, index) => (
+                  <a
+                    href={handle.url}
+                    key={index}
+                    id={"category_" + handle.url + ""}
+                  >
+                    <img
+                      className="footer_social_media_icon"
+                      src={handle.logo.asset.url}
+                      alt=""
+                    />
+                  </a>
+                ))}
+            </div>
+          )}
+        </div>
+      </footer>
+    </div>
   );
 }

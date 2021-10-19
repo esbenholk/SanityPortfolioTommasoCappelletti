@@ -100,7 +100,7 @@ export default function ProductCard({ post }) {
       <div className="details" style={{ color: color }}>
         <h1>{post.title}</h1>
 
-        <div className="flex-row">
+        <div className="flex-row align-left">
           {post.tags &&
             post.tags.map((tag, index) => (
               <p className="tag" key={index}>

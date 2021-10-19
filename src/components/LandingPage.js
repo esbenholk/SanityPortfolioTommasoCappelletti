@@ -53,7 +53,9 @@ export default function LandingPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <motion.h1 className="headline flex-column">{info.greeting}</motion.h1>
+      <motion.h1 className="headline flex-column fullWidthPadded">
+        {info.greeting}
+      </motion.h1>
       {info.mainImage ? (
         <>
           {info.mainImage.hotspot ? (
@@ -65,59 +67,51 @@ export default function LandingPage() {
                   info.mainImage.hotspot.y * 100
                 }%`,
               }}
-              className="mainImage"
+              className="mainImage fullWidthPadded fullwidth"
             />
           ) : (
             <img
               src={urlFor(info.mainImage.asset.url)}
               alt={info.mainImage.alt}
-              className="mainImage"
+              className="mainImage fullWidthPadded fullwidth"
             />
           )}
-
-          {myContext.hasFeaturedPosts && featuredProjects ? (
-            <div className="regContainer">
-              <motion.h1 className="headline flex-column">
-                Latest Projects
-              </motion.h1>
-
-              {width > 900 ? (
-                <CustomCarousel>
-                  {featuredProjects.map((post, index) => (
-                    <FeaturedCard post={post} key={index} />
-                  ))}
-                </CustomCarousel>
-              ) : (
-                <div className="horizontalScroll">
-                  {featuredProjects.map((post, index) => (
-                    <FeaturedCard post={post} key={index} />
-                  ))}
-                </div>
-              )}
-            </div>
-          ) : null}
         </>
+      ) : null}
+
+      {myContext.hasFeaturedPosts && featuredProjects ? (
+        <div className="regContainer">
+          <motion.h1 className="headline flex-column fullWidthPadded">
+            Latest Projects
+          </motion.h1>
+
+          {width > 900 ? (
+            <CustomCarousel>
+              {featuredProjects.map((post, index) => (
+                <FeaturedCard post={post} key={index} />
+              ))}
+            </CustomCarousel>
+          ) : (
+            <div className="horizontalScroll overscrollPadded">
+              {featuredProjects.map((post, index) => (
+                <FeaturedCard post={post} key={index} />
+              ))}
+            </div>
+          )}
+        </div>
       ) : null}
 
       {projectList ? (
         <div className="regContainer">
-          <motion.h1 className="flex-column">More skills and ideas</motion.h1>
-          <motion.h1 className="subheadline flex-column">
+          <motion.h1 className="flex-column fullWidthPadded noMargin">
+            More skills and ideas
+          </motion.h1>
+          <motion.h1 className="subheadline flex-column fullWidthPadded">
             What do you want to see more of?
           </motion.h1>
           <Projects projectList={projectList} />
         </div>
       ) : null}
-
-      <div className="regContainer">
-        <motion.h1 className="flex-column">Others also viewed</motion.h1>
-
-        <div className="horizontalScroll">
-          {projectList.map((post, index) => (
-            <ProductCard post={post} key={index} />
-          ))}
-        </div>
-      </div>
     </motion.div>
   );
 }
