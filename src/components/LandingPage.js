@@ -14,8 +14,6 @@ import FeaturedCard from "./blocks/featuredCard";
 
 import CustomCarousel from "./blocks/Carousel";
 
-import ProductCard from "./blocks/productCard";
-
 import useWindowDimensions from "./functions/useWindowDimensions";
 
 const builder = imageUrlBuilder(sanityClient);

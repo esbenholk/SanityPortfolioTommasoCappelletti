@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 
 import { toggleHover } from "./functions/toggleHover";
 
+import useWindowDimensions from "./functions/useWindowDimensions";
+
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
 
@@ -19,14 +21,23 @@ function hover(e) {
 }
 
 export default function Projects({ projectList }) {
+  const { width } = useWindowDimensions();
+
   return (
     <motion.div
-      className="projectList"
+      className="projectList fullWidthPadded"
       layout
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      <div className="projectList-item">
+        <h2 className="categories">Category</h2>
+        <div>
+          <h2>Project</h2>
+        </div>
+        {width > 900 ? <h2>Year</h2> : null}
+      </div>
       {projectList &&
         projectList.map((project, index) => (
           <div key={index} className="projectList-item">
@@ -73,7 +84,12 @@ export default function Projects({ projectList }) {
                 />
               )}
             </div>
-            <p>{project.year ? project.year : "undefined"}</p>
+            {width > 900 ? (
+              <p className="flex-row align-left">
+                {project.year ? project.year : "undefined"}{" "}
+                {project.yearString ? <p>{project.yearString}</p> : null}
+              </p>
+            ) : null}
           </div>
         ))}
     </motion.div>

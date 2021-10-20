@@ -22,12 +22,59 @@ export default function Home() {
   const info = myContext.siteSettings;
   const { width } = useWindowDimensions();
 
+  function ShowDetails() {
+    return (
+      <div className="flex-row align-top justifyBetween contactDetails">
+        <div className="flex-column">
+          {info.contactHours ? <h2>Opening Hours</h2> : null}
+
+          {info.contactHours ? (
+            <div className="blockContent">
+              <BlockContent
+                blocks={info.contactHours}
+                projectId="swdt1dj3"
+                dataset="production"
+              />
+            </div>
+          ) : null}
+        </div>
+        <div className="flex-column">
+          {info.contactDetails ? <h2>Contact</h2> : null}
+
+          {info.contactDetails ? (
+            <div className="blockContent">
+              <BlockContent
+                blocks={info.contactDetails}
+                projectId="swdt1dj3"
+                dataset="production"
+              />
+            </div>
+          ) : null}
+        </div>
+        <div className="flex-column">
+          {info.socialMediaHandles ? <h2>Follow</h2> : null}
+
+          {info.socialMediaHandles &&
+            info.socialMediaHandles.map((handle, index) => (
+              <a
+                href={handle.url}
+                key={index}
+                id={"category_" + handle.url + ""}
+              >
+                {handle.URLName}
+              </a>
+            ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="content-container fullWidthPadded">
-        {width > 900 && info ? (
+        {info ? (
           <div className="flex-row align-top">
-            {info.authorImage ? (
+            {width > 900 && info.authorImage ? (
               <>
                 {info.authorImage.hotspot ? (
                   <img
@@ -50,38 +97,49 @@ export default function Home() {
               </>
             ) : null}
             <div className="aboutSection">
-              <motion.h1 className="headline">
-                About Tomato Cappelletti
-              </motion.h1>
+              <div>
+                <motion.h1 className="headline">
+                  About Tomato Cappelletti
+                </motion.h1>
 
-              {info.about ? (
-                <div className="blockContent">
-                  <BlockContent
-                    blocks={info.about}
-                    projectId="swdt1dj3"
-                    dataset="production"
-                  />
-                </div>
-              ) : null}
-            </div>
+                {width < 900 && info.authorImage ? (
+                  <>
+                    {info.authorImage.hotspot ? (
+                      <img
+                        src={urlFor(info.authorImage.asset.url)}
+                        alt={info.authorImage.alt}
+                        style={{
+                          objectPosition: `${
+                            info.authorImage.hotspot.x * 100
+                          }% ${info.authorImage.hotspot.y * 100}%`,
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={urlFor(info.authorImage.asset.url)}
+                        alt={info.authorImage.alt}
+                      />
+                    )}
+                  </>
+                ) : null}
 
-            <div>
-              <div className="flex-column">
-                {info.socialMediaHandles &&
-                  info.socialMediaHandles.map((handle, index) => (
-                    <a
-                      href={handle.url}
-                      key={index}
-                      id={"category_" + handle.url + ""}
-                    >
-                      {handle.URLName}
-                    </a>
-                  ))}
+                {info.about ? (
+                  <div className="aboutContent">
+                    <BlockContent
+                      blocks={info.about}
+                      projectId="swdt1dj3"
+                      dataset="production"
+                    />
+                  </div>
+                ) : null}
               </div>
+
+              {width > 900 ? <ShowDetails /> : null}
             </div>
           </div>
         ) : null}
       </div>
+      {width < 900 ? <ShowDetails /> : null}
     </div>
   );
 }

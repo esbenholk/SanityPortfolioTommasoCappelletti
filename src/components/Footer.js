@@ -62,7 +62,7 @@ export default function Footer() {
           {width > 1200 ? (
             <div className="flex-row">
               {info.socialMediaHandles &&
-                info.socialMediaHandles.map((handle, index) => (
+                info.socialMediaHandles.slice(0, 4).map((handle, index) => (
                   <a
                     href={handle.url}
                     key={index}
@@ -91,7 +91,7 @@ export default function Footer() {
           ) : (
             <div className="flex-row">
               {info.socialMediaHandles &&
-                info.socialMediaHandles.map((handle, index) => (
+                info.socialMediaHandles.slice(0, 4).map((handle, index) => (
                   <a
                     href={handle.url}
                     key={index}
