@@ -4,12 +4,14 @@ import { Suspense, lazy, useEffect, useState, createRef } from "react";
 // import NavBar from "./components/NavBar.js";
 import "./App.css";
 import sanityClient from "./client";
-import Header from "./components/Header.js";
+import Header from "./components/Header_function";
 
 import { AnimatePresence } from "framer-motion";
 import Footer from "./components/Footer";
 
 import AppContext from "./globalState";
+
+import ScrollToTop from "./components/blocks/scrollToTop";
 
 const SinglePost = lazy(() => import("./components/SinglePost.js"));
 const LandingPage = lazy(() => import("./components/LandingPage.js"));
@@ -25,6 +27,7 @@ function App() {
   const [categories, setCategories] = useState([]);
 
   const [basket, setBasket] = useState([]);
+  const [rerender, setRerender] = useState(true);
 
   const [hasFeaturedPosts, setHasFeaturedPosts] = useState(false);
 
@@ -45,10 +48,11 @@ function App() {
 
     sanityClient
       .fetch(
-        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title}, tags, color, recap, yearString}'
+        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
       )
       .then((data) => {
         data.sort((a, b) => b.year - a.year);
+        console.log(data);
         setProjectList(data);
       })
       .catch(console.error);
@@ -99,36 +103,43 @@ function App() {
     setHasFeaturedPosts,
   };
 
+  function updatebasket() {
+    //cheat rendering header component again from addToCart
+    setRerender(!rerender);
+  }
+
   return (
     <main>
       <Suspense fallback={null}>
         <AppContext.Provider value={globalContext}>
           <BrowserRouter>
-            {siteSettings && <Header />}
+            {siteSettings && <Header basket={basket} />}
             <AnimatePresence>
               <div className="mainContainer" ref={mainRef}>
-                <Switch>
-                  <Route exact path="/">
-                    {siteSettings && (
-                      <LandingPage
-                        info={siteSettings}
-                        projectList={projectList}
-                      />
-                    )}
-                  </Route>
-                  <Route path="/projects/:slug">
-                    <SinglePost />
-                  </Route>
-                  <Route path="/projects">
-                    <ProjectList projectList={projectList} />
-                  </Route>
-                  <Route path="/about">
-                    <Home info={siteSettings} projectList={projectList} />
-                  </Route>
-                  <Route path="/:slug">
-                    <Category />
-                  </Route>
-                </Switch>
+                <ScrollToTop>
+                  <Switch>
+                    <Route exact path="/">
+                      {siteSettings && (
+                        <LandingPage
+                          info={siteSettings}
+                          projectList={projectList}
+                        />
+                      )}
+                    </Route>
+                    <Route path="/projects/:slug">
+                      <SinglePost updatebasket={updatebasket} />
+                    </Route>
+                    <Route path="/projects">
+                      <ProjectList projectList={projectList} />
+                    </Route>
+                    <Route path="/about">
+                      <Home info={siteSettings} projectList={projectList} />
+                    </Route>
+                    <Route path="/:slug">
+                      <Category />
+                    </Route>
+                  </Switch>
+                </ScrollToTop>
               </div>
             </AnimatePresence>
             {siteSettings && <Footer />}

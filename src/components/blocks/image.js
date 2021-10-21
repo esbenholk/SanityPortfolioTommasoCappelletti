@@ -23,23 +23,27 @@ class Image extends React.Component {
   render() {
     return (
       <>
-        {this.state.image.hotspot ? (
-          <img
-            src={urlFor(this.state.image.asset)}
-            alt={this.state.image.alt}
-            style={{
-              objectPosition: `${this.state.image.hotspot.x * 100}% ${
-                this.state.image.hotspot.y * 100
-              }%`,
-            }}
-            className={this.state.class}
-          />
-        ) : (
-          <img
-            src={urlFor(this.state.image.asset)}
-            alt={this.state.image.alt}
-            className={this.state.class}
-          />
+        {this.state.image && (
+          <>
+            {this.state.image.hotspot ? (
+              <img
+                src={urlFor(this.state.image.asset)}
+                alt={this.state.image.alt}
+                style={{
+                  objectPosition: `${this.state.image.hotspot.x * 100}% ${
+                    this.state.image.hotspot.y * 100
+                  }%`,
+                }}
+                className={this.state.class}
+              />
+            ) : (
+              <img
+                src={urlFor(this.state.image.asset)}
+                alt={this.state.image.alt}
+                className={this.state.class}
+              />
+            )}
+          </>
         )}
       </>
     );

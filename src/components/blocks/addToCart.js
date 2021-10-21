@@ -1,9 +1,53 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import AppContext from "../../globalState";
 
-// import useWindowDimensions from "../functions/useWindowDimensions";
+export default function AddToCartButton({ project, updatebasket }) {
+  const myContext = useContext(AppContext);
+  const basket = myContext.basket;
+  const [buttonText, setButtonText] = useState("Add to cart");
+  const [isInCart, setIsInCart] = useState(false);
 
-export default function AddToCartButton({ post }) {
-  //   const { width } = useWindowDimensions();
+  useEffect(() => {
+    ///renders when new SinglePost Project is loaded
+    setButtonText("Add to cart");
+    setIsInCart(false);
 
-  return <button className="addToCartButton">Add to cart</button>;
+    if (basket) {
+      for (let index = 0; index < basket.length; index++) {
+        const basketproject = basket[index];
+        if (basketproject.title === project.title) {
+          setButtonText("Remove from cart");
+          setIsInCart(true);
+        }
+      }
+    }
+  }, [basket, project]);
+
+  function onClick() {
+    var newBasket = basket;
+    if (isInCart === false) {
+      newBasket.push(project);
+      myContext.setBasket(newBasket);
+      setIsInCart(true);
+      setButtonText("Remove from cart");
+    } else if (isInCart === true) {
+      newBasket = basket;
+      for (let index = 0; index < basket.length; index++) {
+        const basketproject = basket[index];
+        if (basketproject.title === project.title) {
+          newBasket.splice(index, 1);
+          myContext.setBasket(newBasket);
+        }
+      }
+      setIsInCart(false);
+      setButtonText("Add to cart");
+    }
+    updatebasket(basket);
+  }
+
+  return (
+    <button onClick={onClick} className="addToCartButton">
+      {buttonText}
+    </button>
+  );
 }

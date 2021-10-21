@@ -47,7 +47,7 @@ export default function Projects({ projectList }) {
                   <a
                     key={index}
                     id={"category_" + category.title + ""}
-                    href={category.title}
+                    href={category.slug.current}
                   >
                     {category.title}
                     {index + 1 !== project.categories.length ? "," : null}

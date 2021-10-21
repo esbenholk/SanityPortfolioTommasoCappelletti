@@ -7,9 +7,12 @@ import useWindowDimensions from "./functions/useWindowDimensions";
 
 import DropDownMenu from "./blocks/DropDownMenu";
 
+import Basket from "./blocks/basket";
+
 export default function Header() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
+  const basket = myContext.basket;
   const categories = myContext.categories;
   const mainRef = myContext.mainRef;
 
@@ -36,13 +39,7 @@ export default function Header() {
           <div className="no-wrap rightMenu">
             <DropDownMenu categories={categories} mainRef={mainRef} />
 
-            <NavLink to="/projects" className="basket">
-              <img
-                className="social_media_icon header-object basketIcon"
-                src="\assets\awesome-shopping-cart.png"
-                alt="shopping cart"
-              />
-            </NavLink>
+            <Basket basket={basket} />
           </div>
         </nav>
       ) : (
@@ -64,13 +61,7 @@ export default function Header() {
                 <NavLink to="/projects">
                   <h2 className="header-object"> Projects</h2>
                 </NavLink>
-                <NavLink to="/projects">
-                  <img
-                    className="social_media_icon header-object basketIcon"
-                    src="\assets\awesome-shopping-cart.png"
-                    alt="shopping cart"
-                  />
-                </NavLink>
+                <Basket basket={basket} />
               </div>
             </div>
 

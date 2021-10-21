@@ -10,7 +10,6 @@ class DropDownMenu extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { isOpen } = this.state;
 
     return (

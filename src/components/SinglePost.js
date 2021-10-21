@@ -7,6 +7,7 @@ import AddToCartButton from "./blocks/addToCart";
 import { motion } from "framer-motion";
 import Image from "./blocks/image";
 import CustomCarousel from "./blocks/Carousel";
+import { Link } from "react-router-dom";
 
 import Masonry from "react-masonry-css";
 
@@ -16,7 +17,7 @@ const breakpointColumnsObj = {
   default: 2,
 };
 
-export default function SinglePost() {
+export default function SinglePost({ updatebasket, basket }) {
   const [singlePost, setSinglePost] = useState();
   const [relatedPost, setRelatedPost] = useState();
   const { slug } = useParams();
@@ -26,32 +27,31 @@ export default function SinglePost() {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, star_rating ,slug, categories[]->{title}, tags, color, recap, yearString, client
+          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client
         }`
       )
       .then((data) => {
         setSinglePost(data[0]);
-        console.log("get single post", data[0]);
-
         sanityClient
           .fetch(
-            '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title}, tags, color, recap, yearString}'
+            '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
           )
           .then((relatedData) => {
             const relatedProjects = [];
-            for (let index = 0; index < relatedData.length; index++) {
-              const post = relatedData[index];
-              if (post.title !== data[0].title) {
-                if (
-                  post.tags &&
-                  post.tags.some((r) => data[0].tags.includes(r))
-                ) {
-                  relatedProjects.push(post);
+            if (data[0].tags) {
+              for (let index = 0; index < relatedData.length; index++) {
+                const post = relatedData[index];
+                if (post.title !== data[0].title) {
+                  if (
+                    post.tags &&
+                    post.tags.some((r) => data[0].tags.includes(r))
+                  ) {
+                    relatedProjects.push(post);
+                  }
                 }
               }
+              setRelatedPost(relatedProjects);
             }
-            console.log("tTHERE ARE RELATED PROJECTS", relatedProjects);
-            setRelatedPost(relatedProjects);
           })
           .catch(console.error);
       })
@@ -70,6 +70,22 @@ export default function SinglePost() {
         className="fullWidthPadded"
       >
         <article>
+          <div className="flex-row align-top project_directory_line">
+            <a href="/projects">{"Project >"}</a>
+            <div className="flex-row align-left">
+              {singlePost.categories.map((category, index) => (
+                <Link
+                  to={"../" + category.slug.current}
+                  className="tag project_tag"
+                  key={index}
+                >
+                  {category.title + ">"}
+                  {index + 1 !== singlePost.categories.length ? "," : null}
+                </Link>
+              ))}
+            </div>
+            <p>{singlePost.title}</p>
+          </div>
           <div className="flex-row align-top">
             <div className="flex-column contentColumn">
               {width < 600 ? (
@@ -143,7 +159,11 @@ export default function SinglePost() {
                 <p className="stars">{singlePost.star_rating}</p>
               ) : null}
 
-              <AddToCartButton post={singlePost} />
+              <AddToCartButton
+                project={singlePost}
+                updatebasket={updatebasket}
+                basket={basket}
+              />
 
               <div className="flex-column project_details">
                 {singlePost.client && (
@@ -169,12 +189,16 @@ export default function SinglePost() {
                     <h3>Category</h3>
                     <div className="flex-row align-left">
                       {singlePost.categories.map((category, index) => (
-                        <p className="tag project_tag" key={index}>
+                        <Link
+                          to={"../" + category.slug.current}
+                          className="tag project_tag"
+                          key={index}
+                        >
                           {category.title}
                           {index + 1 !== singlePost.categories.length
                             ? ","
                             : null}
-                        </p>
+                        </Link>
                       ))}
                     </div>
                   </>
@@ -203,8 +227,6 @@ export default function SinglePost() {
                     alt="down arrow button"
                     style={{
                       transform: "rotate(90deg)",
-                      width: "31px",
-                      height: "32px",
                     }}
                   />
                 </div>
