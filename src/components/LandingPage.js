@@ -1,9 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import sanityClient from "../client";
-
-import imageUrlBuilder from "@sanity/image-url";
-
 import { motion } from "framer-motion";
 
 import Projects from "./blocks/Projects.js";
@@ -13,20 +9,14 @@ import AppContext from "../globalState";
 import FeaturedCard from "./blocks/featuredCard";
 
 import CustomCarousel from "./blocks/Carousel";
+import Image from "./blocks/image";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
-
-const builder = imageUrlBuilder(sanityClient);
-
-function urlFor(source) {
-  return builder.image(source);
-}
 
 export default function LandingPage() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
   const projectList = myContext.projectList;
-
   const { width } = useWindowDimensions();
 
   const [featuredProjects, setFeaturedProjects] = useState([]);
@@ -55,26 +45,9 @@ export default function LandingPage() {
         {info.greeting}
       </motion.h1>
       {info.mainImage ? (
-        <>
-          {info.mainImage.hotspot ? (
-            <img
-              src={urlFor(info.mainImage.asset.url)}
-              alt={info.mainImage.alt}
-              style={{
-                objectPosition: `${info.mainImage.hotspot.x * 100}% ${
-                  info.mainImage.hotspot.y * 100
-                }%`,
-              }}
-              className="mainImage fullWidthPadded fullwidth"
-            />
-          ) : (
-            <img
-              src={urlFor(info.mainImage.asset.url)}
-              alt={info.mainImage.alt}
-              className="mainImage fullWidthPadded fullwidth"
-            />
-          )}
-        </>
+        <div className="fullWidthPadded">
+          <Image image={info.mainImage} class={"mainImage fullwidth"} />
+        </div>
       ) : null}
 
       {myContext.hasFeaturedPosts && featuredProjects ? (
@@ -84,11 +57,16 @@ export default function LandingPage() {
           </motion.h1>
 
           {width > 900 ? (
-            <CustomCarousel>
-              {featuredProjects.map((post, index) => (
-                <FeaturedCard post={post} key={index} />
-              ))}
-            </CustomCarousel>
+            <div className="fullWidthPadded">
+              <CustomCarousel
+                arrows={true}
+                classsss={"featured_post_container"}
+              >
+                {featuredProjects.map((post, index) => (
+                  <FeaturedCard post={post} key={index} />
+                ))}
+              </CustomCarousel>
+            </div>
           ) : (
             <div className="horizontalScroll overscrollPadded">
               {featuredProjects.map((post, index) => (

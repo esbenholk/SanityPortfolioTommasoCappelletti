@@ -48,7 +48,7 @@ export default function Header() {
       ) : (
         <>
           <nav>
-            <div className="flex-row menu">
+            <div className="flex-row menu header-flex-row">
               <div className="flex-row">
                 <NavLink to="/" className="logo">
                   {info.logo && (

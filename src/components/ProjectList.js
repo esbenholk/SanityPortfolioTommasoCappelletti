@@ -87,7 +87,7 @@ export default function Projects({ projectList }) {
             {width > 900 ? (
               <p className="flex-row align-left">
                 {project.year ? project.year : "undefined"}{" "}
-                {project.yearString ? <p>{project.yearString}</p> : null}
+                {project.yearString ? <u>{project.yearString}</u> : null}
               </p>
             ) : null}
           </div>

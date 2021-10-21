@@ -2,7 +2,7 @@ import { Carousel } from "react-responsive-carousel";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-export default function CustomCarousel({ children }) {
+export default function CustomCarousel({ children, arrows, classsss }) {
   return (
     <Carousel
       swipeable={true}
@@ -13,7 +13,8 @@ export default function CustomCarousel({ children }) {
       showStatus={false}
       showThumbs={false}
       autoPlay={false}
-      className="featured_post_container fullWidthPadded"
+      showArrows={arrows}
+      className={classsss}
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev && (
           <button
@@ -26,7 +27,7 @@ export default function CustomCarousel({ children }) {
                 width: "55px",
                 transform: "rotate(180deg)",
               }}
-              src={`assets/arrow_in_circle.svg`}
+              src={`../assets/arrow_in_circle.svg`}
               alt="prevArrow"
             />
           </button>
@@ -40,7 +41,7 @@ export default function CustomCarousel({ children }) {
           >
             <img
               style={{ height: "55px", width: "55px" }}
-              src={`assets/arrow_in_circle.svg`}
+              src={`../assets/arrow_in_circle.svg`}
               alt="nextArrow"
             />
           </button>
