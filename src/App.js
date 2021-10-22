@@ -74,7 +74,13 @@ function App() {
         if (post.categories != null && Array.isArray(post.categories)) {
           for (let index = 0; index < post.categories.length; index++) {
             const category = post.categories[index];
-            categories.push(category.title);
+
+            if (categories.some((item) => item.title === category.title)) {
+              console.log("obejct in array already");
+            } else {
+              categories.push(category);
+              console.log(category, categories);
+            }
           }
         }
       }

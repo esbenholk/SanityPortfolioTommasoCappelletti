@@ -12,7 +12,7 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-export default function ProductCard({ post }) {
+export default function ProductCard({ post, classssss }) {
   const [isShown, setIsShown] = useState(false);
 
   var color;
@@ -23,7 +23,7 @@ export default function ProductCard({ post }) {
   }
 
   return (
-    <div className="product_card">
+    <div className={classssss + " product_card"}>
       <Link
         to={"/projects/" + post.slug.current}
         key={post.slug.current + "productCard"}

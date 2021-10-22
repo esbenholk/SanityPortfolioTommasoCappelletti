@@ -23,14 +23,13 @@ export default function Projects() {
   const [tags, setTags] = useState(myContext.tags);
   const [currentTags, setCurrentTags] = useState([]);
 
-  const [categories, setCategories] = useState(myContext.categories);
+  const [categories] = useState(myContext.categories);
   const [currentCategories, setCurrentCategories] = useState([]);
 
   useEffect(() => {
     setAllPosts(projectList);
     setSortedPosts(projectList);
     var tags = [];
-    var categories = [];
 
     for (let index = 0; index < projectList.length; index++) {
       const post = projectList[index];
@@ -40,22 +39,14 @@ export default function Projects() {
       if (post.tags != null && Array.isArray(post.tags)) {
         for (let index = 0; index < post.tags.length; index++) {
           const tag = post.tags[index];
+
           tags.push(tag);
-        }
-      }
-      if (post.categories != null && Array.isArray(post.categories)) {
-        for (let index = 0; index < post.categories.length; index++) {
-          const category = post.categories[index];
-          categories.push(category.title);
         }
       }
     }
 
     let sortedTags = [...new Set(tags)];
     setTags(sortedTags);
-
-    let sortedCategories = [...new Set(categories)];
-    setCategories(sortedCategories);
   }, [projectList]);
 
   useEffect(() => {
@@ -132,24 +123,25 @@ export default function Projects() {
   }
 
   function setCategory(category) {
+    console.log(category);
     console.log("sorting from category", category, currentCategories);
-    if (!currentCategories.includes(category.category)) {
+    if (!currentCategories.includes(category.category.title)) {
       const tempCategories = [...currentCategories];
-      tempCategories.push(category.category);
+      tempCategories.push(category.category.title);
       setCurrentCategories(tempCategories);
       console.log(
         "should make category active",
-        document.getElementById("category_" + category.category)
+        document.getElementById("category_" + category.category.title)
       );
       document
-        .getElementById("category_" + category.category)
+        .getElementById("category_" + category.category.title)
         .classList.add("active");
-    } else if (currentCategories.includes(category.category)) {
-      var categoryIndex = currentCategories.indexOf(category.category);
+    } else if (currentCategories.includes(category.category.title)) {
+      var categoryIndex = currentCategories.indexOf(category.category.title);
       currentCategories.splice(categoryIndex, 1);
       const tempCategories = [...currentCategories];
       document
-        .getElementById("category_" + category.category)
+        .getElementById("category_" + category.category.title)
         .classList.remove("active");
 
       setCurrentCategories(tempCategories);
@@ -159,18 +151,19 @@ export default function Projects() {
   return (
     <div className="projects">
       <div className="tag_grid horizontalScroll overscrollPadded">
-        {categories.map((category, index) => (
-          <button
-            className="tag_button standard-button "
-            key={index}
-            id={"category_" + category + ""}
-            onClick={() => {
-              setCategory({ category });
-            }}
-          >
-            {category}
-          </button>
-        ))}
+        {categories &&
+          categories.map((category, index) => (
+            <button
+              className="tag_button standard-button "
+              key={index}
+              id={"category_" + category.title + ""}
+              onClick={() => {
+                setCategory({ category });
+              }}
+            >
+              {category.title}
+            </button>
+          ))}
       </div>
       <div className="tag_grid horizontalScroll overscrollPadded">
         {tags.map((tag, index) => (

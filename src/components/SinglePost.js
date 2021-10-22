@@ -79,10 +79,11 @@ export default function SinglePost({ updatebasket, basket }) {
                   className="tag project_tag"
                   key={index}
                 >
-                  {category.title + ">"}
+                  {category.title}
                   {index + 1 !== singlePost.categories.length ? "," : null}
                 </Link>
               ))}
+              <p>{" > "}</p>
             </div>
             <p>{singlePost.title}</p>
           </div>

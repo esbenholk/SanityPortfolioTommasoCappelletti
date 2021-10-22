@@ -85,6 +85,17 @@ a {
 
 .basket {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  max-height: 64px;
+  min-width: 18px;
+}
+.basket img {
+  width: 35px;
+  height: 31px;
+  max-width: none;
 }
 .basketCounter {
   position: absolute;
@@ -99,9 +110,7 @@ a {
   justify-content: center;
   align-items: center;
 }
-.basket img {
-  transform: translate(0, 50%);
-}
+
 a:visited {
   color: black;
 }
@@ -394,6 +403,22 @@ h2 {
   display: flex;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--menuGrey);
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+.overlay.active {
+  visibility: visible;
+  pointer-events: all;
+}
+
 .dropdown {
   position: relative;
   margin: 12px;
@@ -463,6 +488,102 @@ h2 {
   padding: 20px 18px 24px 18px;
 }
 
+.foldout {
+  position: fixed;
+  top: 0;
+  right: -33%;
+  height: 100%;
+  width: 33%;
+  background-color: white;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  overflow-y: scroll;
+}
+.foldout.active {
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+.foldoutmenu {
+  max-width: 100%;
+  z-index: 9999999;
+}
+.foldoutDiv {
+  width: 100%;
+  padding: 43px 41px 62px 43px;
+}
+
+.foldoutHeader {
+  background-color: #4bc35d;
+}
+.foldoutHeader svg {
+  float: right;
+}
+
+.foldoutHeader p,
+.foldoutHeader h2 {
+  white-space: pre-wrap;
+  color: white;
+  width: 100%;
+}
+.foldoutHeader h2 {
+  margin-top: 40px;
+}
+.foldoutHeader p {
+  text-align: left;
+  font: normal normal normal 20px/27px Open Sans;
+  letter-spacing: 0px;
+}
+.foldoutHeader a {
+  text-align: left;
+  font: normal normal normal 20px/27px Open Sans;
+  letter-spacing: 0px;
+  text-decoration: underline;
+  color: white;
+}
+
+.basketCard {
+  position: relative;
+  width: 100%;
+  padding-top: 31px;
+  padding-bottom: 31px;
+  border-bottom: 1px solid var(--menuGrey);
+}
+
+.basketCard_image {
+  width: 50%;
+  padding-bottom: 50%;
+  position: relative;
+  overflow: hidden;
+  position: relative;
+}
+.basketCard_image img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.basketCard .details {
+  padding-top: 31px;
+  width: 48%;
+  padding-left: 15px;
+}
+.basketCard .details h2 {
+  text-align: left;
+  font: normal normal bold 20px/27px Open Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  white-space: pre-wrap;
+}
+.basketCard .details .tag {
+  text-align: left;
+  font: normal normal normal 18px/24px Open Sans;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
 /* frontpage grids */
 
 /* tags */
@@ -494,11 +615,6 @@ nav {
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
-}
-
-.basketIcon {
-  height: "31px";
-  width: "35px";
 }
 
 .menu a {
@@ -694,6 +810,11 @@ nav .logo_container img {
   min-width: 416px;
   min-height: 611px;
 }
+
+/* .product_card_in_grid {
+  max-width: 100% !important;
+  min-width: 100% !important;
+} */
 .product_card:last-of-type {
   margin-right: var(--mainPadding);
 }
@@ -852,15 +973,16 @@ nav .logo_container img {
   width: auto;
 }
 .my-masonry-grid_column {
-  padding-right: 15px;
+  position: relative;
+  margin-right: 15px;
   background-clip: padding-box;
 }
 
 .my-masonry-grid_column:last-of-type {
-  padding-right: 0px;
+  margin-right: 0px;
 }
 .singleProjectMasonry:last-of-type {
-  padding-right: 15px;
+  margin-right: 15px;
 }
 
 /* Style your items */
@@ -1109,10 +1231,16 @@ footer {
   }
 
   .product_card {
-    width: 173px;
+    max-width: 173px;
+    width: 100%;
     height: auto;
     min-width: 173px;
     min-height: 263px;
+  }
+
+  .product_card_in_grid {
+    min-width: 0;
+    max-width: 100%;
   }
   .product_card:last-of-type {
     margin-right: var(--mainPaddingMobile);
@@ -1232,6 +1360,35 @@ footer {
     margin-bottom: 7px;
     border-bottom: 1px solid var(--menuGrey);
   }
+
+  .my-masonry-grid_column {
+    padding-right: 0px;
+    background-clip: padding-box;
+  }
+
+  .my-masonry-grid_column:last-of-type {
+    padding-right: 0px;
+  }
+  .basket img {
+    height: 16px;
+    width: 18px;
+  }
+  .basketCounter {
+    position: absolute;
+    top: -8px;
+    right: -7px;
+    background-color: red;
+    color: white;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .basketCounter p {
+    font-size: 10px;
+  }
 }
 
 @media only screen and (max-width: 570px) {
@@ -1250,11 +1407,6 @@ footer {
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
-  }
-
-  .basketIcon {
-    height: "16px";
-    width: "18px";
   }
 
   .standard-button {

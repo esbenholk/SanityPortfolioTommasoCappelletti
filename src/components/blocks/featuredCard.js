@@ -69,10 +69,14 @@ export default function FeaturedCard({ post }) {
         <div className="flex-row post_category_list">
           {post.categories &&
             post.categories.map((category, index) => (
-              <p className="standardTransparent-button" key={index}>
+              <a
+                className="standardTransparent-button"
+                key={index}
+                href={category.slug.current}
+              >
                 {" "}
                 {category.title}{" "}
-              </p>
+              </a>
             ))}
         </div>
 

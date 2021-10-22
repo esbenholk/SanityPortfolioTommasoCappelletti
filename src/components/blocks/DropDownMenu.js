@@ -13,62 +13,63 @@ class DropDownMenu extends React.Component {
     const { isOpen } = this.state;
 
     return (
-      <div
-        className={isOpen ? "dropdown active" : "dropdown"}
-        onClick={this.handleClick}
-      >
-        <div className="dropdown__text">
-          {!isOpen ? (
-            <div className="flex-row no-wrap">
-              <img
-                src="/assets/SearchIcon.svg"
-                alt="search icon"
-                style={{ height: "24px" }}
-              ></img>
-              <p style={{ paddingLeft: "40px" }}>Looking for a designer?</p>
-            </div>
-          ) : (
-            <div className="flex-row no-wrap justifyBetween">
-              <p style={{ paddingLeft: "43px" }}>
-                {" "}
-                Which skill are you looking for?
-              </p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 33"
-              >
-                <g
-                  id="Group_137"
-                  data-name="Group 137"
-                  transform="translate(-838.988 -94)"
+      <>
+        <div
+          className={isOpen ? "overlay active" : "overlay"}
+          onClick={this.handleClick}
+        ></div>
+
+        <div
+          className={isOpen ? "dropdown active" : "dropdown"}
+          onClick={this.handleClick}
+        >
+          <div className="dropdown__text">
+            {!isOpen ? (
+              <div className="flex-row no-wrap">
+                <img
+                  src="/assets/SearchIcon.svg"
+                  alt="search icon"
+                  style={{ height: "24px" }}
+                ></img>
+                <p style={{ paddingLeft: "40px" }}>Looking for a designer?</p>
+              </div>
+            ) : (
+              <div className="flex-row no-wrap justifyBetween">
+                <p style={{ paddingLeft: "43px" }}>
+                  {" "}
+                  Which skill are you looking for?
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 33"
                 >
-                  <path
-                    id="Icon_ionic-md-close"
-                    data-name="Icon ionic-md-close"
-                    d="M28.477,9.619l-2.1-2.1L18,15.9,9.619,7.523l-2.1,2.1L15.9,18,7.523,26.381l2.1,2.1L18,20.1l8.381,8.381,2.1-2.1L20.1,18Z"
-                    transform="translate(832.172 93.5)"
-                    stroke="#000"
-                    strokeWidth="1"
-                  />
-                </g>
-              </svg>
-            </div>
-          )}
+                  <g
+                    id="Group_137"
+                    data-name="Group 137"
+                    transform="translate(-838.988 -94)"
+                  >
+                    <path
+                      id="Icon_ionic-md-close"
+                      data-name="Icon ionic-md-close"
+                      d="M28.477,9.619l-2.1-2.1L18,15.9,9.619,7.523l-2.1,2.1L15.9,18,7.523,26.381l2.1,2.1L18,20.1l8.381,8.381,2.1-2.1L20.1,18Z"
+                      transform="translate(832.172 93.5)"
+                      stroke="#000"
+                      strokeWidth="1"
+                    />
+                  </g>
+                </svg>
+              </div>
+            )}
+          </div>
+          {this.itemList(this.props.categories)}
         </div>
-        {this.itemList(this.props.categories)}
-      </div>
+      </>
     );
   }
 
   handleClick = () => {
-    if (this.state.isOpen) {
-      this.props.mainRef.current.style.backgroundColor = "white";
-    } else {
-      this.props.mainRef.current.style.backgroundColor = "#dbdbdb";
-    }
-
     this.setState({
       isOpen: !this.state.isOpen,
     });
@@ -81,15 +82,15 @@ class DropDownMenu extends React.Component {
   };
 
   itemList = (props) => {
-    const list = props.map((item) => (
-      <div className="dropdown__item" key={item.toString()}>
+    const list = props.map((item, index) => (
+      <div className="dropdown__item" key={index}>
         <img
           src="/assets/SearchIcon.svg"
           alt="search icon"
           style={{ height: "13px" }}
         ></img>
-        <a key={item.toString()} href={item}>
-          {item}
+        <a key={item.slug.current.toString()} href={item.slug.current}>
+          {item.title}
         </a>
       </div>
     ));

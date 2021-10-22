@@ -22,7 +22,7 @@ export default function LandingPage() {
   const [featuredProjects, setFeaturedProjects] = useState([]);
 
   useEffect(() => {
-    if (myContext.hasFeaturedPosts === true) {
+    if (myContext.hasFeaturedPosts === true && projectList) {
       const featuredProjects = [];
       for (let index = 0; index < projectList.length; index++) {
         const post = projectList[index];
