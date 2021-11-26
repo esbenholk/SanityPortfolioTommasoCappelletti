@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import AppContext from "../globalState";
 import { motion } from "framer-motion";
 
-import BlockContent from "@sanity/block-content-to-react";
+import BlockContent from "./blocks/BlockContent";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
 
@@ -24,11 +24,7 @@ export default function Home() {
 
               {info.contactHours ? (
                 <div className="blockContent">
-                  <BlockContent
-                    blocks={info.contactHours}
-                    projectId="swdt1dj3"
-                    dataset="production"
-                  />
+                  <BlockContent blocks={info.contactHours} />
                 </div>
               ) : null}
             </div>
@@ -37,11 +33,7 @@ export default function Home() {
 
               {info.contactDetails ? (
                 <div className="blockContent">
-                  <BlockContent
-                    blocks={info.contactDetails}
-                    projectId="swdt1dj3"
-                    dataset="production"
-                  />
+                  <BlockContent blocks={info.contactDetails} />
                 </div>
               ) : null}
             </div>
@@ -88,11 +80,7 @@ export default function Home() {
 
                 {info.about ? (
                   <div className="aboutContent">
-                    <BlockContent
-                      blocks={info.about}
-                      projectId="swdt1dj3"
-                      dataset="production"
-                    />
+                    <BlockContent blocks={info.about} />
                   </div>
                 ) : null}
               </div>

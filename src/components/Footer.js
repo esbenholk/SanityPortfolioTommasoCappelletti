@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import BlockContent from "@sanity/block-content-to-react";
+import BlockContent from "./blocks/BlockContent";
+
 import useWindowDimensions from "./functions/useWindowDimensions";
 
 import AppContext from "../globalState";
@@ -24,7 +25,10 @@ export default function Footer() {
         </motion.h1>
 
         {projectList ? (
-          <div className="overscrollPadded horizontalScroll2">
+          <div
+            style={{ backgroundColor: "white" }}
+            className="overscrollPadded horizontalScroll2"
+          >
             {projectList.map((post, index) => (
               <ProductCard post={post} key={index} />
             ))}
@@ -82,11 +86,7 @@ export default function Footer() {
         <div className="footer_bottom">
           {width > 1200 && info.contact ? (
             <div className="blockContent">
-              <BlockContent
-                blocks={info.contact}
-                projectId="swdt1dj3"
-                dataset="production"
-              />
+              <BlockContent blocks={info.contact} />
             </div>
           ) : (
             <div className="flex-row">

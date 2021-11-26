@@ -18,6 +18,7 @@ export default function LandingPage() {
   const info = myContext.siteSettings;
   const projectList = myContext.projectList;
   const { width } = useWindowDimensions();
+  console.log(info);
 
   const [featuredProjects, setFeaturedProjects] = useState([]);
 
@@ -44,11 +45,28 @@ export default function LandingPage() {
       <motion.h1 className="headline flex-column fullWidthPadded">
         {info.greeting}
       </motion.h1>
-      {info.mainImage ? (
-        <div className="fullWidthPadded">
-          <Image image={info.mainImage} class={"mainImage fullwidth"} />
-        </div>
-      ) : null}
+
+      <>
+        {info.mainImages ? (
+          <div className="fullWidthPadded">
+            <CustomCarousel arrows={true} swipe={true} classsss={""}>
+              {info.mainImages.map((image, index) => (
+                <div key={index}>
+                  <Image image={image} />
+                </div>
+              ))}
+            </CustomCarousel>{" "}
+          </div>
+        ) : (
+          <>
+            {info.mainImage ? (
+              <div className="fullWidthPadded">
+                <Image image={info.mainImage} class={"mainImage fullwidth"} />
+              </div>
+            ) : null}{" "}
+          </>
+        )}
+      </>
 
       {myContext.hasFeaturedPosts && featuredProjects ? (
         <div className="regContainer">

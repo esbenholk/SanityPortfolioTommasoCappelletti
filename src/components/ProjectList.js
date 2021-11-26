@@ -50,7 +50,7 @@ export default function Projects({ projectList }) {
                     href={category.slug.current}
                   >
                     {category.title}
-                    {index + 1 !== project.categories.length ? "," : null}
+                    {index + 1 !== project.categories.length ? ", " : null}
                   </a>
                 ))}
             </div>
@@ -61,10 +61,7 @@ export default function Projects({ projectList }) {
               </a>
               {project.mainImage.hotspot ? (
                 <img
-                  src={urlFor(project.mainImage.asset.url)
-                    .width(500)
-                    .height(300)
-                    .url()}
+                  src={urlFor(project.mainImage.asset.url).url()}
                   alt={project.mainImage.alt}
                   style={{
                     objectPosition: `${project.mainImage.hotspot.x * 100}% ${
@@ -75,10 +72,7 @@ export default function Projects({ projectList }) {
                 />
               ) : (
                 <img
-                  src={urlFor(project.mainImage.asset.url)
-                    .width(500)
-                    .height(300)
-                    .url()}
+                  src={urlFor(project.mainImage.asset.url).url()}
                   alt={project.mainImage.alt}
                   className="thumbnail seeOnHover hidden"
                 />

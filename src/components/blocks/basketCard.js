@@ -9,13 +9,15 @@ export default function BasketCard({
   classssss,
   isInCart,
   removeFromCart,
+  openMenu,
 }) {
   const [isShown, setIsShown] = useState(false);
-  console.log("does it have funciton", removeFromCart);
 
   function remove() {
-    console.log("dioes removal");
     removeFromCart(post);
+  }
+  function closeMenuLocal() {
+    openMenu();
   }
 
   return (
@@ -43,6 +45,7 @@ export default function BasketCard({
           to={"/projects/" + post.slug.current}
           key={post.slug.current + ""}
           className="w-full teaser-link"
+          onClick={closeMenuLocal}
         >
           <h2>{post.title}</h2>
         </Link>

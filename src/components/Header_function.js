@@ -12,7 +12,7 @@ import Basket from "./blocks/basket";
 export default function Header() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
-  const basket = myContext.basket;
+  var basket = myContext.basket;
   const categories = myContext.categories;
   const mainRef = myContext.mainRef;
 

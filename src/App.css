@@ -393,7 +393,7 @@ h2 {
 }
 .regContainer {
   padding-top: 100px;
-  background-color: white;
+  z-index: 9999999;
 }
 
 /* search bar menu */
@@ -427,12 +427,24 @@ h2 {
   background: var(--menuGrey);
   display: flex;
 }
+
+.dropdown__text:first-child {
+  display: flex;
+  align-items: center;
+}
 .dropdown.active {
   background-color: white;
   border-radius: 20px;
   display: block;
   align-items: center;
 }
+
+.dropdown__text .flex-row {
+  display: flex;
+  align-items: right;
+  width: 100%;
+}
+
 .dropdown__text {
   color: black;
   padding: 8px 18px 8px 18px;
@@ -491,12 +503,13 @@ h2 {
 .foldout {
   position: fixed;
   top: 0;
-  right: -33%;
+  right: -40%;
   height: 100%;
-  width: 33%;
+  width: 40%;
   background-color: white;
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
   overflow-y: scroll;
+  z-index: 9999999;
 }
 .foldout.active {
   transform-origin: 0% 0%;
@@ -712,6 +725,7 @@ nav .logo_container img {
 .projectList-item .categories a {
   width: auto;
   position: relative;
+  margin-right: 3px;
 }
 
 .thumbnail {
@@ -864,11 +878,17 @@ nav .logo_container img {
 
 .contentColumn {
   width: 60%;
-  margin-right: 65px;
+  /* margin-right: 65px; */
 }
 .detailColumn {
-  flex-grow: 1;
-  max-width: 60%;
+  /* flex-grow: 1; */
+  width: 400px;
+}
+.detailColumnfixed {
+  position: fixed;
+  right: var(--mainPadding);
+  top: 61px;
+  width: 400px;
 }
 .squareImage {
   width: 100%;
@@ -1100,6 +1120,7 @@ footer {
   .detailColumn {
     margin-top: 30px;
     max-width: 100%;
+    width: 60%;
   }
 }
 
@@ -1459,6 +1480,7 @@ footer {
   .menu a:first-of-type {
     margin: 0px;
   }
+
   .dropdown__text p {
     text-align: left;
     font: normal normal normal 14px/17px Galvji;

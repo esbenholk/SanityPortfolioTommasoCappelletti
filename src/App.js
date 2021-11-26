@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Suspense, lazy, useEffect, useState, createRef } from "react";
+import React, { Suspense, lazy, useEffect, useState, createRef } from "react";
 // import NavBar from "./components/NavBar.js";
 import "./App.css";
 import sanityClient from "./client";
@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     sanityClient
       .fetch(
-        '*[_type == "siteSettings"]{title, greeting, mainImage{asset->{_id,url}, hotspot, alt}, authorImage{asset->{_id,url}, hotspot, alt},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}, contactDetails, contactHours}'
+        '*[_type == "siteSettings"]{title, greeting, mainImage{asset->{_id,url}, hotspot, alt}, mainImages, authorImage{asset->{_id,url}, hotspot, alt},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}, contactDetails, contactHours}'
       )
       .then((data) => {
         setSiteSettings(data[0]);

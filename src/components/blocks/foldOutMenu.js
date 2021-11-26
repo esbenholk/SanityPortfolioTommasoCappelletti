@@ -26,18 +26,24 @@ class FoldOutMenu extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: false,
       projectList: [],
+      isOpen: this.props.isOpen,
     };
   }
-  componentDidMount() {}
-
-  componentDidUpdate() {
-    console.log(this.props.basket, this.props.info);
+  componentDidMount() {
+    console.log("foldoutmenu mounts");
   }
 
+  componentDidUpdate() {
+    console.log("foldoutmenu updates");
+  }
+  handleClick = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
+
   render() {
-    const isOpen = this.props.isOpen;
     var projectList;
     if (this.props.projectList) {
       projectList = [this.props.projectList[0], this.props.projectList[1]];
@@ -45,10 +51,10 @@ class FoldOutMenu extends React.Component {
     return (
       <div>
         <div
-          className={isOpen ? "overlay active" : "overlay"}
-          onClick={this.props.openMenu}
+          className={this.state.isOpen ? "overlay active" : "overlay"}
+          // onClick={this.props.openMenu}
         ></div>
-        <div className={isOpen ? "foldout active" : "foldout"}>
+        <div className={this.state.isOpen ? "foldout active" : "foldout"}>
           <div className="foldoutmenu">
             <div className="foldoutHeader foldoutDiv">
               <svg
@@ -63,7 +69,7 @@ class FoldOutMenu extends React.Component {
                   transform="translate(-838.988 -94)"
                 >
                   <path
-                    onClick={this.props.openMenu}
+                    // onClick={this.props.openMenu}
                     id="Icon_ionic-md-close"
                     data-name="Icon ionic-md-close"
                     d="M28.477,9.619l-2.1-2.1L18,15.9,9.619,7.523l-2.1,2.1L15.9,18,7.523,26.381l2.1,2.1L18,20.1l8.381,8.381,2.1-2.1L20.1,18Z"
@@ -116,12 +122,17 @@ class FoldOutMenu extends React.Component {
       </div>
     );
   }
-
-  handleClick = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  };
 }
 
 export default FoldOutMenu;
+
+{
+  /* <FoldOutMenu
+          openMenu={openMenu}
+          isOpen={isOpen}
+          basket={basket}
+          projectList={projectList}
+          info={info}
+          removeFromCart={removeFromCart}
+        /> */
+}

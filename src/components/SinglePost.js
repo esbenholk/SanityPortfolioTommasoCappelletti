@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import sanityClient from "../client";
 import { useParams } from "react-router-dom";
-import BlockContent from "@sanity/block-content-to-react";
+// import BlockContent from "@sanity/block-content-to-react";
 import ProductCard from "./blocks/productCard";
 import AddToCartButton from "./blocks/addToCart";
 import { motion } from "framer-motion";
 import Image from "./blocks/image";
 import CustomCarousel from "./blocks/Carousel";
 import { Link } from "react-router-dom";
+
+import BlockContent from "./blocks/BlockContent";
 
 import Masonry from "react-masonry-css";
 
@@ -22,6 +24,8 @@ export default function SinglePost({ updatebasket, basket }) {
   const [relatedPost, setRelatedPost] = useState();
   const { slug } = useParams();
   const { width } = useWindowDimensions();
+
+  const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
 
   useEffect(() => {
     sanityClient
@@ -58,6 +62,16 @@ export default function SinglePost({ updatebasket, basket }) {
       .catch(console.error);
   }, [slug]);
 
+  function listenScrollEvent() {
+    if (window.scrollY > 240) {
+      sethasScrolledinPosition(true);
+    } else {
+      sethasScrolledinPosition(false);
+    }
+  }
+
+  window.addEventListener("scroll", listenScrollEvent);
+
   if (!singlePost) return <div>Loading...</div>;
 
   return (
@@ -87,7 +101,7 @@ export default function SinglePost({ updatebasket, basket }) {
             </div>
             <p>{singlePost.title}</p>
           </div>
-          <div className="flex-row align-top">
+          <div className="flex-row align-top justifyBetween">
             <div className="flex-column contentColumn">
               {width < 600 ? (
                 <>
@@ -133,7 +147,13 @@ export default function SinglePost({ updatebasket, basket }) {
                 </>
               )}
             </div>
-            <div className="flex-column detailColumn">
+            <div
+              className={
+                hasScrolledinPosition & (width > 1200)
+                  ? "flex-column detailColumnfixed"
+                  : "flex-column detailColumn"
+              }
+            >
               <header className="flex-row align-top justifyBetween">
                 <h2 className="projectTitle">{singlePost.title}</h2>
                 {singlePost.abbreviated_year ? (
@@ -210,11 +230,7 @@ export default function SinglePost({ updatebasket, basket }) {
           <div className="contentColumn">
             {singlePost.recap && (
               <div className="recap">
-                <BlockContent
-                  blocks={singlePost.recap}
-                  projectId="swdt1dj3"
-                  dataset="production"
-                />
+                <BlockContent blocks={singlePost.recap} />
               </div>
             )}
 
@@ -232,11 +248,7 @@ export default function SinglePost({ updatebasket, basket }) {
                   />
                 </div>
 
-                <BlockContent
-                  blocks={singlePost.body}
-                  projectId="swdt1dj3"
-                  dataset="production"
-                />
+                <BlockContent blocks={singlePost.body} />
               </div>
             )}
           </div>
