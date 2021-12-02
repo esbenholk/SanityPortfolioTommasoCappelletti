@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 
-import Projects from "./blocks/Projects.js";
+import Projects from "./blocks/Projects";
 
 import AppContext from "../globalState";
 
@@ -103,7 +103,7 @@ export default function LandingPage() {
           <motion.h1 className="subheadline flex-column fullWidthPadded">
             What do you want to see more of?
           </motion.h1>
-          <Projects projectList={projectList} />
+          <Projects projectList={projectList} show_categories={true} />
         </div>
       ) : null}
     </motion.div>

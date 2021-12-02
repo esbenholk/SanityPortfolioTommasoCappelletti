@@ -12,7 +12,7 @@ const breakpointColumnsObj = {
   600: 2,
 };
 
-export default function Projects({ show_categories, show_tags }) {
+export default function Projects() {
   const myContext = useContext(AppContext);
   const projectList = myContext.projectList;
 
@@ -150,39 +150,35 @@ export default function Projects({ show_categories, show_tags }) {
 
   return (
     <div className="projects">
-      {show_categories && (
-        <div className="tag_grid horizontalScroll overscrollPadded">
-          {categories &&
-            categories.map((category, index) => (
-              <button
-                className="tag_button standard-button "
-                key={index}
-                id={"category_" + category.title + ""}
-                onClick={() => {
-                  setCategory({ category });
-                }}
-              >
-                {category.title}
-              </button>
-            ))}
-        </div>
-      )}
-      {show_tags && (
-        <div className="tag_grid horizontalScroll overscrollPadded">
-          {tags.map((tag, index) => (
+      <div className="tag_grid horizontalScroll overscrollPadded">
+        {categories &&
+          categories.map((category, index) => (
             <button
-              className="tag_button standard-button"
+              className="tag_button standard-button "
               key={index}
-              id={"tag_" + tag + ""}
+              id={"category_" + category.title + ""}
               onClick={() => {
-                setTag({ tag });
+                setCategory({ category });
               }}
             >
-              {tag}
+              {category.title}
             </button>
           ))}
-        </div>
-      )}
+      </div>
+      <div className="tag_grid horizontalScroll overscrollPadded">
+        {tags.map((tag, index) => (
+          <button
+            className="tag_button standard-button"
+            key={index}
+            id={"tag_" + tag + ""}
+            onClick={() => {
+              setTag({ tag });
+            }}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
 
       <Masonry
         breakpointCols={breakpointColumnsObj}

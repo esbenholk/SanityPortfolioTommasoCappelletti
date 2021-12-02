@@ -165,15 +165,10 @@ h1 {
   text-align: left;
   font: normal normal normal 25px/34px Open Sans;
   letter-spacing: 0px;
-  margin-bottom: 56px;
 }
 
-.tag_grid:first-of-type {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
 .tag_grid {
-  margin-top: 0px;
+  margin-top: 56px;
   margin-bottom: 56px;
 }
 
@@ -1242,13 +1237,9 @@ footer {
   .subheadline {
     margin-bottom: 22px;
   }
-  .tag_grid:first-of-type {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
+
   .tag_grid {
-    margin-top: -10px;
-    margin-bottom: 4px;
+    margin-bottom: 56px;
   }
 
   .product_card {
