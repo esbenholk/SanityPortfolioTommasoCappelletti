@@ -29,7 +29,11 @@ export default function BasketCard({
           onMouseLeave={() => setIsShown(false)}
         >
           <>
-            <Image image={post.productImage} />
+            {isShown ? (
+              <Image image={post.productImage} />
+            ) : (
+              <Image image={post.mainImage} />
+            )}
           </>
         </div>
       ) : (

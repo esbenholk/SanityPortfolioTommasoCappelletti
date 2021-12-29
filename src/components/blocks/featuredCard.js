@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import imageUrlBuilder from "@sanity/image-url";
 
-import useWindowDimensions from "../functions/useWindowDimensions";
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
 
@@ -14,8 +13,6 @@ function urlFor(source) {
 }
 
 export default function FeaturedCard({ post }) {
-  const { width } = useWindowDimensions();
-
   var color;
   if (post.color) {
     color = post.color;

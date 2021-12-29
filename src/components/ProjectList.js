@@ -126,7 +126,11 @@ export default function Projects({ projectList }) {
               </div>
               <div onMouseEnter={hover} onMouseLeave={hover}>
                 {" "}
-                <a href={project.url} target={"_blank"}>
+                <a
+                  href={project.url}
+                  target={"_blank"}
+                  rel="noopener noreferrer"
+                >
                   {project.title ? project.title : "undefined"}
                 </a>
                 {project.mainImage.hotspot ? (

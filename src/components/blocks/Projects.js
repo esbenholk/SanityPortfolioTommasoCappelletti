@@ -22,7 +22,7 @@ export default function Projects({
 }) {
   const myContext = useContext(AppContext);
   if (!projectList) {
-    const projectList = myContext.projectList;
+    projectList = myContext.projectList;
   }
 
   const [allPosts, setAllPosts] = useState(projectList);

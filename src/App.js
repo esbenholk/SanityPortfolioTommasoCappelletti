@@ -120,7 +120,7 @@ function App() {
   };
 
   function updatebasket(string) {
-    if (string != "remove") {
+    if (string !== "remove") {
       setIsBasketOpen(!isBasketOpen);
     }
     setBasket_message(string);

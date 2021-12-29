@@ -37,7 +37,7 @@ export default function Basket({
         {basket_message ? (
           <>
             <h2>{basket_message}</h2>
-            <a onClick={() => updatebasket("")}>Continue browsing</a>
+            <p onClick={() => updatebasket("")}>Continue browsing</p>
           </>
         ) : (
           <h2>Something catches your eye! Wanna drop a line?</h2>

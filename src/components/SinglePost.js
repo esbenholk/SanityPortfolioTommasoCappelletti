@@ -29,7 +29,6 @@ export default function SinglePost({ updatebasket, basket }) {
   const fixedRef = useRef();
 
   const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
-  const [detailColumnClass, setdetailColumnClass] = useState("");
 
   useEffect(() => {
     sanityClient
@@ -165,8 +164,8 @@ export default function SinglePost({ updatebasket, basket }) {
             <div
               className={
                 hasScrolledinPosition & (width > 1200)
-                  ? `flex-column detailColumnfixed fullWidthPadded ${detailColumnClass}`
-                  : `flex-column detailColumn fullWidthPadded ${detailColumnClass}`
+                  ? `flex-column detailColumnfixed fullWidthPadded `
+                  : `flex-column detailColumn fullWidthPadded `
               }
               ref={fixedRef}
             >
@@ -207,6 +206,7 @@ export default function SinglePost({ updatebasket, basket }) {
                     <a
                       href={singlePost.link}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="addToCartButton yellow"
                     >
                       Get this freebie
