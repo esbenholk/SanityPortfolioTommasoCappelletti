@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-import sanityClient from "../../client";
 
 import { Link } from "react-router-dom";
 
-import imageUrlBuilder from "@sanity/image-url";
-
-// Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(sanityClient);
-
-function urlFor(source) {
-  return builder.image(source);
-}
+import Image from "./image";
 
 export default function ProductCard({ post, classssss }) {
   const [isShown, setIsShown] = useState(false);
@@ -23,7 +15,7 @@ export default function ProductCard({ post, classssss }) {
   }
 
   return (
-    <div className={classssss + " product_card"}>
+    <div className={"product_card"}>
       <Link
         to={"/projects/" + post.slug.current}
         key={post.slug.current + "productCard"}
@@ -34,66 +26,20 @@ export default function ProductCard({ post, classssss }) {
         {post.productImage ? (
           <div className="product_card_image">
             {isShown ? (
-              <>
-                {post.mainImage.hotspot ? (
-                  <img
-                    src={urlFor(post.mainImage.asset.url)}
-                    alt={post.mainImage.alt}
-                    style={{
-                      objectPosition: `${post.mainImage.hotspot.x * 100}% ${
-                        post.mainImage.hotspot.y * 100
-                      }%`,
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={urlFor(post.mainImage.asset.url)}
-                    alt={post.mainImage.alt}
-                  />
-                )}
-              </>
+              <div className="squareImage">
+                <h1 style={{ display: "none" }}>hej</h1>
+                <Image image={post.mainImage} />
+              </div>
             ) : (
-              <>
-                {post.productImage.hotspot && post.mainImage ? (
-                  <img
-                    src={urlFor(post.productImage.asset.url)}
-                    alt={post.mainImage.alt}
-                    style={{
-                      objectPosition: `${post.productImage.hotspot.x * 100}% ${
-                        post.mainImage.hotspot.y * 100
-                      }%`,
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={urlFor(post.productImage.asset.url)}
-                    alt={post.productImage.alt}
-                  />
-                )}
-              </>
+              <div className="squareImage">
+                <Image image={post.productImage} />
+              </div>
             )}
           </div>
         ) : (
-          <>
-            {post.mainImage.hotspot ? (
-              <img
-                src={urlFor(post.mainImage.asset.url)}
-                alt={post.mainImage.alt}
-                style={{
-                  objectPosition: `${post.mainImage.hotspot.x * 100}% ${
-                    post.mainImage.hotspot.y * 100
-                  }%`,
-                }}
-                className="product_card_image"
-              />
-            ) : (
-              <img
-                src={urlFor(post.mainImage.asset.url)}
-                alt={post.mainImage.alt}
-                className="product_card_image"
-              />
-            )}
-          </>
+          <div className="squareImage">
+            <Image image={post.mainImage} />
+          </div>
         )}
       </Link>
 
@@ -101,18 +47,23 @@ export default function ProductCard({ post, classssss }) {
         <h1>{post.title}</h1>
 
         <div className="flex-row align-left">
-          {post.tags &&
+          {post.tags ? (
             post.tags.map((tag, index) => (
               <p className="tag" key={index}>
                 {tag}
                 {index + 1 !== post.tags.length ? "," : null}
               </p>
-            ))}
+            ))
+          ) : (
+            <p className="tag" style={{ visibility: "hidden" }}>
+              tag
+            </p>
+          )}
         </div>
         {post.abbreviated_year ? (
           <>
             <div className="year_price flex-row align-top">
-              <p>Y'</p>
+              <p>20</p>
               <p>{post.abbreviated_year}</p>
             </div>
           </>

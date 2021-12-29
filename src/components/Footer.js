@@ -94,13 +94,14 @@ export default function Footer() {
                 info.socialMediaHandles.slice(0, 4).map((handle, index) => (
                   <a
                     href={handle.url}
-                    key={index}
+                    key={"footer_social_media_icon" + index}
                     id={"category_" + handle.url + ""}
                   >
                     <img
                       className="footer_social_media_icon"
                       src={handle.logo.asset.url}
                       alt=""
+                      id={"footer_social_media_icon" + index}
                     />
                   </a>
                 ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import sanityClient from "../client";
 import { useParams } from "react-router-dom";
 // import BlockContent from "@sanity/block-content-to-react";
@@ -25,13 +25,17 @@ export default function SinglePost({ updatebasket, basket }) {
   const { slug } = useParams();
   const { width } = useWindowDimensions();
 
+  const fullArticleRef = useRef();
+  const fixedRef = useRef();
+
   const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
+  const [detailColumnClass, setdetailColumnClass] = useState("");
 
   useEffect(() => {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client
+          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, link, downloadfile{asset->{url}}, freebie
         }`
       )
       .then((data) => {
@@ -68,6 +72,17 @@ export default function SinglePost({ updatebasket, basket }) {
     } else {
       sethasScrolledinPosition(false);
     }
+
+    // if (
+    //   fullArticleRef.current &&
+    //   fullArticleRef.current.getBoundingClientRect().bottom <=
+    //     fixedRef.current.getBoundingClientRect().bottom
+    // ) {
+    //   console.log("should togllge absolute class");
+    //   setdetailColumnClass("detailColumnAbsolute");
+    // } else {
+    //   setdetailColumnClass("");
+    // }
   }
 
   window.addEventListener("scroll", listenScrollEvent);
@@ -77,26 +92,26 @@ export default function SinglePost({ updatebasket, basket }) {
   return (
     <>
       <motion.div
-        layout
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fullWidthPadded"
+      // layout
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
       >
-        <article>
-          <div className="flex-row align-top project_directory_line">
+        <article ref={fullArticleRef}>
+          <div className="flex-row align-top project_directory_line fullWidthPadded">
             <a href="/projects">{"Project >"}</a>
             <div className="flex-row align-left">
-              {singlePost.categories.map((category, index) => (
-                <Link
-                  to={"../" + category.slug.current}
-                  className="tag project_tag"
-                  key={index}
-                >
-                  {category.title}
-                  {index + 1 !== singlePost.categories.length ? "," : null}
-                </Link>
-              ))}
+              {singlePost.categories &&
+                singlePost.categories.map((category, index) => (
+                  <Link
+                    to={"../" + category.slug.current}
+                    className="tag project_tag"
+                    key={index}
+                  >
+                    {category.title}
+                    {index + 1 !== singlePost.categories.length ? "," : null}
+                  </Link>
+                ))}
               <p>{" > "}</p>
             </div>
             <p>{singlePost.title}</p>
@@ -127,7 +142,7 @@ export default function SinglePost({ updatebasket, basket }) {
                   {singlePost.imagesGallery ? (
                     <Masonry
                       breakpointCols={breakpointColumnsObj}
-                      className="my-masonry-grid "
+                      className="my-masonry-grid fullWidthPadded"
                       columnClassName="my-masonry-grid_column singleProjectMasonry"
                     >
                       {singlePost.imagesGallery.map((image, index) => (
@@ -140,7 +155,7 @@ export default function SinglePost({ updatebasket, basket }) {
                     <>
                       <Image
                         image={singlePost.mainImage}
-                        class={"mainImage fullwidth"}
+                        class={"mainImage fullwidth fullWidthPadded"}
                       />
                     </>
                   )}
@@ -150,16 +165,17 @@ export default function SinglePost({ updatebasket, basket }) {
             <div
               className={
                 hasScrolledinPosition & (width > 1200)
-                  ? "flex-column detailColumnfixed"
-                  : "flex-column detailColumn"
+                  ? `flex-column detailColumnfixed fullWidthPadded ${detailColumnClass}`
+                  : `flex-column detailColumn fullWidthPadded ${detailColumnClass}`
               }
+              ref={fixedRef}
             >
               <header className="flex-row align-top justifyBetween">
                 <h2 className="projectTitle">{singlePost.title}</h2>
                 {singlePost.abbreviated_year ? (
                   <>
                     <div className="project_year_price year_price flex-row align-top">
-                      <p>Y'</p>
+                      <p>20</p>
                       <p>{singlePost.abbreviated_year}</p>
                     </div>
                   </>
@@ -185,8 +201,40 @@ export default function SinglePost({ updatebasket, basket }) {
                 updatebasket={updatebasket}
                 basket={basket}
               />
+              {singlePost.freebie && (
+                <>
+                  {singlePost.link ? (
+                    <a
+                      href={singlePost.link}
+                      target="_blank"
+                      className="addToCartButton yellow"
+                    >
+                      Get this freebie
+                    </a>
+                  ) : null}
+                  {singlePost.downloadfile.asset.url ? (
+                    <a
+                      href={`${singlePost.downloadfile.asset.url}?dl=`}
+                      className="addToCartButton yellow"
+                    >
+                      Get this freebie
+                    </a>
+                  ) : null}
+                </>
+              )}
 
-              <div className="flex-column project_details">
+              {width < 1200 ? (
+                <>
+                  {" "}
+                  {singlePost.recap && (
+                    <div className="recap">
+                      <BlockContent blocks={singlePost.recap} />
+                    </div>
+                  )}
+                </>
+              ) : null}
+
+              <div className="flex-column project_details ">
                 {singlePost.client && (
                   <>
                     <h3>Client</h3>
@@ -227,12 +275,17 @@ export default function SinglePost({ updatebasket, basket }) {
               </div>
             </div>
           </div>
-          <div className="contentColumn">
-            {singlePost.recap && (
-              <div className="recap">
-                <BlockContent blocks={singlePost.recap} />
-              </div>
-            )}
+          <div className="contentColumn fullWidthPadded">
+            {width > 1200 ? (
+              <>
+                {" "}
+                {singlePost.recap && (
+                  <div className="recap">
+                    <BlockContent blocks={singlePost.recap} />
+                  </div>
+                )}
+              </>
+            ) : null}
 
             {singlePost.body && (
               <div className="content">
@@ -254,7 +307,7 @@ export default function SinglePost({ updatebasket, basket }) {
           </div>
         </article>
       </motion.div>
-      <div className="regContainer">
+      <div className="regContainer" style={{ backgroundColor: "white" }}>
         {relatedPost && relatedPost.length !== 0 ? (
           <>
             <motion.h1 className="flex-column fullWidthPadded">

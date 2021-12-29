@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Masonry from "react-masonry-css";
 
 import PostCard from "./postCard.js";
+import ProductCard from "./productCard";
 
 import AppContext from "../../globalState";
 
@@ -10,11 +11,19 @@ const breakpointColumnsObj = {
   default: 3,
   1300: 2,
   600: 2,
+  340: 1,
 };
 
-export default function Projects({ show_categories, show_tags }) {
+export default function Projects({
+  show_categories,
+  show_tags,
+  projectList,
+  postcard,
+}) {
   const myContext = useContext(AppContext);
-  const projectList = myContext.projectList;
+  if (!projectList) {
+    const projectList = myContext.projectList;
+  }
 
   const [allPosts, setAllPosts] = useState(projectList);
 
@@ -184,16 +193,29 @@ export default function Projects({ show_categories, show_tags }) {
         </div>
       )}
 
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid fullWidthPadded"
-        columnClassName="my-masonry-grid_column"
-      >
-        {sortedPosts &&
-          sortedPosts.map((post, index) => (
-            <PostCard post={post} key={index} />
-          ))}
-      </Masonry>
+      {postcard ? (
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid fullWidthPadded"
+          columnClassName="my-masonry-grid_column"
+        >
+          {sortedPosts &&
+            sortedPosts.map((post, index) => (
+              <PostCard post={post} key={index} />
+            ))}
+        </Masonry>
+      ) : (
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid fullWidthPadded griddedMasonry"
+          columnClassName="my-masonry-grid_column"
+        >
+          {sortedPosts &&
+            sortedPosts.map((post, index) => (
+              <ProductCard post={post} key={index} mainFirst={true} />
+            ))}
+        </Masonry>
+      )}
     </div>
   );
 }

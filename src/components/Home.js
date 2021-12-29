@@ -59,7 +59,13 @@ export default function Home() {
 
   return (
     <div>
-      <div className="content-container fullWidthPadded">
+      <div
+        className={
+          width > 900
+            ? "content-container fullWidthPadded"
+            : "content-container"
+        }
+      >
         {info ? (
           <div className="flex-row align-top">
             {width > 900 && info.authorImage ? (
@@ -67,7 +73,11 @@ export default function Home() {
             ) : null}
             <div className="aboutSection">
               <div>
-                <motion.h1 className="headline">
+                <motion.h1
+                  className={
+                    width < 900 ? "headline  fullWidthPadded" : "headline "
+                  }
+                >
                   About Tomato Cappelletti
                 </motion.h1>
 
@@ -79,7 +89,13 @@ export default function Home() {
                 ) : null}
 
                 {info.about ? (
-                  <div className="aboutContent">
+                  <div
+                    className={
+                      width < 900
+                        ? "aboutContent  fullWidthPadded"
+                        : "aboutContent"
+                    }
+                  >
                     <BlockContent blocks={info.about} />
                   </div>
                 ) : null}

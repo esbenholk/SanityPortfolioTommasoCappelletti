@@ -13,6 +13,11 @@ import AppContext from "./globalState";
 
 import ScrollToTop from "./components/blocks/scrollToTop";
 
+import Basket from "./components/blocks/basket";
+import Dropdown from "./components/blocks/dropdown";
+
+import useWindowDimensions from "./components/functions/useWindowDimensions";
+
 const SinglePost = lazy(() => import("./components/SinglePost.js"));
 const LandingPage = lazy(() => import("./components/LandingPage.js"));
 const ProjectList = lazy(() => import("./components/ProjectList.js"));
@@ -27,13 +32,19 @@ function App() {
   const [categories, setCategories] = useState([]);
 
   const [basket, setBasket] = useState([]);
-  const [rerender, setRerender] = useState(true);
+  const [isBasketOpen, setIsBasketOpen] = useState(false);
+
+  const [basket_message, setBasket_message] = useState("Your cart is empty.");
 
   const [hasFeaturedPosts, setHasFeaturedPosts] = useState(false);
 
   const mainRef = createRef();
 
+  const { width } = useWindowDimensions();
+
+  ///get data from website and so
   useEffect(() => {
+    ///get the site settings and basic info
     sanityClient
       .fetch(
         '*[_type == "siteSettings"]{title, greeting, mainImage{asset->{_id,url}, hotspot, alt}, mainImages, authorImage{asset->{_id,url}, hotspot, alt},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}, contactDetails, contactHours}'
@@ -45,14 +56,13 @@ function App() {
         }
       })
       .catch(console.error);
-
+    ////get all the projects
     sanityClient
       .fetch(
         '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
       )
       .then((data) => {
         data.sort((a, b) => b.year - a.year);
-        console.log(data);
         setProjectList(data);
       })
       .catch(console.error);
@@ -109,9 +119,11 @@ function App() {
     setHasFeaturedPosts,
   };
 
-  function updatebasket() {
-    //cheat rendering header component again from addToCart
-    setRerender(!rerender);
+  function updatebasket(string) {
+    if (string != "remove") {
+      setIsBasketOpen(!isBasketOpen);
+    }
+    setBasket_message(string);
   }
 
   return (
@@ -119,7 +131,41 @@ function App() {
       <Suspense fallback={null}>
         <AppContext.Provider value={globalContext}>
           <BrowserRouter>
-            {siteSettings && <Header basket={basket} />}
+            {siteSettings && (
+              <>
+                {" "}
+                {width > 950 ? (
+                  <nav className="fullWidthPadded">
+                    <Header />
+                    <div className="flex-row" style={{ minWidth: "50%" }}>
+                      <Dropdown categories={categories} mainRef={mainRef} />
+                      <Basket
+                        basket={basket}
+                        basket_message={basket_message}
+                        isBasketOpen={isBasketOpen}
+                        updatebasket={updatebasket}
+                      />
+                    </div>
+                  </nav>
+                ) : (
+                  <>
+                    <nav className="fullWidthPadded" style={{ width: "100%" }}>
+                      <div className="flex-row" style={{ width: "100%" }}>
+                        <Header />
+                        <Basket
+                          basket={basket}
+                          isBasketOpen={isBasketOpen}
+                          basket_message={basket_message}
+                          updatebasket={updatebasket}
+                        />
+                      </div>
+                      <Dropdown categories={categories} mainRef={mainRef} />
+                    </nav>
+                  </>
+                )}
+              </>
+            )}
+
             <AnimatePresence>
               <div className="mainContainer" ref={mainRef}>
                 <ScrollToTop>

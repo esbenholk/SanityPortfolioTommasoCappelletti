@@ -78,21 +78,14 @@ export default function FeaturedCard({ post }) {
                 {category.title}{" "}
               </a>
             ))}
-        </div>
-
-        {width < 900 ? (
           <Link
             to={"/projects/" + post.slug.current}
             key={post.slug.current}
-            className="w-full teaser-link"
+            className="w-full teaser-link standard-button tag active"
           >
-            <img
-              src="assets/Arrowright.svg"
-              className="arrow"
-              alt="right arrow button"
-            />
+            See project
           </Link>
-        ) : null}
+        </div>
       </div>
     </div>
   );

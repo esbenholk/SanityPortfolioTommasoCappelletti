@@ -42,12 +42,16 @@ export default function AddToCartButton({ project, updatebasket }) {
       setIsInCart(false);
       setButtonText("Add to cart");
     }
-    updatebasket(basket);
+    if (buttonText === "Add to cart") {
+      updatebasket(project.title.toUpperCase() + " was added to your cart.");
+    } else {
+      updatebasket("remove");
+    }
   }
 
   return (
-    <button onClick={onClick} className="addToCartButton">
+    <a onClick={onClick} className="addToCartButton">
       {buttonText}
-    </button>
+    </a>
   );
 }

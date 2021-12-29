@@ -37,10 +37,10 @@ export default function LandingPage() {
 
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    // layout
+    // initial={{ opacity: 0 }}
+    // animate={{ opacity: 1 }}
+    // exit={{ opacity: 0 }}
     >
       <motion.h1 className="headline flex-column fullWidthPadded">
         {info.greeting}
@@ -52,7 +52,7 @@ export default function LandingPage() {
             <CustomCarousel arrows={true} swipe={true} classsss={""}>
               {info.mainImages.map((image, index) => (
                 <div key={index}>
-                  <Image image={image} />
+                  <Image image={image} class={"mainImage fullwidth"} />
                 </div>
               ))}
             </CustomCarousel>{" "}
@@ -103,7 +103,11 @@ export default function LandingPage() {
           <motion.h1 className="subheadline flex-column fullWidthPadded">
             What do you want to see more of?
           </motion.h1>
-          <Projects projectList={projectList} show_categories={true} />
+          <Projects
+            projectList={projectList}
+            show_categories={true}
+            postcard={true}
+          />
         </div>
       ) : null}
     </motion.div>

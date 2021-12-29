@@ -4,12 +4,20 @@ import AppContext from "../../globalState";
 
 import BasketCard from "./basketCard";
 
-export default function Basket({ basket }) {
+import ContactUs from "./email";
+
+export default function Basket({
+  basket,
+  isBasketOpen,
+  updatebasket,
+  basket_message,
+}) {
   const myContext = useContext(AppContext);
   const projectList = myContext.projectList;
   const info = myContext.siteSettings;
+  const [emailIsOpen, setEmailIsOpen] = useState(false);
 
-  const [isOpen, setIsOpen] = useState();
+  // const [isOpen, setIsOpen] = useState();
 
   const EmptyCart = (mail) => {
     return (
@@ -26,18 +34,17 @@ export default function Basket({ basket }) {
   const FullCart = (props) => {
     return (
       <>
-        <h2>Something catches your eye! Wanna drop a line?</h2>
+        {basket_message ? (
+          <>
+            <h2>{basket_message}</h2>
+            <a onClick={() => updatebasket("")}>Continue browsing</a>
+          </>
+        ) : (
+          <h2>Something catches your eye! Wanna drop a line?</h2>
+        )}
       </>
     );
   };
-
-  function openMenu() {
-    if (isOpen === true) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-  }
 
   function removeFromCart(project) {
     var newBasket = basket;
@@ -46,12 +53,13 @@ export default function Basket({ basket }) {
       if (basketproject.title === project.title) {
         newBasket.splice(index, 1);
         myContext.setBasket(newBasket);
+        updatebasket("remove");
       }
     }
   }
   return (
     <>
-      <div className="basket" onClick={openMenu}>
+      <div className="basket" onClick={() => updatebasket("")}>
         <img
           className="header-object basketIcon"
           src="\assets\awesome-shopping-cart.png"
@@ -67,10 +75,10 @@ export default function Basket({ basket }) {
 
       <div>
         <div
-          className={isOpen ? "overlay active" : "overlay"}
-          onClick={openMenu}
+          className={isBasketOpen ? "overlay active" : "overlay"}
+          onClick={() => updatebasket("")}
         ></div>
-        <div className={isOpen ? "foldout active" : "foldout"}>
+        <div className={isBasketOpen ? "foldout active" : "foldout"}>
           <div className="foldoutmenu">
             <div className="foldoutHeader foldoutDiv">
               <svg
@@ -85,7 +93,7 @@ export default function Basket({ basket }) {
                   transform="translate(-838.988 -94)"
                 >
                   <path
-                    onClick={openMenu}
+                    onClick={() => updatebasket("")}
                     id="Icon_ionic-md-close"
                     data-name="Icon ionic-md-close"
                     d="M28.477,9.619l-2.1-2.1L18,15.9,9.619,7.523l-2.1,2.1L15.9,18,7.523,26.381l2.1,2.1L18,20.1l8.381,8.381,2.1-2.1L20.1,18Z"
@@ -112,7 +120,7 @@ export default function Basket({ basket }) {
                         <BasketCard
                           post={post}
                           key={index}
-                          openMenu={openMenu}
+                          openMenu={updatebasket}
                         />
                       ))}
                     </div>
@@ -121,19 +129,27 @@ export default function Basket({ basket }) {
               ) : (
                 <>
                   {" "}
+                  {emailIsOpen && <ContactUs />}
                   <h2>Your cart</h2>
                   {basket ? (
-                    <div className="flex-column">
-                      {basket.map((post, index) => (
-                        <BasketCard
-                          post={post}
-                          key={index}
-                          isInCart={true}
-                          removeFromCart={removeFromCart}
-                          openMenu={openMenu}
-                        />
-                      ))}
-                    </div>
+                    <>
+                      <div className="flex-column">
+                        {basket.map((post, index) => (
+                          <BasketCard
+                            post={post}
+                            key={index}
+                            isInCart={true}
+                            removeFromCart={removeFromCart}
+                            openMenu={updatebasket}
+                          />
+                        ))}
+                      </div>
+                      {!emailIsOpen ? (
+                        <button onClick={() => setEmailIsOpen(!emailIsOpen)}>
+                          Contact Me
+                        </button>
+                      ) : null}
+                    </>
                   ) : null}
                 </>
               )}
