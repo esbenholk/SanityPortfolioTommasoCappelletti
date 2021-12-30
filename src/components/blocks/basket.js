@@ -57,6 +57,12 @@ export default function Basket({
       }
     }
   }
+
+  function emptyBasket() {
+    var emptyBasket = [];
+    myContext.setBasket(emptyBasket);
+    updatebasket("Thank you for reaching out");
+  }
   return (
     <>
       <div className="basket" onClick={() => updatebasket("")}>
@@ -129,7 +135,9 @@ export default function Basket({
               ) : (
                 <>
                   {" "}
-                  {emailIsOpen && <ContactUs />}
+                  {emailIsOpen && (
+                    <ContactUs basket={basket} emptyBasket={emptyBasket} />
+                  )}
                   <h2>Your cart</h2>
                   {basket ? (
                     <>
@@ -145,7 +153,10 @@ export default function Basket({
                         ))}
                       </div>
                       {!emailIsOpen ? (
-                        <button onClick={() => setEmailIsOpen(!emailIsOpen)}>
+                        <button
+                          className="addToCartButton"
+                          onClick={() => setEmailIsOpen(!emailIsOpen)}
+                        >
                           Contact Me
                         </button>
                       ) : null}

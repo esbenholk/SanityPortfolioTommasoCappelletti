@@ -45,7 +45,7 @@ export default function SinglePost({ updatebasket, basket }) {
           )
           .then((relatedData) => {
             const relatedProjects = [];
-            if (data[0].tags) {
+            if (data[0] && data[0].tags) {
               for (let index = 0; index < relatedData.length; index++) {
                 const post = relatedData[index];
                 if (post.title !== data[0].title) {
@@ -203,22 +203,28 @@ export default function SinglePost({ updatebasket, basket }) {
               {singlePost.freebie && (
                 <>
                   {singlePost.link ? (
-                    <a
-                      href={singlePost.link}
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = singlePost.link;
+                      }}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="addToCartButton yellow"
                     >
                       Get this freebie
-                    </a>
+                    </button>
                   ) : null}
                   {singlePost.downloadfile.asset.url ? (
-                    <a
-                      href={`${singlePost.downloadfile.asset.url}?dl=`}
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `${singlePost.downloadfile.asset.url}?dl=`;
+                      }}
                       className="addToCartButton yellow"
                     >
                       Get this freebie
-                    </a>
+                    </button>
                   ) : null}
                 </>
               )}

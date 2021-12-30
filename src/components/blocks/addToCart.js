@@ -50,8 +50,8 @@ export default function AddToCartButton({ project, updatebasket }) {
   }
 
   return (
-    <p onClick={onClick} className="addToCartButton">
+    <button onClick={onClick} className="addToCartButton">
       {buttonText}
-    </p>
+    </button>
   );
 }

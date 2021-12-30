@@ -414,7 +414,7 @@ h1 {
 }
 
 .addToCartButton.yellow {
-  background-color: #ffa700;
+  background-color: #ffa700 !important;
 }
 
 /* search bar menu */
