@@ -49,7 +49,12 @@ export default function LandingPage() {
       <>
         {info.mainImages ? (
           <div className="fullWidthPadded">
-            <CustomCarousel arrows={true} swipe={true} classsss={""}>
+            <CustomCarousel
+              arrows={true}
+              swipe={true}
+              classsss={""}
+              autoplay={true}
+            >
               {info.mainImages.map((image, index) => (
                 <div key={index}>
                   <Image image={image} class={"mainImage fullwidth"} />
