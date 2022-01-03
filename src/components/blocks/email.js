@@ -2,17 +2,16 @@ import React from "react";
 import emailjs from "emailjs-com";
 
 export default function ContactUs(basket) {
-  var projects_html_string = `<div style="display:flex;flex-direction:row;">`;
+  var projects_html_string = `<div style="display:flex;flex-direction:column;">`;
 
   for (let index = 0; index < basket.basket.length; index++) {
     const project = basket.basket[index];
     console.log(project);
-    const html_line = `<div style="display:flex-column;flex-direction:column;padding-right: 10px;"><a href="www.tomatocappeletti.com/projects/${project.slug.current}"><h3>${project.title}</h3></a><img style="width: 300px; height: 300px; object-fit:cover;" src="${project.mainImage.asset.url}"/></div>`;
+    const html_line = `<div style="display:flex-column;flex-direction:column;padding-right: 10px;"><img style="width: 100px; height: 100px; object-fit:cover;" src="${project.productImage.asset.url}"/><a href="www.tomatocappeletti.com/projects/${project.slug.current}"><h3>${project.title}</h3></a></div>`;
     projects_html_string = projects_html_string.concat(html_line);
     if (index === basket.basket.length - 1) {
       projects_html_string = projects_html_string.concat(`</div>`);
     }
-    console.log("project-string", projects_html_string);
   }
 
   function sendEmail(e) {

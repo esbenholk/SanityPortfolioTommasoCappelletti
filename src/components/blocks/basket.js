@@ -134,10 +134,6 @@ export default function Basket({
                 </>
               ) : (
                 <>
-                  {" "}
-                  {emailIsOpen && (
-                    <ContactUs basket={basket} emptyBasket={emptyBasket} />
-                  )}
                   <h2>Your cart</h2>
                   {basket ? (
                     <>
@@ -159,7 +155,10 @@ export default function Basket({
                         >
                           Contact Me
                         </button>
-                      ) : null}
+                      ) : null}{" "}
+                      {emailIsOpen && (
+                        <ContactUs basket={basket} emptyBasket={emptyBasket} />
+                      )}
                     </>
                   ) : null}
                 </>

@@ -30,9 +30,9 @@ export default function BasketCard({
         >
           <>
             {isShown ? (
-              <Image image={post.productImage} />
-            ) : (
               <Image image={post.mainImage} />
+            ) : (
+              <Image image={post.productImage} />
             )}
           </>
         </div>
