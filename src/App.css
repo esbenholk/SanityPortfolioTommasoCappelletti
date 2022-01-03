@@ -4,9 +4,8 @@
   font-family: "OpenSansBold";
   font-style: normal;
   font-weight: normal;
-  src: local("OpenSansBold"),
-    url(./assets/fonts/OpenSans-Bold.ttf) format("truetype"),
-    url(./assets/fonts/OpenSans-Bold.woff) format("woff");
+  src: local("OpenSansBold"), url(./fonts/OpenSans-Bold.ttf) format("truetype"),
+    url(./fonts/OpenSans-Bold.woff) format("woff");
 }
 
 @font-face {
@@ -14,8 +13,8 @@
   font-style: normal;
   font-weight: normal;
   src: local("OpenSansLight"),
-    url(./assets/fonts/OpenSans-Light.ttf) format("truetype"),
-    url(./assets/fonts/OpenSans-Light.woff) format("woff");
+    url(./fonts/OpenSans-Light.ttf) format("truetype"),
+    url(./fonts/OpenSans-Light.woff) format("woff");
 }
 
 @font-face {
@@ -23,16 +22,16 @@
   font-style: normal;
   font-weight: normal;
   src: local("OpenSansReg"),
-    url(./assets/fonts/OpenSans-Regular.ttf) format("truetype"),
-    url(./assets/fonts/OpenSans-Regular.woff) format("woff");
+    url(./fonts/OpenSans-Regular.ttf) format("truetype"),
+    url(./fonts/OpenSans-Regular.woff) format("woff");
 }
 
 @font-face {
   font-family: "Galvji";
   font-style: normal;
   font-weight: normal;
-  src: local("Galvji"), url(./assets/fonts/Galvji-01.ttf) format("truetype"),
-    url(./assets/fonts/Galvji-01.woff) format("woff");
+  src: local("Galvji"), url(./fonts/Galvji-01.ttf) format("truetype"),
+    url(./fonts/Galvji-01.woff) format("woff");
 }
 
 :root {

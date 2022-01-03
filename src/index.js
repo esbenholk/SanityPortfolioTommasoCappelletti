@@ -3,7 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "./assets/fonts/OpenSans-Bold.ttf";
+import "./fonts/OpenSans-Bold.ttf";
+import "./fonts/OpenSans-Bold.ttf";
+import "./fonts/OpenSans-Light.ttf";
+import "./fonts/OpenSans-Regular.ttf";
+import "./fonts/Galvji-01.ttf";
 
 ReactDOM.render(
   <React.StrictMode>
