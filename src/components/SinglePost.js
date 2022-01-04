@@ -15,6 +15,8 @@ import Masonry from "react-masonry-css";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
 
+import Loader from "./blocks/loader";
+
 const breakpointColumnsObj = {
   default: 2,
 };
@@ -86,7 +88,9 @@ export default function SinglePost({ updatebasket, basket }) {
 
   window.addEventListener("scroll", listenScrollEvent);
 
-  if (!singlePost) return <div>Loading...</div>;
+  if (!singlePost) return <Loader />;
+
+  return <Loader />;
 
   return (
     <>

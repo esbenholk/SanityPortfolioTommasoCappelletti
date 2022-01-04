@@ -1080,6 +1080,39 @@ footer {
   outline: none;
 }
 
+/* loading-animation */
+
+.cell {
+  display: inline-block;
+  padding-top: 10%;
+  width: 100%;
+  text-align: center;
+}
+.circle {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: red;
+}
+
+.gelatine {
+  animation: gelatine 10s infinite;
+}
+
+@keyframes gelatine {
+  from,
+  to {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(-1, 1);
+  }
+  100% {
+    transform: scale(-1, -1);
+  }
+}
+
 @media only screen and (max-width: 1300px) {
   .singleProjectMasonry {
     padding-right: 7.5px;
