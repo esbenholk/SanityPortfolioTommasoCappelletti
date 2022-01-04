@@ -189,6 +189,9 @@ function App() {
                     <Route path="/about">
                       <Home info={siteSettings} projectList={projectList} />
                     </Route>
+                    <Route path="/loader">
+                      <Loader />
+                    </Route>
                     <Route path="/:slug">
                       <Category />
                     </Route>
