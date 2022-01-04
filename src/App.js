@@ -18,6 +18,8 @@ import Dropdown from "./components/blocks/dropdown";
 
 import useWindowDimensions from "./components/functions/useWindowDimensions";
 
+import Loader from "./components/blocks/loader";
+
 const SinglePost = lazy(() => import("./components/SinglePost.js"));
 const LandingPage = lazy(() => import("./components/LandingPage.js"));
 const ProjectList = lazy(() => import("./components/ProjectList.js"));
@@ -128,7 +130,7 @@ function App() {
 
   return (
     <main>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <AppContext.Provider value={globalContext}>
           <BrowserRouter>
             {siteSettings && (

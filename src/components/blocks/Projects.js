@@ -7,6 +7,8 @@ import ProductCard from "./productCard";
 
 import AppContext from "../../globalState";
 
+import Loader from "./loader.js";
+
 const breakpointColumnsObj = {
   default: 3,
   1300: 2,
@@ -156,6 +158,7 @@ export default function Projects({
       setCurrentCategories(tempCategories);
     }
   }
+  if (!sortedPosts) return <Loader />;
 
   return (
     <div className="projects">
