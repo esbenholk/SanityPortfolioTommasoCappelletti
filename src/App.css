@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+
 @font-face {
   font-family: "OpenSansBold";
   font-style: normal;
@@ -273,7 +275,7 @@ h1 {
   color: #000000;
   opacity: 1;
   margin-right: 15px;
-
+  margin-top: 15px;
   border: 3px solid #090206;
   border-radius: 70px;
   opacity: 1;
@@ -1282,6 +1284,7 @@ footer {
 
   .tag_grid {
     margin: 0;
+    margin-bottom: 25px;
   }
 
   .product_card {

@@ -50,7 +50,7 @@ export default function LandingPage() {
         {info.mainImages ? (
           <div className="fullWidthPadded">
             <CustomCarousel
-              arrows={true}
+              arrows={false}
               swipe={true}
               classsss={""}
               autoplay={true}

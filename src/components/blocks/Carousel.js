@@ -14,16 +14,18 @@ export default function CustomCarousel({
   }
   return (
     <Carousel
-      swipeable={true}
+      swipeable={!autoplay}
       swipeScrollTolerance={20}
       stopOnHover={true}
       showIndicators={true}
       emulateTouch={true}
       showStatus={false}
+      interval={6000}
       showThumbs={false}
       autoPlay={autoplay}
       showArrows={arrows}
       className={classsss}
+      infiniteLoop={true}
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev && (
           <button
