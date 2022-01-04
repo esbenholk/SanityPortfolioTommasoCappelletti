@@ -30,14 +30,20 @@ export default function BasketCard({
         >
           <>
             {isShown ? (
-              <Image image={post.mainImage} />
+              <div className="squareImage">
+                <Image image={post.mainImage} />
+              </div>
             ) : (
-              <Image image={post.productImage} />
+              <div className="squareImage">
+                <Image image={post.productImage} />
+              </div>
             )}
           </>
         </div>
       ) : (
-        <Image image={post.mainImage} />
+        <div className="squareImage">
+          <Image image={post.mainImage} />
+        </div>
       )}
 
       <div className="details">

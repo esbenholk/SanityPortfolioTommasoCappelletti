@@ -426,6 +426,10 @@ h1 {
   background-color: #ffa700 !important;
 }
 
+.addToCartButton.grey {
+  background-color: var(--menuGrey) !important;
+}
+
 /* search bar menu */
 
 .rightMenu {
@@ -552,7 +556,7 @@ h1 {
 .foldoutHeader h2 {
   white-space: pre-wrap;
   color: white;
-  width: 60%;
+  width: 70%;
 }
 .foldoutHeader h2 {
   margin-top: 40px;
@@ -579,8 +583,8 @@ h1 {
 }
 
 .basketCard_image {
-  width: 50%;
-  padding-bottom: 50%;
+  width: 30%;
+  /* padding-bottom: 50%; */
   position: relative;
   overflow: hidden;
   position: relative;

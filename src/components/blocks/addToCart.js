@@ -50,7 +50,14 @@ export default function AddToCartButton({ project, updatebasket }) {
   }
 
   return (
-    <button onClick={onClick} className="addToCartButton">
+    <button
+      onClick={onClick}
+      className={
+        buttonText === "Add to cart"
+          ? `addToCartButton `
+          : `addToCartButton grey`
+      }
+    >
       {buttonText}
     </button>
   );
