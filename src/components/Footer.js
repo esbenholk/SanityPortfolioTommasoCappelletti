@@ -29,9 +29,9 @@ export default function Footer() {
   return (
     <div>
       <div className="regContainer">
-        <motion.h1 className="flex-column fullWidthPadded">
+        <motion.h2 className="flex-column fullWidthPadded">
           Others also viewed
-        </motion.h1>
+        </motion.h2>
 
         {projectList ? (
           <div

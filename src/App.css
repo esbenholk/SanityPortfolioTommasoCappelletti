@@ -42,7 +42,7 @@
   --mainPadding: 150px;
   --mainPaddingMobile: 26px;
   --normalColor: white;
-  --menuGrey: #dbdbdb;
+  --menuGrey: #f3f3f3;
 }
 
 * {
@@ -317,12 +317,12 @@ h1 {
 }
 
 .stars {
-  margin-top: 25px;
+  margin-top: 5px;
   font-size: 18px !important;
 }
 .project_directory_line {
   padding-bottom: 7px;
-  margin-bottom: 61px;
+  margin-bottom: 45px;
   border-bottom: 1px solid var(--menuGrey);
 }
 .project_directory_line > * {
@@ -391,7 +391,7 @@ h1 {
 
 .mainContainer {
   position: relative;
-  padding-top: 221px;
+  padding-top: 200px;
   min-height: 90vh;
 }
 .regContainer {
@@ -631,9 +631,6 @@ h1 {
 
 .tag {
   margin-right: 5px;
-}
-.recap {
-  padding-top: 20px;
 }
 
 nav {
@@ -889,15 +886,16 @@ nav .logo_container img {
 
 .year_price p {
   margin-top: 5px;
+
   text-align: left;
-  font: normal normal bold 44px/60px Open Sans !important;
+  font: normal normal bold 35px Open Sans !important;
   letter-spacing: 0px;
   color: #030000;
 }
 .year_price p:last-of-type {
   margin-top: 0px;
   text-decoration: none;
-  font: normal normal bold 60px Open Sans !important;
+  font: normal normal bold 50px Open Sans !important;
   letter-spacing: 0px;
   color: #030000;
 }
@@ -941,12 +939,12 @@ nav .logo_container img {
 }
 
 .recap {
-  margin-top: 121px;
-  margin-bottom: 59px;
+  margin-top: 50px;
+  margin-bottom: 40px;
 }
 .recap p {
   text-align: left;
-  font: normal normal 600 35px/47px Open Sans;
+  font: normal normal 600 25px Open Sans;
   letter-spacing: 0px;
   color: #030000;
   opacity: 1;
@@ -957,7 +955,7 @@ nav .logo_container img {
 }
 .content p {
   text-align: left;
-  font: normal normal normal 30px/41px Open Sans;
+  font: normal normal normal 18px Open Sans;
   letter-spacing: 0px;
   color: #030000;
   opacity: 1;
@@ -965,7 +963,7 @@ nav .logo_container img {
 
 .content .header {
   height: 136px;
-  margin-bottom: 56px;
+  margin-bottom: 10px;
 }
 .content .header img {
   width: 31px;
@@ -1000,7 +998,7 @@ nav .logo_container img {
 .project_tag u,
 .project_tag {
   text-align: left;
-  font: normal normal normal 18px/24px Open Sans;
+  font: normal normal normal 14px Open Sans;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
@@ -1214,6 +1212,11 @@ footer {
     max-width: 100%;
     width: 100%;
   }
+
+  .normPaddingMobile {
+    padding-left: var(--mainPadding) !important;
+    padding-right: var(--mainPadding) !important;
+  }
 }
 
 @media only screen and (max-width: 950px) {
@@ -1249,7 +1252,7 @@ footer {
   }
 
   .mainContainer {
-    padding-top: 248px;
+    padding-top: 200px;
     min-height: 90vh;
   }
 
@@ -1258,9 +1261,10 @@ footer {
     padding-right: var(--mainPaddingMobile);
   }
   .fullWidthPaddedLeft {
-    padding-left: var(--mobilePadding);
+    padding-left: var(--mainPaddingMobile);
     padding-right: 10px;
   }
+
   .overscrollPadded {
     padding-left: var(--mainPaddingMobile);
   }
@@ -1522,11 +1526,15 @@ footer {
     transition: border-radius 2s ease;
     background: var(--menuGrey);
   }
+  .normPaddingMobile {
+    padding-left: var(--mainPaddingMobile) !important;
+    padding-right: var(--mainPaddingMobile) !important;
+  }
 }
 
 @media only screen and (max-width: 570px) {
   .mainContainer {
-    padding-top: 170px;
+    padding-top: 150px;
     min-height: 90vh;
   }
 
@@ -1585,6 +1593,10 @@ footer {
 
   .menu {
     flex-wrap: nowrap;
+    width: 85%;
+    /* background-color: red; */
+    justify-items: space-between;
+    justify-content: space-between;
   }
   .menu a {
     margin-left: 14px;
@@ -1611,7 +1623,7 @@ footer {
   /* SINGLE POST */
 
   .detailColumn {
-    margin-top: 30px;
+    margin-top: 0px;
     max-width: 100%;
   }
   .recap {
@@ -1685,7 +1697,7 @@ footer {
   .project_directory_line p,
   .project_directory_line a {
     text-align: left;
-    font: normal normal normal 15px/20px Open Sans;
+    font: normal normal normal 11px Open Sans;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -1811,5 +1823,5 @@ footer {
 }
 
 .thirtypercent {
-  opacity: 33%;
+  opacity: 33% !important;
 }

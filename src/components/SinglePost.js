@@ -88,30 +88,32 @@ export default function SinglePost({ updatebasket, basket }) {
       // exit={{ opacity: 0 }}
       >
         <article ref={fullArticleRef}>
-          <div className="flex-row align-top project_directory_line fullWidthPadded">
-            <a href="/projects">{"Project >"}</a>
+          <div className="flex-row align-top project_directory_line fullWidthPadded ">
+            <a className="thirtypercent" href="/projects">
+              {"Project >"}
+            </a>
             <div className="flex-row align-left">
               {singlePost.categories &&
                 singlePost.categories.map((category, index) => (
                   <Link
                     to={"../" + category.slug.current}
-                    className="tag project_tag"
+                    className="tag project_tag thirtypercent"
                     key={index}
                   >
                     {category.title}
                     {index + 1 !== singlePost.categories.length ? "," : null}
                   </Link>
                 ))}
-              <p>{" > "}</p>
+              <p className="thirtypercent">{" > "}</p>
             </div>
             <p>{singlePost.title}</p>
           </div>
-          <div className="flex-row align-top justifyBetween">
+          <div className="flex-row align-top justifyBetween ">
             <div className="flex-column contentColumn">
               {width < 600 ? (
                 <>
                   {singlePost.imagesGallery ? (
-                    <CustomCarousel arrows={false} swipe={true} classsss={""}>
+                    <CustomCarousel arrows={true} swipe={true} classsss={""}>
                       {singlePost.imagesGallery.map((image, index) => (
                         <div className="squareImage" key={index}>
                           <Image image={image} />
@@ -132,7 +134,7 @@ export default function SinglePost({ updatebasket, basket }) {
                   {singlePost.imagesGallery ? (
                     <Masonry
                       breakpointCols={breakpointColumnsObj}
-                      className="my-masonry-grid fullWidthPaddedLeft"
+                      className="my-masonry-grid fullWidthPaddedLeft normPaddingMobile"
                       columnClassName="my-masonry-grid_column singleProjectMasonry"
                     >
                       {singlePost.imagesGallery.map((image, index) => (
@@ -145,7 +147,9 @@ export default function SinglePost({ updatebasket, basket }) {
                     <>
                       <Image
                         image={singlePost.mainImage}
-                        class={"mainImage fullwidth fullWidthPaddedLeft"}
+                        class={
+                          "mainImage fullwidth fullWidthPaddedLeft normPaddingMobile"
+                        }
                       />
                     </>
                   )}
@@ -155,8 +159,8 @@ export default function SinglePost({ updatebasket, basket }) {
             <div
               className={
                 hasScrolledinPosition & (width > 1200)
-                  ? `flex-column detailColumnfixed `
-                  : `flex-column detailColumn`
+                  ? `flex-column detailColumnfixed`
+                  : `flex-column detailColumn normPaddingMobile`
               }
               ref={fixedRef}
             >
@@ -276,7 +280,7 @@ export default function SinglePost({ updatebasket, basket }) {
               </div>
             </div>
           </div>
-          <div className="contentColumn fullWidthPaddedLeft">
+          <div className="contentColumn fullWidthPaddedLeft  normPaddingMobile">
             {width > 1200 ? (
               <>
                 {" "}
@@ -308,12 +312,13 @@ export default function SinglePost({ updatebasket, basket }) {
           </div>
         </article>
       </motion.div>
+
       <div className="regContainer" style={{ backgroundColor: "white" }}>
         {relatedPost && relatedPost.length !== 0 ? (
           <>
-            <motion.h1 className="flex-column fullWidthPadded">
+            <motion.h2 className="flex-column fullWidthPadded">
               Related Projects
-            </motion.h1>
+            </motion.h2>
             <div className="overscrollPadded horizontalScroll2">
               {relatedPost.map((post, index) => (
                 <ProductCard post={post} key={index} />
