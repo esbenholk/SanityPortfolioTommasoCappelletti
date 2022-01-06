@@ -68,13 +68,9 @@ export default function PostCard({ post }) {
             <Link
               to={"/projects/" + post.slug.current}
               key={post.slug.current}
-              className="w-full teaser-link"
+              className="w-full teaser-link standard-button tag active"
             >
-              <img
-                src="assets/Arrowright.svg"
-                className="arrow"
-                alt="right arrow button"
-              />
+              See project
             </Link>
           </div>
         ) : null}

@@ -25,7 +25,7 @@ export default function CustomCarousel({
       autoPlay={autoplay}
       showArrows={arrows}
       className={classsss}
-      infiniteLoop={true}
+      infiniteLoop={false}
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev && (
           <button

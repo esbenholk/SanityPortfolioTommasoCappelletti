@@ -289,6 +289,10 @@ h1 {
   padding-left: var(--mainPadding);
   padding-right: var(--mainPadding);
 }
+.fullWidthPaddedLeft {
+  padding-left: var(--mainPadding);
+  padding-right: 50px;
+}
 .overscrollPadded {
   padding-left: var(--mainPadding);
   padding-right: 0;
@@ -546,7 +550,7 @@ h1 {
 }
 .foldoutDiv {
   width: 100%;
-  padding: 43px 41px 62px 43px;
+  padding: 30px 30px 30px 30px;
 }
 
 .foldoutHeader {
@@ -560,7 +564,7 @@ h1 {
 .foldoutHeader h2 {
   white-space: pre-wrap;
   color: white;
-  width: 70%;
+  width: 90%;
 }
 .foldoutHeader h2 {
   margin-top: 40px;
@@ -1252,6 +1256,10 @@ footer {
   .fullWidthPadded {
     padding-left: var(--mainPaddingMobile);
     padding-right: var(--mainPaddingMobile);
+  }
+  .fullWidthPaddedLeft {
+    padding-left: var(--mobilePadding);
+    padding-right: 10px;
   }
   .overscrollPadded {
     padding-left: var(--mainPaddingMobile);

@@ -132,7 +132,7 @@ export default function SinglePost({ updatebasket, basket }) {
                   {singlePost.imagesGallery ? (
                     <Masonry
                       breakpointCols={breakpointColumnsObj}
-                      className="my-masonry-grid fullWidthPadded"
+                      className="my-masonry-grid fullWidthPaddedLeft"
                       columnClassName="my-masonry-grid_column singleProjectMasonry"
                     >
                       {singlePost.imagesGallery.map((image, index) => (
@@ -145,7 +145,7 @@ export default function SinglePost({ updatebasket, basket }) {
                     <>
                       <Image
                         image={singlePost.mainImage}
-                        class={"mainImage fullwidth fullWidthPadded"}
+                        class={"mainImage fullwidth fullWidthPaddedLeft"}
                       />
                     </>
                   )}
@@ -232,10 +232,14 @@ export default function SinglePost({ updatebasket, basket }) {
               ) : null}
 
               <div className="flex-column project_details ">
-                {singlePost.client && (
+                {singlePost.description && (
                   <>
-                    <h3>Client</h3>
-                    <p className="project_tag">{singlePost.client}</p>
+                    {" "}
+                    {singlePost.recap && (
+                      <div className="recap">
+                        <BlockContent blocks={singlePost.description} />
+                      </div>
+                    )}
                   </>
                 )}
                 {singlePost.year && (
@@ -272,7 +276,7 @@ export default function SinglePost({ updatebasket, basket }) {
               </div>
             </div>
           </div>
-          <div className="contentColumn fullWidthPadded">
+          <div className="contentColumn fullWidthPaddedLeft">
             {width > 1200 ? (
               <>
                 {" "}
