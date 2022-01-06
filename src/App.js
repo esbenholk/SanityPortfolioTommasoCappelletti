@@ -89,9 +89,11 @@ function App() {
 
             if (categories.some((item) => item.title === category.title)) {
               console.log("obejct in array already");
-            } else {
+            } else if (
+              category.title !== "On sale" ||
+              category.title === "On Sale"
+            ) {
               categories.push(category);
-              console.log(category, categories);
             }
           }
         }

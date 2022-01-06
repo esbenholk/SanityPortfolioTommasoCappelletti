@@ -10,8 +10,8 @@ class Loader extends React.Component {
   render() {
     return (
       <>
-        <div class="cell">
-          <div class="circle gelatine"></div>
+        <div className="cell">
+          <div className="circle gelatine"></div>
         </div>
       </>
     );

@@ -229,6 +229,10 @@ h1 {
 .align-left {
   justify-content: flex-start;
 }
+.align-right {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
 .justifyBetween {
   justify-content: space-between;
 }
@@ -1073,6 +1077,13 @@ footer {
   padding-right: var(--normalPadding);
 }
 
+.scrolltoTop {
+  margin: 36px;
+  position: relative;
+
+  right: 0;
+}
+
 /* email */
 .contact-form textarea,
 .contact-form input {
@@ -1149,7 +1160,7 @@ footer {
 
   footer {
     min-height: 225px;
-    margin-top: 93px;
+    /* margin-top: 93px; */
     background-color: var(--menuGrey);
     display: flex;
     flex-direction: column;

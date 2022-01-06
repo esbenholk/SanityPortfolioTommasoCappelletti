@@ -17,6 +17,15 @@ export default function Footer() {
 
   const { width } = useWindowDimensions();
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+
   return (
     <div>
       <div className="regContainer">
@@ -35,6 +44,23 @@ export default function Footer() {
           </div>
         ) : null}
       </div>
+
+      {width < 600 ? (
+        <div className="flex-row fullwidth align-right">
+          <img
+            style={{
+              height: "55px",
+              width: "55px",
+              transform: "rotate(-90deg)",
+            }}
+            className="scrolltoTop"
+            src={`../assets/arrow_in_circle.svg`}
+            alt="prevArrow"
+            onClick={scrollToTop}
+          />
+        </div>
+      ) : null}
+
       <footer>
         <div className="flex-row justifyBetween footer_top">
           <div className="flex-row ">
@@ -56,7 +82,7 @@ export default function Footer() {
                 <NavLink to="/projects">
                   <h2 className="header-object footer-object">Projects</h2>
                 </NavLink>
-                <NavLink to="/projects">
+                <NavLink to="/on-sale">
                   <h2 className="header-object footer-object">On Sale</h2>
                 </NavLink>{" "}
               </div>
