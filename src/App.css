@@ -900,19 +900,21 @@ nav .logo_container img {
 /* SINGLE POST */
 
 .contentColumn {
-  width: 70%;
+  width: 60%;
   /* flex: 1; */
   /* margin-right: 65px; */
 }
 .detailColumn {
   /* flex-grow: 1; */
-  width: 600px;
+  width: 40%;
+  padding-right: var(--mainPadding);
 }
 .detailColumnfixed {
   position: fixed;
   right: 0;
   top: 61px;
-  width: 600px;
+  width: 40%;
+  padding-right: var(--mainPadding);
 }
 /* .detailColumnAbsolute {
   position: absolute;

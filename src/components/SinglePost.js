@@ -155,8 +155,8 @@ export default function SinglePost({ updatebasket, basket }) {
             <div
               className={
                 hasScrolledinPosition & (width > 1200)
-                  ? `flex-column detailColumnfixed fullWidthPadded `
-                  : `flex-column detailColumn fullWidthPadded `
+                  ? `flex-column detailColumnfixed `
+                  : `flex-column detailColumn`
               }
               ref={fixedRef}
             >
