@@ -12,6 +12,8 @@ export default function CustomCarousel({
   if (!autoplay) {
     autoplay = false;
   }
+
+  console.log("RENDERS CAROUSEL", children);
   return (
     <Carousel
       swipeable={!autoplay}

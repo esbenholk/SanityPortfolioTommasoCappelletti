@@ -24,6 +24,7 @@ const breakpointColumnsObj = {
 export default function SinglePost({ updatebasket, basket }) {
   const [singlePost, setSinglePost] = useState();
   const [relatedPost, setRelatedPost] = useState();
+  const [isNew, setIsNew] = useState(false);
   const { slug } = useParams();
   const { width } = useWindowDimensions();
 
@@ -41,6 +42,8 @@ export default function SinglePost({ updatebasket, basket }) {
       )
       .then((data) => {
         setSinglePost(data[0]);
+        setIsNew(!isNew);
+        console.log("updates array", data[0]);
         sanityClient
           .fetch(
             '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
@@ -65,7 +68,7 @@ export default function SinglePost({ updatebasket, basket }) {
           .catch(console.error);
       })
       .catch(console.error);
-  }, [slug]);
+  }, [slug, isNew]);
 
   function listenScrollEvent() {
     if (window.scrollY > 240) {
@@ -74,6 +77,8 @@ export default function SinglePost({ updatebasket, basket }) {
       sethasScrolledinPosition(false);
     }
   }
+
+  console.log("SLUGGG:", slug, singlePost);
 
   window.addEventListener("scroll", listenScrollEvent);
 
@@ -113,19 +118,44 @@ export default function SinglePost({ updatebasket, basket }) {
               {width < 600 ? (
                 <>
                   {singlePost.imagesGallery ? (
-                    <CustomCarousel arrows={true} swipe={true} classsss={""}>
-                      {singlePost.imagesGallery.map((image, index) => (
-                        <div className="squareImage" key={index}>
-                          <Image image={image} />
-                        </div>
-                      ))}
-                    </CustomCarousel>
+                    <>
+                      {isNew ? (
+                        <>
+                          <p>is new</p>
+                          <CustomCarousel
+                            arrows={false}
+                            swipe={true}
+                            classsss={""}
+                          >
+                            {singlePost.imagesGallery.map((image, index) => (
+                              <div className="squareImage" key={index}>
+                                <Image image={image} />
+                              </div>
+                            ))}
+                          </CustomCarousel>
+                        </>
+                      ) : (
+                        <>
+                          <p>is not new</p>
+                          <CustomCarousel
+                            arrows={false}
+                            swipe={true}
+                            classsss={""}
+                          >
+                            {singlePost.imagesGallery.map((image, index) => (
+                              <div className="squareImage" key={index}>
+                                <Image image={image} />
+                              </div>
+                            ))}
+                          </CustomCarousel>
+                        </>
+                      )}
+                    </>
                   ) : (
                     <>
-                      <Image
-                        image={singlePost.mainImage}
-                        class={"mainImage fullwidth"}
-                      />
+                      <div className="squareImage">
+                        <Image image={singlePost.mainImage} />
+                      </div>
                     </>
                   )}
                 </>

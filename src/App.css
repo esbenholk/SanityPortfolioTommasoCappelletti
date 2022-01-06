@@ -645,6 +645,7 @@ nav {
   align-content: flex-start;
   padding: var(--mainPadding);
   padding-top: 76px;
+  padding-bottom: 0px;
 }
 
 .header-object {
@@ -1272,6 +1273,7 @@ footer {
   nav {
     padding: var(--mainPaddingMobile);
     padding-top: 32px;
+    padding-bottom: 0px;
     position: absolute;
     top: 0;
     left: 0;
@@ -1823,5 +1825,5 @@ footer {
 }
 
 .thirtypercent {
-  opacity: 33% !important;
+  color: var(--menuGrey);
 }
