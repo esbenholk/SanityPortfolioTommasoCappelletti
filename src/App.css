@@ -39,7 +39,7 @@
 :root {
   /* Set neon color */
   --normalPadding: 2%;
-  --mainPadding: 58px;
+  --mainPadding: 150px;
   --mainPaddingMobile: 26px;
   --normalColor: white;
   --menuGrey: #dbdbdb;
@@ -900,7 +900,7 @@ nav .logo_container img {
 /* SINGLE POST */
 
 .contentColumn {
-  width: 55%;
+  width: 70%;
   /* flex: 1; */
   /* margin-right: 65px; */
 }
@@ -1057,7 +1057,7 @@ footer {
 }
 
 .footer_social_media_icon {
-  width: 60px;
+  width: 30px;
   align-self: center;
   object-fit: contain;
   margin-left: 36px;
@@ -1068,13 +1068,13 @@ footer {
 
 .footer_top {
   margin-bottom: 35px;
-  padding-left: var(--normalPadding);
-  padding-right: var(--normalPadding);
+  padding-left: var(--mainPadding);
+  padding-right: var(--mainPadding);
 }
 
 .footer_bottom {
-  padding-left: var(--normalPadding);
-  padding-right: var(--normalPadding);
+  padding-left: var(--mainPadding);
+  padding-right: var(--mainPadding);
 }
 
 .scrolltoTop {
@@ -1175,7 +1175,7 @@ footer {
   }
 
   .footer_social_media_icon {
-    width: 60px;
+    width: 30px;
     align-self: center;
     object-fit: contain;
     margin-left: 36px;
@@ -1186,6 +1186,11 @@ footer {
     padding-left: var(--normalPaddingMobile);
     padding-right: var(--normalPaddingMobile);
     background-color: black;
+  }
+
+  .footer_bottom {
+    padding-left: var(--mobilePadding);
+    padding-right: var(--mobilePadding);
   }
   .footer_bottom .flex-row {
     justify-content: center;
@@ -1793,4 +1798,8 @@ footer {
     opacity: 0.33;
     padding-left: 10px;
   }
+}
+
+.thirtypercent {
+  opacity: 33%;
 }

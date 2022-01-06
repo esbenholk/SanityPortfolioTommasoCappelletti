@@ -50,7 +50,7 @@ export default function LandingPage() {
         {info.mainImages ? (
           <div className="fullWidthPadded">
             <CustomCarousel
-              arrows={false}
+              arrows={true}
               swipe={true}
               classsss={""}
               autoplay={true}
@@ -76,7 +76,7 @@ export default function LandingPage() {
       {myContext.hasFeaturedPosts && featuredProjects ? (
         <div className="regContainer">
           <motion.h1 className="headline flex-column fullWidthPadded">
-            Latest Projects
+            {info.featured_project_title}
           </motion.h1>
 
           {width > 900 ? (

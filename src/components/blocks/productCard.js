@@ -6,16 +6,18 @@ import Image from "./image";
 
 export default function ProductCard({ post, classssss }) {
   const [isShown, setIsShown] = useState(false);
-  const [isOnSale, setIsOnSale] = useState(false);
-  console.log(post);
-  if (post.categories) {
-    for (let index = 0; index < post.categories.length; index++) {
-      const category = post.categories[index];
-      if (category.title === "On Sale" || category.title === "On sale") {
-        setIsOnSale(true);
-      }
-    }
-  }
+  // const [isOnSale, setIsOnSale] = useState(false);
+  // console.log(post);
+
+  // // if (post.categories) {
+  // //   for (let index = 0; index < post.categories.length; index++) {
+  // //     const category = post.categories[index];
+  // //     if (category.title === "On Sale" || category.title === "On sale") {
+  // //       setIsOnSale(true);
+  // //     }
+  // //   }
+  // // }
+  // setIsOnSale(true);
 
   var color;
   if (post.color) {
@@ -79,7 +81,7 @@ export default function ProductCard({ post, classssss }) {
           </>
         ) : null}
         {post.star_rating ? <p className="stars">{post.star_rating}</p> : null}
-        {isOnSale ? <p>On Sale</p> : null}
+        {/* {isOnSale ? <p>On Sale</p> : null} */}
       </div>
     </div>
   );

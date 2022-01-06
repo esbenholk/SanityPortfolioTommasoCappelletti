@@ -41,7 +41,7 @@ export default function ContactUs(basket) {
       <input type="hidden" name="contact_number" />
 
       <div className="flex-row fullwidth justifyBetween">
-        <h2 style={{ flex: "1" }}>Email</h2>
+        <h2 style={{ flex: "1" }}>Your email</h2>
         <input
           type="email"
           name="from_email"
@@ -63,7 +63,7 @@ export default function ContactUs(basket) {
       </div>
 
       <div className="flex-row fullwidth justifyBetween">
-        <h2 style={{ flex: "1" }}>Message</h2>
+        <h2 style={{ flex: "1" }}>Your message</h2>
         <input
           style={{ flex: "2" }}
           name="text"

@@ -73,17 +73,6 @@ export default function SinglePost({ updatebasket, basket }) {
     } else {
       sethasScrolledinPosition(false);
     }
-
-    // if (
-    //   fullArticleRef.current &&
-    //   fullArticleRef.current.getBoundingClientRect().bottom <=
-    //     fixedRef.current.getBoundingClientRect().bottom
-    // ) {
-    //   console.log("should togllge absolute class");
-    //   setdetailColumnClass("detailColumnAbsolute");
-    // } else {
-    //   setdetailColumnClass("");
-    // }
   }
 
   window.addEventListener("scroll", listenScrollEvent);
