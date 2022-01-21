@@ -59,10 +59,17 @@ export default function PostCard({ post }) {
             <div className="flex-row">
               {post.categories &&
                 post.categories.map((category, index) => (
-                  <p className="standardTransparent-button" key={index}>
-                    {" "}
-                    {category.title}{" "}
-                  </p>
+                  <>
+                    {category.title === "On Sale" ||
+                      (category.title === "On sale" ? (
+                        <></>
+                      ) : (
+                        <p className="standardTransparent-button" key={index}>
+                          {" "}
+                          {category.title}{" "}
+                        </p>
+                      ))}
+                  </>
                 ))}
             </div>
             <Link

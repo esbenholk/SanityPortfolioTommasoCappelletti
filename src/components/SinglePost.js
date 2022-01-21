@@ -18,8 +18,6 @@ import useWindowDimensions from "./functions/useWindowDimensions";
 import Loader from "./blocks/loader";
 import VideoPlayer from "./blocks/videoPlayer";
 
-import ReactPlayer from "react-player";
-
 const breakpointColumnsObj = {
   default: 2,
 };
@@ -344,7 +342,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       Get this freebie
                     </button>
                   ) : null}
-                  {singlePost.downloadfile.asset.url ? (
+                  {singlePost.downloadfile ? (
                     <button
                       onClick={(e) => {
                         e.preventDefault();

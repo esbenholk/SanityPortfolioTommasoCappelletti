@@ -67,8 +67,10 @@ export default function FeaturedCard({ post }) {
           {post.categories &&
             post.categories.map((category, index) => (
               <>
-                {category.title !== "On sale" ||
-                  (category.title !== "On Sale" && (
+                {category.title === "On Sale" ||
+                  (category.title === "On sale" ? (
+                    <></>
+                  ) : (
                     <a
                       className="standardTransparent-button"
                       key={index}

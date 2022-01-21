@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
-
 import Image from "./image";
 
 export default function ProductCard({ post, classssss }) {

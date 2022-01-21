@@ -56,14 +56,23 @@ export default function Projects({ projectList }) {
             <div className="categories">
               {project.categories &&
                 project.categories.map((category, index) => (
-                  <a
-                    key={index}
-                    id={"category_" + category.title + ""}
-                    href={category.slug.current}
-                  >
-                    {category.title}
-                    {index + 1 !== project.categories.length ? ", " : null}
-                  </a>
+                  <>
+                    {category.title === "On Sale" ||
+                      (category.title === "On sale" ? (
+                        <></>
+                      ) : (
+                        <a
+                          key={index}
+                          id={"category_" + category.title + ""}
+                          href={category.slug.current}
+                        >
+                          {category.title}
+                          {index + 1 !== project.categories.length
+                            ? ", "
+                            : null}
+                        </a>
+                      ))}
+                  </>
                 ))}
             </div>
             <div onMouseEnter={hover} onMouseLeave={hover}>
@@ -114,14 +123,23 @@ export default function Projects({ projectList }) {
               <div className="categories">
                 {project.categories &&
                   project.categories.map((category, index) => (
-                    <a
-                      key={index}
-                      id={"category_" + category.title + ""}
-                      href={category.slug.current}
-                    >
-                      {category.title}
-                      {index + 1 !== project.categories.length ? ", " : null}
-                    </a>
+                    <>
+                      {category.title === "On Sale" ||
+                        (category.title === "On sale" ? (
+                          <></>
+                        ) : (
+                          <a
+                            key={index}
+                            id={"category_" + category.title + ""}
+                            href={category.slug.current}
+                          >
+                            {category.title}
+                            {index + 1 !== project.categories.length
+                              ? ", "
+                              : null}
+                          </a>
+                        ))}
+                    </>
                   ))}
               </div>
               <div onMouseEnter={hover} onMouseLeave={hover}>
