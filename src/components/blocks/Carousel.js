@@ -8,12 +8,16 @@ export default function CustomCarousel({
   arrows,
   classsss,
   autoplay,
+  currentIndex,
+  stopVideo,
 }) {
   if (!autoplay) {
     autoplay = false;
   }
+  if (!currentIndex) {
+    currentIndex = 0;
+  }
 
-  console.log("RENDERS CAROUSEL", children);
   return (
     <Carousel
       swipeable={!autoplay}
@@ -28,10 +32,14 @@ export default function CustomCarousel({
       showArrows={arrows}
       className={classsss}
       infiniteLoop={false}
+      selectedItem={currentIndex}
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev && (
           <button
-            onClick={clickHandler}
+            onClick={(e) => {
+              clickHandler();
+              stopVideo();
+            }}
             className="featuredCardArrow prevArrow"
           >
             <img
@@ -49,8 +57,12 @@ export default function CustomCarousel({
       renderArrowNext={(clickHandler, hasNext, labelNext) =>
         hasNext && (
           <button
-            onClick={clickHandler}
+            // onClick={clickHandler}
             className="featuredCardArrow nextArrow"
+            onClick={(e) => {
+              clickHandler();
+              stopVideo();
+            }}
           >
             <img
               style={{ height: "55px", width: "55px" }}

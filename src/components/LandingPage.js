@@ -54,6 +54,7 @@ export default function LandingPage() {
               swipe={true}
               classsss={""}
               autoplay={true}
+              currentIndex={0}
             >
               {info.mainImages.map((image, index) => (
                 <div key={index}>

@@ -16,6 +16,9 @@ import Masonry from "react-masonry-css";
 import useWindowDimensions from "./functions/useWindowDimensions";
 
 import Loader from "./blocks/loader";
+import VideoPlayer from "./blocks/videoPlayer";
+
+import ReactPlayer from "react-player";
 
 const breakpointColumnsObj = {
   default: 2,
@@ -24,25 +27,27 @@ const breakpointColumnsObj = {
 export default function SinglePost({ updatebasket, basket }) {
   const [singlePost, setSinglePost] = useState();
   const [relatedPost, setRelatedPost] = useState();
-  const [isNew, setIsNew] = useState(false);
+  const [imagesGallery, setImagesGallery] = useState([]);
   const { slug } = useParams();
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const fullArticleRef = useRef();
   const fixedRef = useRef();
 
   const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
+  const [lightBoxIsOpen, setLightBoxIsOpen] = useState(false);
+  const [lightBoxIndex, setLightBoxIndex] = useState(0);
 
   useEffect(() => {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, link, downloadfile{asset->{url}}, freebie
+          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, link, downloadfile{asset->{url}}, freebie
         }`
       )
       .then((data) => {
         setSinglePost(data[0]);
-        setIsNew(!isNew);
+        setImagesGallery(data[0].imagesGallery);
         console.log("updates array", data[0]);
         sanityClient
           .fetch(
@@ -68,7 +73,7 @@ export default function SinglePost({ updatebasket, basket }) {
           .catch(console.error);
       })
       .catch(console.error);
-  }, [slug, isNew]);
+  }, [slug]);
 
   function listenScrollEvent() {
     if (window.scrollY > 240) {
@@ -78,7 +83,24 @@ export default function SinglePost({ updatebasket, basket }) {
     }
   }
 
-  console.log("SLUGGG:", slug, singlePost);
+  function openLightBox(index) {
+    setLightBoxIndex(index);
+    setLightBoxIsOpen(true);
+  }
+  function closeLightBox() {
+    setLightBoxIsOpen(false);
+    console.log("close lightbox");
+  }
+  function shutDownIframes() {
+    var iframes = document.getElementsByTagName("iframe");
+    for (let index = 0; index < iframes.length; index++) {
+      const element = iframes[index];
+      element.contentWindow.postMessage(
+        '{"event":"command","func":"stopVideo","args":""}',
+        "*"
+      );
+    }
+  }
 
   window.addEventListener("scroll", listenScrollEvent);
 
@@ -92,6 +114,71 @@ export default function SinglePost({ updatebasket, basket }) {
       // animate={{ opacity: 1 }}
       // exit={{ opacity: 0 }}
       >
+        {lightBoxIsOpen && (
+          <div
+            style={{
+              position: "fixed",
+              top: "0",
+              right: "0",
+              height: height,
+              width: width,
+              zIndex: "9999999999999999",
+              backgroundColor: "white",
+              padding: "6%",
+            }}
+            className="whitebox"
+          >
+            <div
+              onClick={(e) => {
+                e.preventDefault();
+                closeLightBox();
+              }}
+              style={{ position: "absolute", right: "3%" }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 33"
+              >
+                <g
+                  id="Group_137"
+                  data-name="Group 137"
+                  transform="translate(-838.988 -94)"
+                >
+                  <path
+                    // onClick={this.props.openMenu}
+                    id="Icon_ionic-md-close"
+                    data-name="Icon ionic-md-close"
+                    d="M28.477,9.619l-2.1-2.1L18,15.9,9.619,7.523l-2.1,2.1L15.9,18,7.523,26.381l2.1,2.1L18,20.1l8.381,8.381,2.1-2.1L20.1,18Z"
+                    transform="translate(832.172 93.5)"
+                    stroke="black"
+                    strokeWidth="5"
+                  />
+                </g>
+              </svg>
+            </div>
+
+            <CustomCarousel
+              arrows={true}
+              swipe={true}
+              classsss={""}
+              currentIndex={lightBoxIndex}
+              stopVideo={shutDownIframes}
+            >
+              {singlePost.imagesGallery.map((image, index) => (
+                <Image image={image} key={index} />
+              ))}
+              {singlePost.videos ? (
+                <>
+                  {singlePost.videos.map((video, index) => (
+                    <VideoPlayer video={video} key={index} showThumb={false} />
+                  ))}
+                </>
+              ) : null}
+            </CustomCarousel>
+          </div>
+        )}
         <article ref={fullArticleRef}>
           <div className="flex-row align-top project_directory_line fullWidthPadded ">
             <a className="thirtypercent" href="/projects">
@@ -117,39 +204,30 @@ export default function SinglePost({ updatebasket, basket }) {
             <div className="flex-column contentColumn">
               {width < 600 ? (
                 <>
-                  {singlePost.imagesGallery ? (
+                  {imagesGallery ? (
                     <>
-                      {isNew ? (
-                        <>
-                          <p>is new</p>
-                          <CustomCarousel
-                            arrows={false}
-                            swipe={true}
-                            classsss={""}
-                          >
-                            {singlePost.imagesGallery.map((image, index) => (
-                              <div className="squareImage" key={index}>
-                                <Image image={image} />
-                              </div>
-                            ))}
-                          </CustomCarousel>
-                        </>
-                      ) : (
-                        <>
-                          <p>is not new</p>
-                          <CustomCarousel
-                            arrows={false}
-                            swipe={true}
-                            classsss={""}
-                          >
-                            {singlePost.imagesGallery.map((image, index) => (
-                              <div className="squareImage" key={index}>
-                                <Image image={image} />
-                              </div>
-                            ))}
-                          </CustomCarousel>
-                        </>
-                      )}
+                      <>
+                        <CustomCarousel
+                          arrows={false}
+                          swipe={true}
+                          classsss={""}
+                        >
+                          {singlePost.imagesGallery.map((image, index) => (
+                            <div className="squareImage" key={index}>
+                              <Image image={image} />
+                            </div>
+                          ))}
+                          {singlePost.videos ? (
+                            <>
+                              {singlePost.videos.map((video, index) => (
+                                <div className="squareImage" key={index}>
+                                  <VideoPlayer video={video} playing={false} />
+                                </div>
+                              ))}
+                            </>
+                          ) : null}
+                        </CustomCarousel>
+                      </>
                     </>
                   ) : (
                     <>
@@ -161,17 +239,43 @@ export default function SinglePost({ updatebasket, basket }) {
                 </>
               ) : (
                 <>
-                  {singlePost.imagesGallery ? (
+                  {imagesGallery ? (
                     <Masonry
                       breakpointCols={breakpointColumnsObj}
                       className="my-masonry-grid fullWidthPaddedLeft normPaddingMobile"
                       columnClassName="my-masonry-grid_column singleProjectMasonry"
                     >
                       {singlePost.imagesGallery.map((image, index) => (
-                        <div className="squareImage" key={index}>
+                        <div
+                          className="squareImage"
+                          key={index}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            openLightBox(index);
+                          }}
+                        >
                           <Image image={image} />
                         </div>
                       ))}
+
+                      {singlePost.videos ? (
+                        <>
+                          {singlePost.videos.map((video, index) => (
+                            <div
+                              className="squareImage"
+                              key={index}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                openLightBox(
+                                  singlePost.imagesGallery.length + index
+                                );
+                              }}
+                            >
+                              <VideoPlayer video={video} showThumb={true} />
+                            </div>
+                          ))}
+                        </>
+                      ) : null}
                     </Masonry>
                   ) : (
                     <>

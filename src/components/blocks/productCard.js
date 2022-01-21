@@ -28,8 +28,9 @@ export default function ProductCard({ post, classssss }) {
 
   return (
     <div className={"product_card"}>
-      <Link
-        to={"/projects/" + post.slug.current}
+      <a
+        //to={"/projects/" + post.slug.current}
+        href={"/projects/" + post.slug.current}
         key={post.slug.current + "productCard"}
         className="w-full teaser-link"
         onMouseEnter={() => setIsShown(true)}
@@ -53,7 +54,7 @@ export default function ProductCard({ post, classssss }) {
             <Image image={post.mainImage} />
           </div>
         )}
-      </Link>
+      </a>
 
       <div className="details" style={{ color: color }}>
         <h1>{post.title}</h1>

@@ -78,6 +78,7 @@ body {
 
 img {
   max-width: 100%;
+  max-height: 100%;
   transform: translateZ(0);
 }
 
@@ -768,6 +769,11 @@ nav .logo_container img {
   overflow: visible !important;
 }
 
+.dot {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+  background-color: var(--menuGrey) !important;
+}
+
 .featuredCardArrow {
   position: absolute;
   top: 50%;
@@ -930,6 +936,7 @@ nav .logo_container img {
   overflow: hidden;
   position: relative;
 }
+.squareImage iframe,
 .squareImage img {
   position: absolute;
   top: 0;
@@ -1118,6 +1125,19 @@ footer {
 
 .gelatine {
   animation: gelatine 10s infinite;
+}
+
+.whitebox .carousel-root,
+.whitebox .carousel,
+.whitebox .slider-wrapper,
+.whitebox .slider {
+  max-height: 100% !important;
+  height: 100% !important;
+}
+.whitebox img {
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 @keyframes gelatine {
@@ -1806,10 +1826,6 @@ footer {
   .control-dots {
     position: absolute;
     top: 99%;
-  }
-  .dot {
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
-    background-color: var(--menuGrey) !important;
   }
 }
 
