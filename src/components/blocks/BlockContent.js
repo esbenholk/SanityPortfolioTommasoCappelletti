@@ -12,8 +12,7 @@ const serializers = {
           return <h2>{props.children}</h2>;
         case "h3":
           return <h3>{props.children}</h3>;
-        case "a":
-          return <a>{props.children}</a>;
+
         // ...
 
         default:
