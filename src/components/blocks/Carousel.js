@@ -21,6 +21,7 @@ export default function CustomCarousel({
   return (
     <Carousel
       swipeable={!autoplay}
+      axis={"horizontal"}
       swipeScrollTolerance={1}
       stopOnHover={true}
       showIndicators={true}
@@ -38,7 +39,9 @@ export default function CustomCarousel({
           <button
             onClick={(e) => {
               clickHandler();
-              stopVideo();
+              if (stopVideo) {
+                stopVideo();
+              }
             }}
             className="featuredCardArrow prevArrow"
           >
@@ -61,7 +64,9 @@ export default function CustomCarousel({
             className="featuredCardArrow nextArrow"
             onClick={(e) => {
               clickHandler();
-              stopVideo();
+              if (stopVideo) {
+                stopVideo();
+              }
             }}
           >
             <img
