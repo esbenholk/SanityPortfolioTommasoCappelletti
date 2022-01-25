@@ -111,7 +111,7 @@ export default function Footer() {
 
         <div className="footer_bottom">
           {width > 1200 && info.contact ? (
-            <div className="blockContent">
+            <div className="blockContent thirtypercentOpacity ">
               <BlockContent blocks={info.contact} />
             </div>
           ) : (

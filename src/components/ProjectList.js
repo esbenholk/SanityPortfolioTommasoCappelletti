@@ -10,6 +10,8 @@ import { toggleHover } from "./functions/toggleHover";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
 
+import { Link } from "react-router-dom";
+
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
 
@@ -61,25 +63,25 @@ export default function Projects({ projectList }) {
                       (category.title === "On sale" ? (
                         <></>
                       ) : (
-                        <a
+                        <Link
                           key={index}
                           id={"category_" + category.title + ""}
-                          href={category.slug.current}
+                          to={category.slug.current}
                         >
                           {category.title}
                           {index + 1 !== project.categories.length
                             ? ", "
                             : null}
-                        </a>
+                        </Link>
                       ))}
                   </>
                 ))}
             </div>
             <div onMouseEnter={hover} onMouseLeave={hover}>
               {" "}
-              <a href={"/projects/" + project.slug.current}>
+              <Link to={"/projects/" + project.slug.current}>
                 {project.title ? project.title : "undefined"}
-              </a>
+              </Link>
               {project.mainImage.hotspot ? (
                 <img
                   src={urlFor(project.mainImage.asset.url).url()}
@@ -128,16 +130,16 @@ export default function Projects({ projectList }) {
                         (category.title === "On sale" ? (
                           <></>
                         ) : (
-                          <a
+                          <Link
                             key={index}
                             id={"category_" + category.title + ""}
-                            href={category.slug.current}
+                            to={category.slug.current}
                           >
                             {category.title}
                             {index + 1 !== project.categories.length
                               ? ", "
                               : null}
-                          </a>
+                          </Link>
                         ))}
                     </>
                   ))}

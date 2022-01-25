@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 
 export default function ContactUs(basket) {
+  const [sendButtonActive, setSendButtonActive] = useState(false);
   var projects_html_string = `<div style="display:flex;flex-direction:column;">`;
 
   for (let index = 0; index < basket.basket.length; index++) {
@@ -46,6 +47,10 @@ export default function ContactUs(basket) {
           type="email"
           name="from_email"
           style={{ flex: "2" }}
+          required
+          onChange={() => {
+            setSendButtonActive(true);
+          }}
           placeholder="Insert your email"
         />
       </div>
@@ -77,7 +82,15 @@ export default function ContactUs(basket) {
         value={projects_html_string}
       />
 
-      <button type="submit" className="addToCartButton" value="Send">
+      <button
+        type="submit"
+        className={
+          sendButtonActive
+            ? "addToCartButton"
+            : "addToCartButton thirtypercentOpacity"
+        }
+        value="Send"
+      >
         Send{" "}
       </button>
     </form>

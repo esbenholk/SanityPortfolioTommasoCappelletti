@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import Image from "./image";
 
+import { Link } from "react-router-dom";
+
 export default function ProductCard({ post, classssss }) {
   const [isShown, setIsShown] = useState(false);
   // const [isOnSale, setIsOnSale] = useState(false);
@@ -26,9 +28,9 @@ export default function ProductCard({ post, classssss }) {
 
   return (
     <div className={"product_card"}>
-      <a
-        //to={"/projects/" + post.slug.current}
-        href={"/projects/" + post.slug.current}
+      <Link
+        to={"/projects/" + post.slug.current}
+        // href={"/projects/" + post.slug.current}
         key={post.slug.current + "productCard"}
         className="w-full teaser-link"
         onMouseEnter={() => setIsShown(true)}
@@ -52,7 +54,7 @@ export default function ProductCard({ post, classssss }) {
             <Image image={post.mainImage} />
           </div>
         )}
-      </a>
+      </Link>
 
       <div className="details" style={{ color: color }}>
         <h1>{post.title}</h1>

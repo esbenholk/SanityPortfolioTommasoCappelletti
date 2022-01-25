@@ -26,52 +26,54 @@ export default function PostCard({ post }) {
   }
 
   return (
-    <Link to={"/projects/" + post.slug.current} key={post.slug.current}>
-      <div
-        className="post_card"
-        onMouseEnter={() => setIsShown(true)}
-        onMouseLeave={() => setIsShown(false)}
-      >
-        {width > 700 && isShown ? (
-          <div
-            className="post_card_overlay seeOnHover"
-            style={{ backgroundColor: color }}
-          >
-            <div className="details">
-              <Link
-                to={"/projects/" + post.slug.current}
-                key={post.slug.current}
-                className="w-full teaser-link"
-              >
-                <h3>{post.title}</h3>
-              </Link>
+    <div
+      className="post_card"
+      onMouseEnter={() => setIsShown(true)}
+      onMouseLeave={() => setIsShown(false)}
+    >
+      {width > 700 && isShown ? (
+        <div
+          className="post_card_overlay seeOnHover"
+          style={{ backgroundColor: color }}
+        >
+          <div className="details">
+            <Link
+              to={"/projects/" + post.slug.current}
+              key={post.slug.current}
+              className="w-full teaser-link"
+            >
+              <h3>{post.title}</h3>
+            </Link>
 
-              <div className="flex-row">
-                {post.tags &&
-                  post.tags.map((tag, index) => (
-                    <p className="tag" key={index}>
-                      {tag}
-                      {index + 1 !== post.tags.length ? "," : null}
-                    </p>
-                  ))}
-              </div>
-            </div>
             <div className="flex-row">
-              {post.categories &&
-                post.categories.map((category, index) => (
-                  <>
-                    {category.title === "On Sale" ||
-                      (category.title === "On sale" ? (
-                        <></>
-                      ) : (
-                        <p className="standardTransparent-button" key={index}>
-                          {" "}
-                          {category.title}{" "}
-                        </p>
-                      ))}
-                  </>
+              {post.tags &&
+                post.tags.map((tag, index) => (
+                  <p className="tag" key={index}>
+                    {tag}
+                    {index + 1 !== post.tags.length ? "," : null}
+                  </p>
                 ))}
             </div>
+          </div>
+          <div className="flex-row">
+            {post.categories &&
+              post.categories.map((category, index) => (
+                <>
+                  {category.title === "On Sale" ||
+                    (category.title === "On sale" ? (
+                      <></>
+                    ) : (
+                      <a
+                        className="standardTransparent-button"
+                        key={index}
+                        href={category.slug.current}
+                      >
+                        {" "}
+                        {category.title}{" "}
+                      </a>
+                    ))}
+                </>
+              ))}
             <Link
               to={"/projects/" + post.slug.current}
               key={post.slug.current}
@@ -80,8 +82,10 @@ export default function PostCard({ post }) {
               See project
             </Link>
           </div>
-        ) : null}
+        </div>
+      ) : null}
 
+      <Link to={"/projects/" + post.slug.current} key={post.slug.current}>
         {post.mainImage.hotspot ? (
           <img
             src={urlFor(post.mainImage.asset.url)}
@@ -100,7 +104,7 @@ export default function PostCard({ post }) {
             className="post_card_image"
           />
         )}
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

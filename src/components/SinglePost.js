@@ -40,7 +40,7 @@ export default function SinglePost({ updatebasket, basket }) {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, link, downloadfile{asset->{url}}, freebie
+          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, external_links, description, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, link, downloadfile{asset->{url}}, freebie
         }`
       )
       .then((data) => {
@@ -178,7 +178,7 @@ export default function SinglePost({ updatebasket, basket }) {
           </div>
         )}
         <article ref={fullArticleRef}>
-          <div className="flex-row align-top project_directory_line fullWidthPadded ">
+          <div className="flex-row align-top project_directory_line">
             <a className="thirtypercent" href="/projects">
               {"Project >"}
             </a>
@@ -368,16 +368,6 @@ export default function SinglePost({ updatebasket, basket }) {
               ) : null}
 
               <div className="flex-column project_details ">
-                {singlePost.description && (
-                  <>
-                    {" "}
-                    {singlePost.recap && (
-                      <div className="recap">
-                        <BlockContent blocks={singlePost.description} />
-                      </div>
-                    )}
-                  </>
-                )}
                 {singlePost.year && (
                   <>
                     <h3>Year</h3>
@@ -407,6 +397,43 @@ export default function SinglePost({ updatebasket, basket }) {
                         </Link>
                       ))}
                     </div>
+                  </>
+                )}
+
+                {singlePost.external_links && (
+                  <>
+                    {singlePost.external_links.length > 1 ? (
+                      <h3>External links</h3>
+                    ) : (
+                      <h3>External link</h3>
+                    )}
+
+                    <div className="flex-row align-left">
+                      {singlePost.external_links.map((link, index) => (
+                        <a
+                          href={link.external_link}
+                          className="tag project_tag"
+                          key={index}
+                        >
+                          {link.name}
+                          {index + 1 < singlePost.external_links.length
+                            ? ","
+                            : null}
+                        </a>
+                      ))}
+                    </div>
+                  </>
+                )}
+                {singlePost.description && (
+                  <>
+                    {" "}
+                    {singlePost.description && (
+                      <>
+                        <div className="project_tag tag">
+                          <BlockContent blocks={singlePost.description} />
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
               </div>
