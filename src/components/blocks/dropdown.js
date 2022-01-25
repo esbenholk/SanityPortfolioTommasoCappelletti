@@ -28,7 +28,7 @@ class Dropdown extends React.Component {
               <img
                 src="/assets/SearchIcon.svg"
                 alt="search icon"
-                style={{ height: "24px" }}
+                style={{ height: "19px" }}
                 className={isOpen ? "invisible" : "visible"}
               ></img>
               <p>
@@ -39,8 +39,8 @@ class Dropdown extends React.Component {
             </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="19"
+              height="19"
               viewBox="0 0 24 33"
               className={isOpen ? "visible" : "invisible"}
             >
@@ -78,7 +78,7 @@ class Dropdown extends React.Component {
         <img
           src="/assets/SearchIcon.svg"
           alt="search icon"
-          style={{ height: "24px" }}
+          style={{ height: "19px" }}
         ></img>
         <a key={item.slug.current.toString()} href={`../${item.slug.current}`}>
           {item.title}

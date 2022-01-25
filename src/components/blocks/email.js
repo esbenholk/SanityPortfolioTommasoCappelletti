@@ -41,8 +41,10 @@ export default function ContactUs(basket) {
     <form className="contact-form flex-column" onSubmit={sendEmail}>
       <input type="hidden" name="contact_number" />
 
-      <div className="flex-row fullwidth justifyBetween">
-        <h2 style={{ flex: "1" }}>Your email</h2>
+      <div className="flex-column fullwidth justifyBetween">
+        <h2 style={{ flex: "1" }} className="emailForm-h2">
+          Your email
+        </h2>
         <input
           type="email"
           name="from_email"
@@ -67,8 +69,10 @@ export default function ContactUs(basket) {
         />
       </div>
 
-      <div className="flex-row fullwidth justifyBetween">
-        <h2 style={{ flex: "1" }}>Your message</h2>
+      <div className="flex-column fullwidth justifyBetween">
+        <h2 style={{ flex: "1" }} className="emailForm-h2">
+          Your message
+        </h2>
         <input
           style={{ flex: "2" }}
           name="text"
@@ -85,9 +89,7 @@ export default function ContactUs(basket) {
       <button
         type="submit"
         className={
-          sendButtonActive
-            ? "addToCartButton"
-            : "addToCartButton thirtypercentOpacity"
+          sendButtonActive ? "addToCartButton" : "addToCartButton inactive"
         }
         value="Send"
       >

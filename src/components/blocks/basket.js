@@ -119,7 +119,7 @@ export default function Basket({
               {basket.length === 0 ? (
                 <>
                   {" "}
-                  <h2>Others have looked at</h2>
+                  <h1>Others have looked at</h1>
                   {projectList ? (
                     <div className="flex-column">
                       {projectList.map((post, index) => (

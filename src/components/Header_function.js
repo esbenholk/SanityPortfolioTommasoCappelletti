@@ -3,9 +3,12 @@ import { NavLink } from "react-router-dom";
 
 import AppContext from "../globalState";
 
+import useWindowDimensions from "../components/functions/useWindowDimensions";
+
 export default function Header() {
   const myContext = useContext(AppContext);
   const info = myContext.siteSettings;
+  const { width } = useWindowDimensions();
 
   return (
     <>
@@ -21,6 +24,11 @@ export default function Header() {
         <NavLink to="/projects">
           <h2 className="header-object">Projects</h2>
         </NavLink>
+        {width > 950 ? (
+          <NavLink to="/on-sale">
+            <h2 className="header-object">Freebies</h2>
+          </NavLink>
+        ) : null}
       </div>
     </>
   );

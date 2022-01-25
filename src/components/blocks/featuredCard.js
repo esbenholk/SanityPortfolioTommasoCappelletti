@@ -50,7 +50,7 @@ export default function FeaturedCard({ post }) {
             key={post.slug.current}
             className="w-full teaser-link"
           >
-            <h3>{post.title}</h3>
+            <h1>{post.title}</h1>
           </Link>
 
           <div className="flex-row featuredCardTags">

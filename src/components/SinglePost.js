@@ -179,22 +179,20 @@ export default function SinglePost({ updatebasket, basket }) {
         )}
         <article ref={fullArticleRef}>
           <div className="flex-row align-top project_directory_line">
-            <a className="thirtypercent" href="/projects">
-              {"Project >"}
-            </a>
+            <a href="/projects">{"Project >"}</a>
             <div className="flex-row align-left">
               {singlePost.categories &&
                 singlePost.categories.map((category, index) => (
                   <Link
                     to={"../" + category.slug.current}
-                    className="tag project_tag thirtypercent"
+                    className="tag project_tag"
                     key={index}
                   >
                     {category.title}
                     {index + 1 !== singlePost.categories.length ? "," : null}
                   </Link>
                 ))}
-              <p className="thirtypercent">{" > "}</p>
+              <p>{" > "}</p>
             </div>
             <p>{singlePost.title}</p>
           </div>
@@ -412,7 +410,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       {singlePost.external_links.map((link, index) => (
                         <a
                           href={link.external_link}
-                          className="tag project_tag"
+                          className="tag project_tag externalLink"
                           key={index}
                         >
                           {link.name}

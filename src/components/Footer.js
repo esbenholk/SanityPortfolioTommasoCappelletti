@@ -29,14 +29,14 @@ export default function Footer() {
   return (
     <div>
       <div className="regContainer">
-        <motion.h2 className="flex-column fullWidthPadded">
+        <motion.h1 className="flex-column fullWidthPadded segmentHeadline">
           Others also viewed
-        </motion.h2>
+        </motion.h1>
 
         {projectList ? (
           <div
             style={{ backgroundColor: "white" }}
-            className="overscrollPadded horizontalScroll2"
+            className="overscrollPadded horizontalScroll2 horizontal"
           >
             {projectList.map((post, index) => (
               <ProductCard post={post} key={index} />
@@ -83,7 +83,7 @@ export default function Footer() {
                   <h2 className="header-object footer-object">Projects</h2>
                 </NavLink>
                 <NavLink to="/on-sale">
-                  <h2 className="header-object footer-object">On Sale</h2>
+                  <h2 className="header-object footer-object">Freebies</h2>
                 </NavLink>{" "}
               </div>
             ) : null}

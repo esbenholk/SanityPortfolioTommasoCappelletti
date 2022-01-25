@@ -138,10 +138,10 @@ function App() {
             {siteSettings && (
               <>
                 {" "}
-                {width > 950 ? (
+                {width > 1050 ? (
                   <nav className="fullWidthPadded">
                     <Header />
-                    <div className="flex-row" style={{ minWidth: "50%" }}>
+                    <div className="flex-row" style={{ minWidth: "40%" }}>
                       <Dropdown categories={categories} mainRef={mainRef} />
                       <Basket
                         basket={basket}
