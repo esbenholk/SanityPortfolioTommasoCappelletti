@@ -22,7 +22,7 @@ export default function CustomCarousel({
     <Carousel
       swipeable={!autoplay}
       axis={"horizontal"}
-      swipeScrollTolerance={10}
+      swipeScrollTolerance={30}
       stopOnHover={true}
       showIndicators={true}
       emulateTouch={true}

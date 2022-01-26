@@ -158,24 +158,35 @@ export default function SinglePost({ updatebasket, basket }) {
               </svg>
             </div>
 
-            <CustomCarousel
-              arrows={true}
-              swipe={true}
-              classsss={""}
-              currentIndex={lightBoxIndex}
-              stopVideo={shutDownIframes}
-            >
-              {imagesGallery.map((image, index) => (
-                <Image image={image} key={index} />
-              ))}
-              {singlePost.videos ? (
-                <>
-                  {singlePost.videos.map((video, index) => (
-                    <VideoPlayer video={video} key={index} showThumb={false} />
-                  ))}
-                </>
-              ) : null}
-            </CustomCarousel>
+            {singlePost.videos && singlePost.videos.length > 0 ? (
+              <CustomCarousel
+                arrows={true}
+                swipe={true}
+                classsss={""}
+                currentIndex={lightBoxIndex}
+                stopVideo={shutDownIframes}
+              >
+                {imagesGallery.map((image, index) => (
+                  <Image image={image} key={index} />
+                ))}
+
+                {singlePost.videos.map((video, index) => (
+                  <VideoPlayer video={video} key={index} showThumb={false} />
+                ))}
+              </CustomCarousel>
+            ) : (
+              <CustomCarousel
+                arrows={true}
+                swipe={true}
+                classsss={""}
+                currentIndex={lightBoxIndex}
+                stopVideo={shutDownIframes}
+              >
+                {imagesGallery.map((image, index) => (
+                  <Image image={image} key={index} />
+                ))}
+              </CustomCarousel>
+            )}
           </div>
         )}
 
