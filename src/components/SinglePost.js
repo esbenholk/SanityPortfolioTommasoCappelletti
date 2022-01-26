@@ -37,6 +37,8 @@ export default function SinglePost({ updatebasket, basket }) {
   const [lightBoxIndex, setLightBoxIndex] = useState(0);
 
   useEffect(() => {
+    console.log("NEW SINGLE PROJECT SLUG LOADED", slug);
+
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
@@ -46,7 +48,7 @@ export default function SinglePost({ updatebasket, basket }) {
       .then((data) => {
         setSinglePost(data[0]);
         setImagesGallery(data[0].imagesGallery);
-        console.log("updates array", data[0]);
+        console.log("project datat loaded", data[0]);
         sanityClient
           .fetch(
             '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
@@ -87,7 +89,6 @@ export default function SinglePost({ updatebasket, basket }) {
   }
   function closeLightBox() {
     setLightBoxIsOpen(false);
-    console.log("close lightbox");
   }
   function shutDownIframes() {
     var iframes = document.getElementsByTagName("iframe");
@@ -164,7 +165,7 @@ export default function SinglePost({ updatebasket, basket }) {
               currentIndex={lightBoxIndex}
               stopVideo={shutDownIframes}
             >
-              {singlePost.imagesGallery.map((image, index) => (
+              {imagesGallery.map((image, index) => (
                 <Image image={image} key={index} />
               ))}
               {singlePost.videos ? (
@@ -177,6 +178,7 @@ export default function SinglePost({ updatebasket, basket }) {
             </CustomCarousel>
           </div>
         )}
+
         <article ref={fullArticleRef}>
           <div className="flex-row align-top project_directory_line">
             <a href="/projects">{"Project >"}</a>
@@ -208,7 +210,7 @@ export default function SinglePost({ updatebasket, basket }) {
                           swipe={true}
                           classsss={""}
                         >
-                          {singlePost.imagesGallery.map((image, index) => (
+                          {imagesGallery.map((image, index) => (
                             <div className="squareImage" key={index}>
                               <Image image={image} />
                             </div>
@@ -241,7 +243,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       className="my-masonry-grid fullWidthPaddedLeft normPaddingMobile"
                       columnClassName="my-masonry-grid_column singleProjectMasonry"
                     >
-                      {singlePost.imagesGallery.map((image, index) => (
+                      {imagesGallery.map((image, index) => (
                         <div
                           className="squareImage"
                           key={index}

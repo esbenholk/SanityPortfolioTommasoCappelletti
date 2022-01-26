@@ -21,7 +21,7 @@ export default function FeaturedCard({ post }) {
   }
 
   return (
-    <div className="featured_post_card">
+    <div className="featured_post_card" key={post}>
       {post.mainImage.hotspot ? (
         <img
           src={urlFor(post.mainImage.asset.url)}
@@ -66,7 +66,7 @@ export default function FeaturedCard({ post }) {
         <div className="flex-row post_category_list">
           {post.categories &&
             post.categories.map((category, index) => (
-              <>
+              <div key={index}>
                 {category.title === "On Sale" ||
                   (category.title === "On sale" ? (
                     <></>
@@ -80,11 +80,10 @@ export default function FeaturedCard({ post }) {
                       {category.title}{" "}
                     </a>
                   ))}
-              </>
+              </div>
             ))}
           <Link
             to={"/projects/" + post.slug.current}
-            key={post.slug.current}
             className="w-full teaser-link standard-button tag active"
           >
             See project

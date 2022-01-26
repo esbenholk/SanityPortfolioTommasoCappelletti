@@ -1,5 +1,6 @@
 import React from "react";
 import sanityClient from "../../client";
+// import { Image } from "react-native";
 
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -10,44 +11,32 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-class Image extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      image: props.image,
-      class: props.class,
-    };
-  }
-
-  render() {
-    return (
-      <>
-        {this.state.image && (
-          <>
-            {this.state.image.hotspot ? (
-              <img
-                src={urlFor(this.state.image.asset)}
-                alt={this.state.image.alt}
-                style={{
-                  objectPosition: `${this.state.image.hotspot.x * 100}% ${
-                    this.state.image.hotspot.y * 100
-                  }%`,
-                }}
-                className={this.state.class}
-              />
-            ) : (
-              <img
-                src={urlFor(this.state.image.asset)}
-                alt={this.state.image.alt}
-                className={this.state.class}
-              />
-            )}
-          </>
-        )}
-      </>
-    );
-  }
+export default function Image({ image }) {
+  return (
+    <>
+      {image && (
+        <>
+          {image.hotspot ? (
+            <img
+              src={urlFor(image.asset)}
+              key={image.asset._ref}
+              alt={image.alt}
+              style={{
+                objectPosition: `${image.hotspot.x * 100}% ${
+                  image.hotspot.y * 100
+                }%`,
+              }}
+              // className={this.state.class}
+            />
+          ) : (
+            <img
+              src={urlFor(image.asset)}
+              key={image.asset._ref}
+              alt={image.alt}
+            />
+          )}
+        </>
+      )}
+    </>
+  );
 }
-
-export default Image;

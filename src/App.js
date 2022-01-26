@@ -182,7 +182,7 @@ function App() {
                         />
                       )}
                     </Route>
-                    <Route path="/projects/:slug">
+                    <Route exact path="/projects/:slug">
                       <SinglePost updatebasket={updatebasket} />
                     </Route>
                     <Route path="/projects">

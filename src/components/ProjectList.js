@@ -82,7 +82,7 @@ export default function Projects({ projectList }) {
               <Link to={"/projects/" + project.slug.current}>
                 {project.title ? project.title : "undefined"}
               </Link>
-              {project.mainImage.hotspot ? (
+              {project.mainImage.hotspot && width > 900 ? (
                 <img
                   src={urlFor(project.mainImage.asset.url).url()}
                   alt={project.mainImage.alt}

@@ -19,12 +19,6 @@ export default class VideoPlayer extends React.Component {
   removeThumbnail() {
     this.setState({ display: "block" });
   }
-  componentDidUpdate() {
-    console.log("videplayer updates", this.props.playing, this.shouldPlay);
-  }
-  componentDidMount() {
-    console.log("videplayer mounts", this.props.playing, this.shouldPlay);
-  }
 
   render() {
     return (
