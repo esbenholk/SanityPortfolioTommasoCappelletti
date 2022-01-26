@@ -18,17 +18,19 @@ export default function Header() {
             <img src={info.logo.asset.url} alt="" className="logo" />
           )}
         </NavLink>
-        <NavLink to="/about">
-          <h2 className="header-object">About</h2>
-        </NavLink>
-        <NavLink to="/projects">
-          <h2 className="header-object">Projects</h2>
-        </NavLink>
-        {width > 950 ? (
-          <NavLink to="/on-sale">
-            <h2 className="header-object">Freebies</h2>
+        <div className="flex-row no-wrap">
+          <NavLink to="/about" className={"menu_link"}>
+            <h2 className="header-object">About</h2>
           </NavLink>
-        ) : null}
+          <NavLink to="/projects" className={"menu_link"}>
+            <h2 className="header-object">Projects</h2>
+          </NavLink>
+          {width > 950 ? (
+            <NavLink to="/on-sale" className={"menu_link"}>
+              <h2 className="header-object">Freebies</h2>
+            </NavLink>
+          ) : null}
+        </div>
       </div>
     </>
   );

@@ -191,23 +191,21 @@ export default function SinglePost({ updatebasket, basket }) {
         )}
 
         <article ref={fullArticleRef}>
-          <div className="flex-row align-top project_directory_line">
-            <a href="/projects">{"Project >"}</a>
-            <div className="flex-row align-left">
-              {singlePost.categories &&
-                singlePost.categories.map((category, index) => (
-                  <Link
-                    to={"../" + category.slug.current}
-                    className="tag project_tag"
-                    key={index}
-                  >
-                    {category.title}
-                    {index + 1 !== singlePost.categories.length ? "," : null}
-                  </Link>
-                ))}
-              <p>{" > "}</p>
-            </div>
-            <p>{singlePost.title}</p>
+          <div className="flex-row project_directory_line">
+            <a href="/projects" className="tag project_tag directoryTag ">
+              {"Project >"}
+            </a>
+            {singlePost.categories && (
+              <Link
+                to={"../" + singlePost.categories[0].slug.current}
+                className="tag project_tag directoryTag "
+              >
+                {singlePost.categories[0].title + " >"}
+              </Link>
+            )}
+            <a href="none" className="tag project_tag directoryTag ">
+              {singlePost.title}
+            </a>
           </div>
           <div className="flex-row align-top justifyBetween ">
             <div className="flex-column contentColumn">
@@ -367,17 +365,6 @@ export default function SinglePost({ updatebasket, basket }) {
                 </>
               )}
 
-              {width < 1200 ? (
-                <>
-                  {" "}
-                  {singlePost.recap && (
-                    <div className="recap">
-                      <BlockContent blocks={singlePost.recap} />
-                    </div>
-                  )}
-                </>
-              ) : null}
-
               <div className="flex-column project_details ">
                 {singlePost.year && (
                   <>
@@ -448,6 +435,17 @@ export default function SinglePost({ updatebasket, basket }) {
                   </>
                 )}
               </div>
+
+              {width < 1200 ? (
+                <>
+                  {" "}
+                  {singlePost.recap && (
+                    <div className="recap">
+                      <BlockContent blocks={singlePost.recap} />
+                    </div>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
           <div className="contentColumn fullWidthPaddedLeft  normPaddingMobile">
@@ -486,7 +484,7 @@ export default function SinglePost({ updatebasket, basket }) {
       <div className="regContainer" style={{ backgroundColor: "white" }}>
         {relatedPost && relatedPost.length !== 0 ? (
           <>
-            <motion.h2 className="flex-column fullWidthPadded">
+            <motion.h2 className="flex-column fullWidthPadded segmentHeadline">
               Related Projects
             </motion.h2>
             <div className="overscrollPadded horizontalScroll2">

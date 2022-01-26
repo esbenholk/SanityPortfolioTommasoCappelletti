@@ -11,7 +11,10 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-export default function Image({ image }) {
+export default function Image(props) {
+  const image = props.image;
+  const classs = props.class;
+
   return (
     <>
       {image && (
@@ -26,13 +29,14 @@ export default function Image({ image }) {
                   image.hotspot.y * 100
                 }%`,
               }}
-              // className={this.state.class}
+              className={classs}
             />
           ) : (
             <img
               src={urlFor(image.asset)}
               key={image.asset._ref}
               alt={image.alt}
+              className={classs}
             />
           )}
         </>

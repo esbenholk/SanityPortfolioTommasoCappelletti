@@ -48,20 +48,36 @@ export default function LandingPage() {
 
       <>
         {info.mainImages ? (
-          <div className="fullWidthPadded">
-            <CustomCarousel
-              arrows={true}
-              swipe={true}
-              classsss={""}
-              autoplay={true}
-              currentIndex={0}
-            >
-              {info.mainImages.map((image, index) => (
-                <div key={index}>
-                  <Image image={image} class={"mainImage fullwidth"} />
-                </div>
-              ))}
-            </CustomCarousel>{" "}
+          <div className={width > 900 ? "fullWidthPadded" : ""}>
+            {width > 900 ? (
+              <CustomCarousel
+                arrows={true}
+                swipe={true}
+                classsss={""}
+                autoplay={true}
+                currentIndex={0}
+              >
+                {info.mainImages.map((image, index) => (
+                  <div key={index}>
+                    <Image image={image} class={"mainImage fullwidth"} />
+                  </div>
+                ))}
+              </CustomCarousel>
+            ) : (
+              <CustomCarousel
+                arrows={false}
+                swipe={true}
+                classsss={""}
+                autoplay={true}
+                currentIndex={0}
+              >
+                {info.mainImages.map((image, index) => (
+                  <div key={index}>
+                    <Image image={image} class={"mainImage fullwidth"} />
+                  </div>
+                ))}
+              </CustomCarousel>
+            )}
           </div>
         ) : (
           <>

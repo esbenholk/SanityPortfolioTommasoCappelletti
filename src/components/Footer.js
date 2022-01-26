@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import BlockContent from "./blocks/BlockContent";
 
@@ -49,8 +49,6 @@ export default function Footer() {
         <div className="flex-row fullwidth align-right">
           <img
             style={{
-              height: "55px",
-              width: "55px",
               transform: "rotate(-90deg)",
             }}
             className="scrolltoTop"
@@ -76,21 +74,24 @@ export default function Footer() {
 
             {width > 1200 ? (
               <div className="flex-row">
-                <NavLink to="/about">
-                  <h2 className="header-object footer-object">About</h2>
+                <NavLink to="/about" className={"footer_menu_link menu_limk"}>
+                  <h2 className="header-object">About</h2>
                 </NavLink>
-                <NavLink to="/projects">
-                  <h2 className="header-object footer-object">Projects</h2>
+                <NavLink
+                  to="/projects"
+                  className={"footer_menu_link menu_limk"}
+                >
+                  <h2 className="header-object">Projects</h2>
                 </NavLink>
-                <NavLink to="/on-sale">
-                  <h2 className="header-object footer-object">Freebies</h2>
+                <NavLink to="/on-sale" className={"footer_menu_link menu_limk"}>
+                  <h2 className="header-object">Freebies</h2>
                 </NavLink>{" "}
               </div>
             ) : null}
           </div>
 
           {width > 1200 ? (
-            <div className="flex-row">
+            <div className="flex-row ">
               {info.socialMediaHandles &&
                 info.socialMediaHandles.slice(0, 4).map((handle, index) => (
                   <a
@@ -115,7 +116,7 @@ export default function Footer() {
               <BlockContent blocks={info.contact} />
             </div>
           ) : (
-            <div className="flex-row">
+            <div className="flex-row justifyBetween">
               {info.socialMediaHandles &&
                 info.socialMediaHandles.slice(0, 4).map((handle, index) => (
                   <a

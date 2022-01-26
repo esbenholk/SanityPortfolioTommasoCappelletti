@@ -23,7 +23,7 @@ export default function Home() {
               {info.contactHours ? <h2>Opening Hours</h2> : null}
 
               {info.contactHours ? (
-                <div className="blockContent">
+                <div className="contact_detail_content">
                   <BlockContent blocks={info.contactHours} />
                 </div>
               ) : null}
@@ -32,7 +32,7 @@ export default function Home() {
               {info.contactDetails ? <h2>Contact</h2> : null}
 
               {info.contactDetails ? (
-                <div className="blockContent">
+                <div className="contact_detail_content">
                   <BlockContent blocks={info.contactDetails} />
                 </div>
               ) : null}
@@ -92,8 +92,8 @@ export default function Home() {
                   <div
                     className={
                       width < 900
-                        ? "aboutContent  fullWidthPadded"
-                        : "aboutContent"
+                        ? "content aboutContent fullWidthPadded"
+                        : "content aboutContent"
                     }
                   >
                     <BlockContent blocks={info.about} />

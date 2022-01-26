@@ -81,7 +81,9 @@ export default function ProductCard({ post, classssss }) {
             </div>
           </>
         ) : null}
-        {post.star_rating ? <p className="stars">{post.star_rating}</p> : null}
+        {post.star_rating ? (
+          <p className="stars productCard-stars">{post.star_rating}</p>
+        ) : null}
         {/* {isOnSale ? <p>On Sale</p> : null} */}
       </div>
     </div>
