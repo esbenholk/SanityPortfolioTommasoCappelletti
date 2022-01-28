@@ -31,14 +31,18 @@ export default function SinglePost({ updatebasket, basket }) {
 
   const fullArticleRef = useRef();
   const fixedRef = useRef();
+  const endOfProject = useRef();
 
-  const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
+  // const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
+  const [detailColumnClass, setDetailColumnClass] = useState(
+    "flex-column detailColumn normPaddingMobile"
+  );
   const [lightBoxIsOpen, setLightBoxIsOpen] = useState(false);
   const [lightBoxIndex, setLightBoxIndex] = useState(0);
 
-  useEffect(() => {
-    console.log("NEW SINGLE PROJECT SLUG LOADED", slug);
+  const [isPlaying, setIsPlaying] = useState(false);
 
+  useEffect(() => {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
@@ -77,9 +81,25 @@ export default function SinglePost({ updatebasket, basket }) {
 
   function listenScrollEvent() {
     if (window.scrollY > 240) {
-      sethasScrolledinPosition(true);
+      // sethasScrolledinPosition(true);
+      setDetailColumnClass("flex-column detailColumnfixed");
+
+      if (endOfProject.current) {
+        // const endOfprojectDistanceToTop =
+        //   endOfProject.current.getBoundingClientRect().top;
+        // const fixedRefDistanceToTop =
+        //   fixedRef.current.getBoundingClientRect().top +
+        //   fixedRef.current.getBoundingClientRect().height;
+        // if (endOfprojectDistanceToTop < fixedRefDistanceToTop) {
+        //   console.log("SHOULD CHNAGE CLASS");
+        setDetailColumnClass(
+          "flex-column detailColumnAbsolute normPaddingMobile"
+        );
+        // }
+      }
     } else {
-      sethasScrolledinPosition(false);
+      // sethasScrolledinPosition(false);
+      setDetailColumnClass("flex-column detailColumn normPaddingMobile");
     }
   }
 
@@ -92,8 +112,13 @@ export default function SinglePost({ updatebasket, basket }) {
   }
   function shutDownIframes() {
     var iframes = document.getElementsByTagName("iframe");
+    console.log("tries to shut down iframes", iframes);
+    setIsPlaying(false);
+
     for (let index = 0; index < iframes.length; index++) {
       const element = iframes[index];
+      element.contentWindow.postMessage('{"method":"pause"}', "*");
+
       element.contentWindow.postMessage(
         '{"event":"command","func":"stopVideo","args":""}',
         "*"
@@ -144,7 +169,7 @@ export default function SinglePost({ updatebasket, basket }) {
               />
             </div>
 
-            {singlePost.videos && singlePost.videos.length > 0 ? (
+            {singlePost.videos && singlePost.videos.length >= 0 ? (
               <CustomCarousel
                 arrows={true}
                 swipe={true}
@@ -157,7 +182,12 @@ export default function SinglePost({ updatebasket, basket }) {
                 ))}
 
                 {singlePost.videos.map((video, index) => (
-                  <VideoPlayer video={video} key={index} showThumb={false} />
+                  <VideoPlayer
+                    video={video}
+                    key={index}
+                    showThumb={false}
+                    isPlaying={isPlaying}
+                  />
                 ))}
               </CustomCarousel>
             ) : (
@@ -199,11 +229,12 @@ export default function SinglePost({ updatebasket, basket }) {
                 <>
                   {imagesGallery ? (
                     <>
-                      <>
+                      {singlePost.videos && singlePost.videos.length >= 0 ? (
                         <CustomCarousel
                           arrows={false}
                           swipe={true}
                           classsss={""}
+                          stopVideo={shutDownIframes}
                         >
                           {imagesGallery.map((image, index) => (
                             <div className="squareImage" key={index}>
@@ -211,26 +242,35 @@ export default function SinglePost({ updatebasket, basket }) {
                             </div>
                           ))}
 
-                          {singlePost.videos && singlePost.videos.length > 0 ? (
-                            <>
-                              {singlePost.videos.map((video, index) => (
-                                <div
-                                  className="squareImage"
-                                  key={index}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    openLightBox(
-                                      singlePost.imagesGallery.length + index
-                                    );
-                                  }}
-                                >
-                                  <VideoPlayer video={video} showThumb={true} />
-                                </div>
-                              ))}
-                            </>
-                          ) : null}
+                          {singlePost.videos.map((video, index) => (
+                            <div className="squareImage" key={index}>
+                              <VideoPlayer video={video} showThumb={false} />
+                            </div>
+                          ))}
                         </CustomCarousel>
-                      </>
+                      ) : (
+                        <CustomCarousel
+                          arrows={false}
+                          swipe={true}
+                          classsss={""}
+                          stopVideo={shutDownIframes}
+                        >
+                          {imagesGallery.map((image, index) => (
+                            <div
+                              className="squareImage"
+                              key={index}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                openLightBox(
+                                  singlePost.imagesGallery.length + index
+                                );
+                              }}
+                            >
+                              <Image image={image} />
+                            </div>
+                          ))}
+                        </CustomCarousel>
+                      )}
                     </>
                   ) : (
                     <>
@@ -294,11 +334,12 @@ export default function SinglePost({ updatebasket, basket }) {
               )}
             </div>
             <div
-              className={
-                hasScrolledinPosition & (width > 1200)
-                  ? `flex-column detailColumnfixed`
-                  : `flex-column detailColumn normPaddingMobile`
-              }
+              // className={
+              //   hasScrolledinPosition & (width > 1200)
+              //     ? `flex-column detailColumnfixed`
+              //     : `flex-column detailColumn normPaddingMobile`
+              // }
+              className={detailColumnClass}
               ref={fixedRef}
             >
               <header className="flex-row align-top justifyBetween">
@@ -480,7 +521,11 @@ export default function SinglePost({ updatebasket, basket }) {
         </article>
       </motion.div>
 
-      <div className="regContainer" style={{ backgroundColor: "white" }}>
+      <div
+        className="regContainer"
+        ref={endOfProject}
+        style={{ backgroundColor: "white" }}
+      >
         {relatedPost && relatedPost.length !== 0 ? (
           <>
             <motion.h2 className="flex-column fullWidthPadded segmentHeadline">

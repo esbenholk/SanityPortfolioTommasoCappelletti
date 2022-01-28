@@ -75,7 +75,7 @@ export default function ContactUs(basket) {
         </h2>
         <input
           style={{ flex: "2" }}
-          name="text"
+          name="message"
           placeholder="Hello, I am interested in the following projects:"
         />
       </div>

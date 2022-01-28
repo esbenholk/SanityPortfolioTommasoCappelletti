@@ -34,6 +34,11 @@ export default function CustomCarousel({
       className={classsss}
       infiniteLoop={false}
       selectedItem={currentIndex}
+      onChange={(e) => {
+        if (stopVideo) {
+          stopVideo();
+        }
+      }}
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev && (
           <button

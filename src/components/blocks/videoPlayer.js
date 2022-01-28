@@ -13,6 +13,7 @@ export default class VideoPlayer extends React.Component {
       display: "none",
       showThumb: props.showThumb,
       shouldPlay: props.playing,
+      url: props.video.embedID,
     };
   }
 
@@ -37,8 +38,20 @@ export default class VideoPlayer extends React.Component {
           <ReactPlayer
             width="100%"
             height="100%"
-            url={`https://www.youtube.com/embed/${this.state.video.embedID}`}
-            playing={this.props.playing}
+            url={this.state.url}
+            playing={this.props.isPlaying}
+            controls
+            playsinline
+            config={{
+              youtube: {
+                playerVars: { modestbranding: 1 },
+              },
+              file: {
+                attributes: {
+                  controlsList: "nofullscreen",
+                },
+              },
+            }}
           />
         )}
       </>

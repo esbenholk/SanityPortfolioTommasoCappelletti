@@ -1003,10 +1003,13 @@ nav .logo_container img {
   width: 40%;
   padding-right: var(--mainPadding);
 }
-/* .detailColumnAbsolute {
-  position: absolute;
+.detailColumnAbsolute {
+  position: relative;
   bottom: 0;
-} */
+  right: 0;
+  width: 40%;
+  padding-right: var(--mainPadding);
+}
 .squareImage {
   width: 100%;
   padding-bottom: 100%;
