@@ -88,7 +88,6 @@ function App() {
             const category = post.categories[index];
 
             if (categories.some((item) => item.title === category.title)) {
-              console.log("obejct in array already");
             } else if (
               category.title !== "Freebie" ||
               category.title === "Freebie"

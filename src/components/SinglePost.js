@@ -33,10 +33,14 @@ export default function SinglePost({ updatebasket, basket }) {
   const fixedRef = useRef();
   const endOfProject = useRef();
 
-  // const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
-  const [detailColumnClass, setDetailColumnClass] = useState(
-    "flex-column detailColumn normPaddingMobile"
-  );
+  const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
+  // const [detailColumnClass, setDetailColumnClass] = useState(
+  //   "flex-column detailColumn normPaddingMobile"
+  // );
+
+  // const [endOfprojectDistanceToTop, setEndOfprojectDistanceToTop] = useState(0);
+  // const [fixedRefDistanceToTop, setFixedRefDistanceToTop] = useState(0);
+
   const [lightBoxIsOpen, setLightBoxIsOpen] = useState(false);
   const [lightBoxIndex, setLightBoxIndex] = useState(0);
 
@@ -52,7 +56,6 @@ export default function SinglePost({ updatebasket, basket }) {
       .then((data) => {
         setSinglePost(data[0]);
         setImagesGallery(data[0].imagesGallery);
-        console.log("project datat loaded", data[0]);
         sanityClient
           .fetch(
             '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
@@ -73,6 +76,16 @@ export default function SinglePost({ updatebasket, basket }) {
               }
               setRelatedPost(relatedProjects);
             }
+
+            // if (endOfProject.current) {
+            //   setEndOfprojectDistanceToTop(
+            //     endOfProject.current.getBoundingClientRect().top
+            //   );
+            //   setFixedRefDistanceToTop(
+            //     fixedRef.current.getBoundingClientRect().top +
+            //       fixedRef.current.getBoundingClientRect().height
+            //   );
+            // }
           })
           .catch(console.error);
       })
@@ -80,26 +93,29 @@ export default function SinglePost({ updatebasket, basket }) {
   }, [slug]);
 
   function listenScrollEvent() {
-    if (window.scrollY > 240) {
-      // sethasScrolledinPosition(true);
-      setDetailColumnClass("flex-column detailColumnfixed");
+    if (width > 1200) {
+      if (window.scrollY > 240) {
+        sethasScrolledinPosition(true);
+        // setDetailColumnClass("flex-column detailColumnfixed");
 
-      if (endOfProject.current) {
-        // const endOfprojectDistanceToTop =
-        //   endOfProject.current.getBoundingClientRect().top;
-        // const fixedRefDistanceToTop =
-        //   fixedRef.current.getBoundingClientRect().top +
-        //   fixedRef.current.getBoundingClientRect().height;
-        // if (endOfprojectDistanceToTop < fixedRefDistanceToTop) {
+        // if (
+        //   endOfProject.current &&
+        //   endOfProject.current.getBoundingClientRect().top <
+        //     fixedRef.current.getBoundingClientRect().top +
+        //       fixedRef.current.getBoundingClientRect().height
+        // ) {
         //   console.log("SHOULD CHNAGE CLASS");
-        setDetailColumnClass(
-          "flex-column detailColumnAbsolute normPaddingMobile"
-        );
+        //   // setDetailColumnClass("flex-column detailColumnAbsolute");
+        //   sethasScrolledinPosition(false);
         // }
+        // } else {
+        //   sethasScrolledinPosition(false);
+        //   // setDetailColumnClass("flex-column detailColumn normPaddingMobile");
+        // }
+      } else {
+        // setDetailColumnClass("flex-column detailColumn normPaddingMobile");
+        sethasScrolledinPosition(false);
       }
-    } else {
-      // sethasScrolledinPosition(false);
-      setDetailColumnClass("flex-column detailColumn normPaddingMobile");
     }
   }
 
@@ -126,17 +142,20 @@ export default function SinglePost({ updatebasket, basket }) {
     }
   }
 
-  window.addEventListener("scroll", listenScrollEvent);
+  window.addEventListener("scroll", function () {
+    listenScrollEvent();
+  });
 
   if (!singlePost) return <Loader />;
 
   return (
     <>
       <motion.div
-      // layout
-      // initial={{ opacity: 0 }}
-      // animate={{ opacity: 1 }}
-      // exit={{ opacity: 0 }}
+        // layout
+        // initial={{ opacity: 0 }}
+        // animate={{ opacity: 1 }}
+        // exit={{ opacity: 0 }}
+        onScroll={listenScrollEvent}
       >
         {lightBoxIsOpen && (
           <div
@@ -334,12 +353,12 @@ export default function SinglePost({ updatebasket, basket }) {
               )}
             </div>
             <div
-              // className={
-              //   hasScrolledinPosition & (width > 1200)
-              //     ? `flex-column detailColumnfixed`
-              //     : `flex-column detailColumn normPaddingMobile`
-              // }
-              className={detailColumnClass}
+              className={
+                hasScrolledinPosition & (width > 1200)
+                  ? `flex-column detailColumnfixed`
+                  : `flex-column detailColumn normPaddingMobile`
+              }
+              // className={detailColumnClass}
               ref={fixedRef}
             >
               <header className="flex-row align-top justifyBetween">
@@ -522,7 +541,7 @@ export default function SinglePost({ updatebasket, basket }) {
       </motion.div>
 
       <div
-        className="regContainer"
+        className="regContainer cover"
         ref={endOfProject}
         style={{ backgroundColor: "white" }}
       >

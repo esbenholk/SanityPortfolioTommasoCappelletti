@@ -40,7 +40,7 @@
   /* Set neon color */
   --normalPadding: 2%;
   --mainPadding: 150px;
-  --mainPaddingMobile: 15px;
+  --mainPaddingMobile: 27px;
   --normalColor: white;
   --menuGrey: #f3f3f3;
 }
@@ -438,10 +438,14 @@ h1 {
   min-height: 90vh;
 }
 .regContainer {
-  padding-top: 100px;
+  margin-top: 100px;
   z-index: 9999999;
   position: relative;
   background-color: white;
+}
+
+.cover {
+  box-shadow: 2px -50px 50px 34px #ffffff;
 }
 .regContainer:last-of-type {
   padding-bottom: 100px;
@@ -1004,9 +1008,6 @@ nav .logo_container img {
   padding-right: var(--mainPadding);
 }
 .detailColumnAbsolute {
-  position: relative;
-  bottom: 0;
-  right: 0;
   width: 40%;
   padding-right: var(--mainPadding);
 }
