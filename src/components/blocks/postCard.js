@@ -59,8 +59,8 @@ export default function PostCard({ post }) {
             {post.categories &&
               post.categories.map((category, index) => (
                 <>
-                  {category.title === "On Sale" ||
-                    (category.title === "On sale" ? (
+                  {category.title === "Freebie" ||
+                    (category.title === "Freebie" ? (
                       <></>
                     ) : (
                       <a

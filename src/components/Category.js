@@ -4,7 +4,7 @@ import sanityClient from "../client";
 import { useParams } from "react-router-dom";
 import Projects from "./blocks/Projects";
 
-import BlockContent from "@sanity/block-content-to-react";
+import BlockContent from "./blocks/BlockContent";
 
 export default function Category() {
   const { slug } = useParams();
@@ -42,14 +42,14 @@ export default function Category() {
   return (
     <div className="content-container ">
       <div className="fullWidthPadded category_details">
-        {category && category.title ? <h2>{category.title}</h2> : null}
+        {category && category.title ? (
+          <h1 className="noMargin">{category.title}</h1>
+        ) : null}
+
+        {/* <h1 className="subheadline">Filter projects by tags</h1> */}
         {category && category.description ? (
-          <div className="blockContent">
-            <BlockContent
-              blocks={category.description}
-              projectId="swdt1dj3"
-              dataset="production"
-            />
+          <div className="subheadline">
+            <BlockContent blocks={category.description} />
           </div>
         ) : null}
       </div>

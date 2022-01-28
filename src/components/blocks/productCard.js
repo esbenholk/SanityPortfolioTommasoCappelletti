@@ -12,7 +12,7 @@ export default function ProductCard({ post, classssss }) {
   // // if (post.categories) {
   // //   for (let index = 0; index < post.categories.length; index++) {
   // //     const category = post.categories[index];
-  // //     if (category.title === "On Sale" || category.title === "On sale") {
+  // //     if (category.title === "Freebie" || category.title === "Freebie") {
   // //       setIsOnSale(true);
   // //     }
   // //   }
@@ -84,7 +84,7 @@ export default function ProductCard({ post, classssss }) {
         {post.star_rating ? (
           <p className="stars productCard-stars">{post.star_rating}</p>
         ) : null}
-        {/* {isOnSale ? <p>On Sale</p> : null} */}
+        {/* {isOnSale ? <p>Freebie</p> : null} */}
       </div>
     </div>
   );

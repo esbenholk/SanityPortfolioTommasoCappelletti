@@ -57,28 +57,12 @@ class FoldOutMenu extends React.Component {
         <div className={this.state.isOpen ? "foldout active" : "foldout"}>
           <div className="foldoutmenu">
             <div className="foldoutHeader foldoutDiv">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 33"
-              >
-                <g
-                  id="Group_137"
-                  data-name="Group 137"
-                  transform="translate(-838.988 -94)"
-                >
-                  <path
-                    // onClick={this.props.openMenu}
-                    id="Icon_ionic-md-close"
-                    data-name="Icon ionic-md-close"
-                    d="M28.477,9.619l-2.1-2.1L18,15.9,9.619,7.523l-2.1,2.1L15.9,18,7.523,26.381l2.1,2.1L18,20.1l8.381,8.381,2.1-2.1L20.1,18Z"
-                    transform="translate(832.172 93.5)"
-                    stroke="white"
-                    strokeWidth="5"
-                  />
-                </g>
-              </svg>
+              <img
+                src="../assets/CloseCross.svg"
+                className="closeCross"
+                alt="down arrow button"
+              />
+              <H1>HEJ</H1>
               {this.props.basket.length === 0 ? (
                 <EmptyCart email={this.props.info.email} />
               ) : (

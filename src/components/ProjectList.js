@@ -59,8 +59,8 @@ export default function Projects({ projectList }) {
               {project.categories &&
                 project.categories.map((category, index) => (
                   <>
-                    {category.title === "On Sale" ||
-                      (category.title === "On sale" ? (
+                    {category.title === "Freebie" ||
+                      (category.title === "Freebie" ? (
                         <></>
                       ) : (
                         <Link
@@ -126,8 +126,8 @@ export default function Projects({ projectList }) {
                 {project.categories &&
                   project.categories.map((category, index) => (
                     <>
-                      {category.title === "On Sale" ||
-                        (category.title === "On sale" ? (
+                      {category.title === "Freebie" ||
+                        (category.title === "Freebie" ? (
                           <></>
                         ) : (
                           <Link

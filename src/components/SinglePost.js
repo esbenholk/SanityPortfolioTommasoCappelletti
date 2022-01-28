@@ -132,37 +132,23 @@ export default function SinglePost({ updatebasket, basket }) {
                 e.preventDefault();
                 closeLightBox();
               }}
-              style={{ position: "absolute", right: "3%" }}
+              style={{ position: "absolute", right: "3%", top: "5%" }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 33"
-              >
-                <g
-                  id="Group_137"
-                  data-name="Group 137"
-                  transform="translate(-838.988 -94)"
-                >
-                  <path
-                    // onClick={this.props.openMenu}
-                    id="Icon_ionic-md-close"
-                    data-name="Icon ionic-md-close"
-                    d="M28.477,9.619l-2.1-2.1L18,15.9,9.619,7.523l-2.1,2.1L15.9,18,7.523,26.381l2.1,2.1L18,20.1l8.381,8.381,2.1-2.1L20.1,18Z"
-                    transform="translate(832.172 93.5)"
-                    stroke="black"
-                    strokeWidth="5"
-                  />
-                </g>
-              </svg>
+              <img
+                src="../assets/CloseCross.svg"
+                className="closeCross"
+                alt="down arrow button"
+                style={{
+                  transform: "rotate(90deg)",
+                }}
+              />
             </div>
 
             {singlePost.videos && singlePost.videos.length > 0 ? (
               <CustomCarousel
                 arrows={true}
                 swipe={true}
-                classsss={""}
+                classsss={"whiteboxCarousel"}
                 currentIndex={lightBoxIndex}
                 stopVideo={shutDownIframes}
               >
@@ -178,7 +164,7 @@ export default function SinglePost({ updatebasket, basket }) {
               <CustomCarousel
                 arrows={true}
                 swipe={true}
-                classsss={""}
+                classsss={"whiteboxCarousel"}
                 currentIndex={lightBoxIndex}
                 stopVideo={shutDownIframes}
               >
@@ -224,11 +210,21 @@ export default function SinglePost({ updatebasket, basket }) {
                               <Image image={image} />
                             </div>
                           ))}
-                          {singlePost.videos ? (
+
+                          {singlePost.videos && singlePost.videos.length > 0 ? (
                             <>
                               {singlePost.videos.map((video, index) => (
-                                <div className="squareImage" key={index}>
-                                  <VideoPlayer video={video} playing={false} />
+                                <div
+                                  className="squareImage"
+                                  key={index}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    openLightBox(
+                                      singlePost.imagesGallery.length + index
+                                    );
+                                  }}
+                                >
+                                  <VideoPlayer video={video} showThumb={true} />
                                 </div>
                               ))}
                             </>

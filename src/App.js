@@ -90,8 +90,8 @@ function App() {
             if (categories.some((item) => item.title === category.title)) {
               console.log("obejct in array already");
             } else if (
-              category.title !== "On sale" ||
-              category.title === "On Sale"
+              category.title !== "Freebie" ||
+              category.title === "Freebie"
             ) {
               categories.push(category);
             }

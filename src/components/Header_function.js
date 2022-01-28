@@ -26,7 +26,7 @@ export default function Header() {
             <h2 className="header-object">Projects</h2>
           </NavLink>
           {width > 950 ? (
-            <NavLink to="/on-sale" className={"menu_link"}>
+            <NavLink to="/freebies" className={"menu_link"}>
               <h2 className="header-object">Freebies</h2>
             </NavLink>
           ) : null}

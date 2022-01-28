@@ -67,8 +67,8 @@ export default function FeaturedCard({ post }) {
           {post.categories &&
             post.categories.map((category, index) => (
               <div key={index}>
-                {category.title === "On Sale" ||
-                  (category.title === "On sale" ? (
+                {category.title === "Freebie" ||
+                  (category.title === "Freebie" ? (
                     <></>
                   ) : (
                     <a
