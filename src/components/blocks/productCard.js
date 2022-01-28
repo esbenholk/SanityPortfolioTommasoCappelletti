@@ -4,8 +4,11 @@ import Image from "./image";
 
 import { Link } from "react-router-dom";
 
-export default function ProductCard({ post, classssss }) {
+export default function ProductCard(props) {
   const [isShown, setIsShown] = useState(false);
+  const post = props.post;
+  const shouldHaveFreebieSign = props.shouldHaveFreebieSign;
+
   // const [isOnSale, setIsOnSale] = useState(false);
   // console.log(post);
 
@@ -81,10 +84,23 @@ export default function ProductCard({ post, classssss }) {
             </div>
           </>
         ) : null}
-        {post.star_rating ? (
-          <p className="stars productCard-stars">{post.star_rating}</p>
-        ) : null}
-        {/* {isOnSale ? <p>Freebie</p> : null} */}
+        <div className="flex-row">
+          {post.star_rating ? (
+            <p className="stars productCard-stars">{post.star_rating}</p>
+          ) : null}
+          {shouldHaveFreebieSign && (
+            <div className="freebieSign">
+              <Link
+                to={"/projects/" + post.slug.current}
+                // href={"/projects/" + post.slug.current}
+                key={post.slug.current + "productCard"}
+                className="w-full teaser-link"
+              >
+                <h2>Download me</h2>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ export default function SinglePost({ updatebasket, basket }) {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, external_links, description, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, link, downloadfile{asset->{url}}, freebie
+          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, imagesGallery, external_links, description, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, Link, downloadfile{asset->{url}}, freebie
         }`
       )
       .then((data) => {
@@ -334,18 +334,20 @@ export default function SinglePost({ updatebasket, basket }) {
               />
               {singlePost.freebie && (
                 <>
-                  {singlePost.link ? (
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = singlePost.link;
-                      }}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="addToCartButton yellow"
-                    >
-                      Get this freebie
-                    </button>
+                  {singlePost.Link ? (
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.location.href = singlePost.Link;
+                        }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="addToCartButton yellow"
+                      >
+                        Get this freebie
+                      </button>
+                    </>
                   ) : null}
                   {singlePost.downloadfile ? (
                     <button
@@ -394,6 +396,19 @@ export default function SinglePost({ updatebasket, basket }) {
                   </>
                 )}
 
+                {singlePost.description && (
+                  <>
+                    {" "}
+                    {singlePost.description && (
+                      <>
+                        <div className="project_tag tag">
+                          <BlockContent blocks={singlePost.description} />
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+
                 {singlePost.external_links && (
                   <>
                     {singlePost.external_links.length > 1 ? (
@@ -416,18 +431,6 @@ export default function SinglePost({ updatebasket, basket }) {
                         </a>
                       ))}
                     </div>
-                  </>
-                )}
-                {singlePost.description && (
-                  <>
-                    {" "}
-                    {singlePost.description && (
-                      <>
-                        <div className="project_tag tag">
-                          <BlockContent blocks={singlePost.description} />
-                        </div>
-                      </>
-                    )}
                   </>
                 )}
               </div>

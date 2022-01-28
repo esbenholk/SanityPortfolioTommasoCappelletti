@@ -10,8 +10,12 @@ export default function Category() {
   const { slug } = useParams();
   const [projectList, setProjectList] = useState();
   const [category, setCategory] = useState();
+  const [shouldHaveFreebieSign, setShouldHaveFreebieSign] = useState(false);
 
   useEffect(() => {
+    if (slug === "freebies") {
+      setShouldHaveFreebieSign(true);
+    }
     sanityClient
       .fetch(
         `*[_type == "category" && slug.current=="${slug}"]{ title, slug, description}`
@@ -56,7 +60,12 @@ export default function Category() {
 
       <Suspense fallback={null}>
         {projectList && projectList.length > 0 ? (
-          <Projects projectList={projectList} show_tags={true} />
+          <Projects
+            projectList={projectList}
+            show_tags={true}
+            columns={4}
+            shouldHaveFreebieSign={shouldHaveFreebieSign}
+          />
         ) : null}
       </Suspense>
     </div>

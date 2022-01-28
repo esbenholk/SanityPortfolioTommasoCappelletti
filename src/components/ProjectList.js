@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import sanityClient from "../client";
 
@@ -24,18 +24,6 @@ function hover(e) {
 
 export default function Projects({ projectList }) {
   const { width } = useWindowDimensions();
-  const [pressList, setPressList] = useState();
-
-  useEffect(() => {
-    sanityClient
-      .fetch(
-        '*[_type == "press"]{title,mainImage{asset->{_id,url}, hotspot, alt}, url, year, categories[]->{title, slug}, yearString}'
-      )
-      .then((press) => {
-        setPressList(press);
-      })
-      .catch(console.error);
-  }, []);
 
   return (
     <motion.div
@@ -46,11 +34,11 @@ export default function Projects({ projectList }) {
       // exit={{ opacity: 0 }}
     >
       <div className="projectList-item">
-        <h2 className="categories">Category</h2>
+        <h1 className="categories">Category</h1>
         <div>
-          <h2>Project</h2>
+          <h1>Project</h1>
         </div>
-        {width > 900 ? <h2>Year</h2> : null}
+        {width > 900 ? <h1>Year</h1> : null}
       </div>
       {projectList &&
         projectList.map((project, index) => (
@@ -108,78 +96,6 @@ export default function Projects({ projectList }) {
               </p>
             ) : null}
           </div>
-        ))}
-      {pressList && (
-        <div className="projectList-item" style={{ marginTop: "45px" }}>
-          <h2 className="categories">Category</h2>
-          <div>
-            <h2>Press</h2>
-          </div>
-          {width > 900 ? <h2>Year</h2> : null}
-        </div>
-      )}
-      {pressList &&
-        pressList.map((project, index) => (
-          <>
-            <div key={index} className="projectList-item">
-              <div className="categories">
-                {project.categories &&
-                  project.categories.map((category, index) => (
-                    <>
-                      {category.title === "Freebie" ||
-                        (category.title === "Freebie" ? (
-                          <></>
-                        ) : (
-                          <Link
-                            key={index}
-                            id={"category_" + category.title + ""}
-                            to={category.slug.current}
-                          >
-                            {category.title}
-                            {index + 1 !== project.categories.length
-                              ? ", "
-                              : null}
-                          </Link>
-                        ))}
-                    </>
-                  ))}
-              </div>
-              <div onMouseEnter={hover} onMouseLeave={hover}>
-                {" "}
-                <a
-                  href={project.url}
-                  target={"_blank"}
-                  rel="noopener noreferrer"
-                >
-                  {project.title ? project.title : "undefined"}
-                </a>
-                {project.mainImage.hotspot ? (
-                  <img
-                    src={urlFor(project.mainImage.asset.url).url()}
-                    alt={project.mainImage.alt}
-                    style={{
-                      objectPosition: `${project.mainImage.hotspot.x * 100}% ${
-                        project.mainImage.hotspot.y * 100
-                      }%`,
-                    }}
-                    className="thumbnail seeOnHover hidden"
-                  />
-                ) : (
-                  <img
-                    src={urlFor(project.mainImage.asset.url).url()}
-                    alt={project.mainImage.alt}
-                    className="thumbnail seeOnHover hidden"
-                  />
-                )}
-              </div>
-              {width > 900 ? (
-                <p className="flex-row align-left">
-                  {project.year ? project.year : "undefined"}{" "}
-                  {project.yearString ? <u>{project.yearString}</u> : null}
-                </p>
-              ) : null}
-            </div>
-          </>
         ))}
     </motion.div>
   );

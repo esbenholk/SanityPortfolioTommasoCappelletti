@@ -42,13 +42,13 @@ export default function PostCard({ post }) {
               key={post.slug.current}
               className="w-full teaser-link"
             >
-              <h3>{post.title}</h3>
+              <h1 className="noMargin">{post.title}</h1>
             </Link>
 
             <div className="flex-row">
               {post.tags &&
                 post.tags.map((tag, index) => (
-                  <p className="tag" key={index}>
+                  <p className="tag postCardTag" key={index}>
                     {tag}
                     {index + 1 !== post.tags.length ? "," : null}
                   </p>
@@ -77,7 +77,7 @@ export default function PostCard({ post }) {
             <Link
               to={"/projects/" + post.slug.current}
               key={post.slug.current}
-              className="w-full teaser-link standard-button tag active"
+              className="w-full teaser-link standard-button tag active extraBorder"
             >
               See project
             </Link>

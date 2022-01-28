@@ -129,6 +129,8 @@ export default function LandingPage() {
             projectList={projectList}
             show_categories={true}
             postcard={true}
+            columns={3}
+            shouldHaveFreebieSign={false}
           />
         </div>
       ) : null}

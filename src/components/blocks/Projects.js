@@ -9,23 +9,25 @@ import AppContext from "../../globalState";
 
 import Loader from "./loader.js";
 
-const breakpointColumnsObj = {
-  default: 3,
-  1300: 2,
-  600: 2,
-  340: 1,
-};
-
 export default function Projects({
   show_categories,
   show_tags,
   projectList,
   postcard,
+  columns,
+  shouldHaveFreebieSign,
 }) {
   const myContext = useContext(AppContext);
   if (!projectList) {
     projectList = myContext.projectList;
   }
+
+  const breakpointColumnsObj = {
+    default: columns,
+    1300: 2,
+    600: 2,
+    340: 1,
+  };
 
   const [allPosts, setAllPosts] = useState(projectList);
 
@@ -210,12 +212,17 @@ export default function Projects({
       ) : (
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid fullWidthPadded griddedMasonry"
+          className="my-masonry-grid fullWidthPadded griddedMasonry categoryGrid"
           columnClassName="my-masonry-grid_column"
         >
           {sortedPosts &&
             sortedPosts.map((post, index) => (
-              <ProductCard post={post} key={index} mainFirst={true} />
+              <ProductCard
+                post={post}
+                key={index}
+                mainFirst={true}
+                shouldHaveFreebieSign={shouldHaveFreebieSign}
+              />
             ))}
         </Masonry>
       )}

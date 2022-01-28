@@ -62,7 +62,6 @@ class FoldOutMenu extends React.Component {
                 className="closeCross"
                 alt="down arrow button"
               />
-              <H1>HEJ</H1>
               {this.props.basket.length === 0 ? (
                 <EmptyCart email={this.props.info.email} />
               ) : (

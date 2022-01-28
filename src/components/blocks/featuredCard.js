@@ -50,15 +50,15 @@ export default function FeaturedCard({ post }) {
             key={post.slug.current}
             className="w-full teaser-link"
           >
-            <h1>{post.title}</h1>
+            <h1 className="noMargin">{post.title}</h1>
           </Link>
 
           <div className="flex-row featuredCardTags">
             {post.tags &&
               post.tags.map((tag, index) => (
-                <p className="featuredCardTag" key={index}>
+                <p className="tag postCardTag" key={index}>
                   {tag}
-                  {index + 1 !== post.tags.length ? "," : null}
+                  {index + 1 !== post.tags.length ? ",  " : null}
                 </p>
               ))}
           </div>
@@ -72,7 +72,7 @@ export default function FeaturedCard({ post }) {
                     <></>
                   ) : (
                     <a
-                      className="standardTransparent-button"
+                      className="standardTransparent-button buttonOnWrapList"
                       key={index}
                       href={category.slug.current}
                     >
@@ -84,7 +84,7 @@ export default function FeaturedCard({ post }) {
             ))}
           <Link
             to={"/projects/" + post.slug.current}
-            className="w-full teaser-link standard-button tag active"
+            className="w-full teaser-link standard-button tag active extraBorder buttonOnWrapList"
           >
             See project
           </Link>
