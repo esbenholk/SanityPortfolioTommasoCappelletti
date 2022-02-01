@@ -27,7 +27,7 @@ export default function CustomCarousel({
 
         let startPos;
         let endPos;
-        let isScrolling = 1;
+        let isScrolling = true;
 
         function touchMove(e) {
           if (
@@ -43,7 +43,7 @@ export default function CustomCarousel({
             x: touch.pageX - startPos.x,
             y: touch.pageY - startPos.y,
           };
-          isScrolling = Math.abs(endPos.x) <= Math.abs(endPos.y) ? 1 : 0; //When isScrolling is 1, it means vertical sliding and 0 is horizontal sliding
+          isScrolling = Math.abs(endPos.x) <= Math.abs(endPos.y) ? true : false; //When isScrolling is 1, it means vertical sliding and 0 is horizontal sliding
           if (isScrolling && swipeable) {
             setSwipeable(false);
           }
@@ -74,9 +74,10 @@ export default function CustomCarousel({
 
   return (
     <Carousel
-      swipeable={swipeable}
+      swipeable={true}
+      preventMovementUntilSwipeScrollTolerance
       axis={"horizontal"}
-      swipeScrollTolerance={30}
+      swipeScrollTolerance={100}
       stopOnHover={true}
       showIndicators={true}
       emulateTouch={true}
