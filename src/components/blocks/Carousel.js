@@ -24,6 +24,7 @@ export default function CustomCarousel({
     if (children.length) {
       function disableScroll() {
         let carousel = document.querySelector(".carousel");
+        console.log(carousel);
 
         let startPos;
         let endPos;
@@ -74,7 +75,6 @@ export default function CustomCarousel({
 
   return (
     <Carousel
-      className="carousel"
       swipeable={!autoplay}
       axis={"horizontal"}
       swipeScrollTolerance={30}
@@ -86,7 +86,7 @@ export default function CustomCarousel({
       showThumbs={false}
       autoPlay={autoplay}
       showArrows={arrows}
-      className={classsss}
+      className={`carousel "${classsss}"`}
       infiniteLoop={false}
       selectedItem={currentIndex}
       onChange={(e) => {
