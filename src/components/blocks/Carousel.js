@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -11,6 +11,8 @@ export default function CustomCarousel({
   currentIndex,
   stopVideo,
 }) {
+  let [swipeable, setSwipeable] = useState(true);
+
   if (!autoplay) {
     autoplay = false;
   }
@@ -18,8 +20,61 @@ export default function CustomCarousel({
     currentIndex = 0;
   }
 
+  useEffect(() => {
+    if (children.length) {
+      function disableScroll() {
+        let carousel = document.querySelector(".carousel");
+
+        let startPos;
+        let endPos;
+        let isScrolling = 1;
+
+        function touchMove(e) {
+          if (
+            e.targetTouches.length > 1 ||
+            (e.scale && e.scale !== 1) ||
+            !startPos
+          )
+            return;
+
+          var touch = e.targetTouches[0];
+
+          endPos = {
+            x: touch.pageX - startPos.x,
+            y: touch.pageY - startPos.y,
+          };
+          isScrolling = Math.abs(endPos.x) <= Math.abs(endPos.y) ? 1 : 0; //When isScrolling is 1, it means vertical sliding and 0 is horizontal sliding
+          if (isScrolling && swipeable) {
+            setSwipeable(false);
+          }
+        }
+
+        function touchEnd() {
+          setSwipeable(true);
+          carousel.removeEventListener("touchmove", touchMove);
+        }
+
+        function touchStart(e) {
+          var touch = e.targetTouches[0]; //The touches array object gets all the touches on the screen, taking the first touch
+          startPos = {
+            x: touch.pageX,
+            y: touch.pageY,
+          };
+
+          carousel.addEventListener("touchmove", touchMove);
+        }
+
+        carousel.addEventListener("touchstart", touchStart);
+        carousel.addEventListener("touchend", touchEnd);
+      }
+
+      disableScroll();
+    }
+  }, [children, swipeable]);
+
   return (
     <Carousel
+      className="carousel"
       swipeable={!autoplay}
       axis={"horizontal"}
       swipeScrollTolerance={30}
