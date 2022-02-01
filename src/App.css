@@ -259,6 +259,13 @@ h1 {
 .align-top {
   align-items: flex-start;
 }
+.align-bottom {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+/* .align-bottom div:first-of-type {
+  width: 100%;
+} */
 .align-left {
   justify-content: flex-start;
 }
@@ -438,15 +445,15 @@ h1 {
   min-height: 90vh;
 }
 .regContainer {
-  margin-top: 100px;
+  padding-top: 100px;
   z-index: 9999999;
   position: relative;
-  background-color: white;
+  /* background-color: white; */
 }
 
-.cover {
+/* .cover {
   box-shadow: 2px -50px 50px 34px #ffffff;
-}
+} */
 .regContainer:last-of-type {
   padding-bottom: 100px;
 }
@@ -887,6 +894,7 @@ nav .logo_container img {
 }
 .details {
   height: auto;
+  width: 100%;
 }
 
 .featured_post_card_image {
@@ -1000,17 +1008,12 @@ nav .logo_container img {
   width: 40%;
   padding-right: var(--mainPadding);
 }
-.detailColumnfixed {
-  position: fixed;
-  right: 0;
-  top: 61px;
+
+.detailColumnUnfixed {
   width: 40%;
   padding-right: var(--mainPadding);
 }
-.detailColumnAbsolute {
-  width: 40%;
-  padding-right: var(--mainPadding);
-}
+
 .squareImage {
   width: 100%;
   padding-bottom: 100%;
@@ -1282,12 +1285,22 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 1300px) {
-  .singleProjectMasonry {
+  /* .singleProjectMasonry {
     padding-right: 7.5px;
-  }
+  } */
   .singleProjectMasonry:last-of-type {
     padding-right: 0;
     padding-left: 0px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .detailColumnfixed {
+    position: fixed;
+    right: 0;
+    top: 61px;
+    width: 40%;
+    padding-right: var(--mainPadding);
   }
 }
 

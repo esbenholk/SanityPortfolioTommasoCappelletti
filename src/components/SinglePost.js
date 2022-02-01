@@ -32,14 +32,9 @@ export default function SinglePost({ updatebasket, basket }) {
   const fullArticleRef = useRef();
   const fixedRef = useRef();
   const endOfProject = useRef();
+  const parentContainer = useRef();
 
   const [hasScrolledinPosition, sethasScrolledinPosition] = useState(false);
-  // const [detailColumnClass, setDetailColumnClass] = useState(
-  //   "flex-column detailColumn normPaddingMobile"
-  // );
-
-  // const [endOfprojectDistanceToTop, setEndOfprojectDistanceToTop] = useState(0);
-  // const [fixedRefDistanceToTop, setFixedRefDistanceToTop] = useState(0);
 
   const [lightBoxIsOpen, setLightBoxIsOpen] = useState(false);
   const [lightBoxIndex, setLightBoxIndex] = useState(0);
@@ -76,16 +71,6 @@ export default function SinglePost({ updatebasket, basket }) {
               }
               setRelatedPost(relatedProjects);
             }
-
-            // if (endOfProject.current) {
-            //   setEndOfprojectDistanceToTop(
-            //     endOfProject.current.getBoundingClientRect().top
-            //   );
-            //   setFixedRefDistanceToTop(
-            //     fixedRef.current.getBoundingClientRect().top +
-            //       fixedRef.current.getBoundingClientRect().height
-            //   );
-            // }
           })
           .catch(console.error);
       })
@@ -96,26 +81,30 @@ export default function SinglePost({ updatebasket, basket }) {
     if (width > 1200) {
       if (window.scrollY > 240) {
         sethasScrolledinPosition(true);
-        // setDetailColumnClass("flex-column detailColumnfixed");
-
-        // if (
-        //   endOfProject.current &&
-        //   endOfProject.current.getBoundingClientRect().top <
-        //     fixedRef.current.getBoundingClientRect().top +
-        //       fixedRef.current.getBoundingClientRect().height
-        // ) {
-        //   console.log("SHOULD CHNAGE CLASS");
-        //   // setDetailColumnClass("flex-column detailColumnAbsolute");
-        //   sethasScrolledinPosition(false);
-        // }
-        // } else {
-        //   sethasScrolledinPosition(false);
-        //   // setDetailColumnClass("flex-column detailColumn normPaddingMobile");
-        // }
+        if (fixedRef.current) {
+          if (
+            endOfProject.current.getBoundingClientRect().top <
+            fixedRef.current.getBoundingClientRect().top +
+              fixedRef.current.getBoundingClientRect().height
+          ) {
+            // sethasScrolledinPosition(false);
+            fixedRef.current.style.background = "blue";
+            fixedRef.current.style.bottom =
+              fixedRef.current.getBoundingClientRect().top;
+            // endOfProject.current.getBoundingClientRect().top +
+            // fixedRef.current.getBoundingClientRect().top +
+            // fixedRef.current.getBoundingClientRect().height;
+            // fixedRef.current.className =
+            //   "flex-column detailColumnAbsolute normPaddingMobile";
+            // parentContainer.current.className =
+            //   "flex-row align-bottom justifyBetween";
+          }
+        }
       } else {
-        // setDetailColumnClass("flex-column detailColumn normPaddingMobile");
         sethasScrolledinPosition(false);
       }
+    } else {
+      sethasScrolledinPosition(false);
     }
   }
 
@@ -150,13 +139,7 @@ export default function SinglePost({ updatebasket, basket }) {
 
   return (
     <>
-      <motion.div
-        // layout
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1 }}
-        // exit={{ opacity: 0 }}
-        onScroll={listenScrollEvent}
-      >
+      <motion.div>
         {lightBoxIsOpen && (
           <div
             style={{
@@ -242,7 +225,10 @@ export default function SinglePost({ updatebasket, basket }) {
               {singlePost.title}
             </a>
           </div>
-          <div className="flex-row align-top justifyBetween ">
+          <div
+            className="flex-row align-top justifyBetween"
+            ref={parentContainer}
+          >
             <div className="flex-column contentColumn">
               {width < 600 ? (
                 <>
@@ -358,7 +344,6 @@ export default function SinglePost({ updatebasket, basket }) {
                   ? `flex-column detailColumnfixed`
                   : `flex-column detailColumn normPaddingMobile`
               }
-              // className={detailColumnClass}
               ref={fixedRef}
             >
               <header className="flex-row align-top justifyBetween">
@@ -540,11 +525,7 @@ export default function SinglePost({ updatebasket, basket }) {
         </article>
       </motion.div>
 
-      <div
-        className="regContainer cover"
-        ref={endOfProject}
-        style={{ backgroundColor: "white" }}
-      >
+      <div className="regContainer cover" ref={endOfProject}>
         {relatedPost && relatedPost.length !== 0 ? (
           <>
             <motion.h2 className="flex-column fullWidthPadded segmentHeadline">

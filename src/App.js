@@ -20,7 +20,7 @@ import useWindowDimensions from "./components/functions/useWindowDimensions";
 
 import Loader from "./components/blocks/loader";
 
-const SinglePost = lazy(() => import("./components/SinglePost.js"));
+const SinglePost = lazy(() => import("./components/stickyScrollComponent.js"));
 const LandingPage = lazy(() => import("./components/LandingPage.js"));
 const ProjectList = lazy(() => import("./components/ProjectList.js"));
 const Category = lazy(() => import("./components/Category.js"));
@@ -138,7 +138,7 @@ function App() {
               <>
                 {" "}
                 {width > 1050 ? (
-                  <nav className="fullWidthPadded">
+                  <nav className="fullWidthPadded normPaddingMobile">
                     <Header />
                     <div className="flex-row" style={{ minWidth: "40%" }}>
                       <Dropdown categories={categories} mainRef={mainRef} />
