@@ -98,7 +98,6 @@ export default function SinglePost({ updatebasket, basket }) {
     var scrollCallBack;
 
     if (current && width > 1200) {
-      console.log("does use effect layout");
       const originalPosition = current.offsetTop + 240;
       scrollCallBack = window.addEventListener("scroll", () => {
         const sticky = current.offsetTop + 240;
@@ -241,116 +240,111 @@ export default function SinglePost({ updatebasket, basket }) {
         className="flex-row align-top justifyBetween"
         style={{ alignItems: "stretch" }}
       >
-        <div className="flex-column contentColumn fullWidthPaddedLeft  normPaddingMobile">
-          <div className="images ">
-            {width < 600 ? (
-              <>
-                {imagesGallery ? (
-                  <>
-                    {singlePost.videos && singlePost.videos.length >= 0 ? (
-                      <CustomCarousel
-                        arrows={false}
-                        swipe={true}
-                        classsss={""}
-                        stopVideo={shutDownIframes}
-                      >
-                        {imagesGallery.map((image, index) => (
-                          <div className="squareImage" key={index}>
-                            <Image image={image} />
-                          </div>
-                        ))}
+        <div
+          className={
+            width < 600
+              ? "flex-column contentColumn"
+              : "flex-column contentColumn fullWidthPaddedLeft  normPaddingMobile"
+          }
+        >
+          {width < 600 ? (
+            <>
+              {imagesGallery ? (
+                <>
+                  {singlePost.videos && singlePost.videos.length >= 0 ? (
+                    <CustomCarousel
+                      arrows={false}
+                      swipe={true}
+                      classsss={""}
+                      stopVideo={shutDownIframes}
+                    >
+                      {imagesGallery.map((image, index) => (
+                        <div className="squareImage" key={index}>
+                          <Image image={image} />
+                        </div>
+                      ))}
 
-                        {singlePost.videos.map((video, index) => (
-                          <div className="squareImage" key={index}>
-                            <VideoPlayer video={video} showThumb={false} />
-                          </div>
-                        ))}
-                      </CustomCarousel>
-                    ) : (
-                      <CustomCarousel
-                        arrows={false}
-                        swipe={true}
-                        classsss={""}
-                        stopVideo={shutDownIframes}
-                      >
-                        {imagesGallery.map((image, index) => (
-                          <div
-                            className="squareImage"
-                            key={index}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              openLightBox(
-                                singlePost.imagesGallery.length + index
-                              );
-                            }}
-                          >
-                            <Image image={image} />
-                          </div>
-                        ))}
-                      </CustomCarousel>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <div className="squareImage">
-                      <Image image={singlePost.mainImage} />
+                      {singlePost.videos.map((video, index) => (
+                        <div className="squareImage" key={index}>
+                          <VideoPlayer video={video} showThumb={false} />
+                        </div>
+                      ))}
+                    </CustomCarousel>
+                  ) : (
+                    <CustomCarousel
+                      arrows={false}
+                      swipe={true}
+                      classsss={""}
+                      stopVideo={shutDownIframes}
+                    >
+                      {imagesGallery.map((image, index) => (
+                        <div className="squareImage" key={index}>
+                          <Image image={image} />
+                        </div>
+                      ))}
+                    </CustomCarousel>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div className="squareImage">
+                    <Image image={singlePost.mainImage} />
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              {imagesGallery ? (
+                <Masonry
+                  breakpointCols={breakpointColumnsObj}
+                  className="my-masonry-grid"
+                  columnClassName="my-masonry-grid_column singleProjectMasonry"
+                >
+                  {imagesGallery.map((image, index) => (
+                    <div
+                      className="squareImage"
+                      key={index}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openLightBox(index);
+                      }}
+                    >
+                      <Image image={image} />
                     </div>
-                  </>
-                )}
-              </>
-            ) : (
-              <>
-                {imagesGallery ? (
-                  <Masonry
-                    breakpointCols={breakpointColumnsObj}
-                    className="my-masonry-grid"
-                    columnClassName="my-masonry-grid_column singleProjectMasonry"
-                  >
-                    {imagesGallery.map((image, index) => (
-                      <div
-                        className="squareImage"
-                        key={index}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          openLightBox(index);
-                        }}
-                      >
-                        <Image image={image} />
-                      </div>
-                    ))}
+                  ))}
 
-                    {singlePost.videos ? (
-                      <>
-                        {singlePost.videos.map((video, index) => (
-                          <div
-                            className="squareImage"
-                            key={index}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              openLightBox(
-                                singlePost.imagesGallery.length + index
-                              );
-                            }}
-                          >
-                            <VideoPlayer video={video} showThumb={true} />
-                          </div>
-                        ))}
-                      </>
-                    ) : null}
-                  </Masonry>
-                ) : (
-                  <>
-                    <Image
-                      image={singlePost.mainImage}
-                      class={
-                        "mainImage fullwidth fullWidthPaddedLeft normPaddingMobile"
-                      }
-                    />
-                  </>
-                )}
-              </>
-            )}
-          </div>
+                  {singlePost.videos ? (
+                    <>
+                      {singlePost.videos.map((video, index) => (
+                        <div
+                          className="squareImage"
+                          key={index}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            openLightBox(
+                              singlePost.imagesGallery.length + index
+                            );
+                          }}
+                        >
+                          <VideoPlayer video={video} showThumb={true} />
+                        </div>
+                      ))}
+                    </>
+                  ) : null}
+                </Masonry>
+              ) : (
+                <>
+                  <Image
+                    image={singlePost.mainImage}
+                    class={
+                      "mainImage fullwidth fullWidthPaddedLeft normPaddingMobile"
+                    }
+                  />
+                </>
+              )}
+            </>
+          )}
           <div className="content">
             <div className="">
               {width > 1200 ? (
