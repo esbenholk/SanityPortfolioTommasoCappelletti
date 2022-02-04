@@ -351,34 +351,33 @@ export default function SinglePost({ updatebasket, basket }) {
               )}
             </>
           )}
-          <div className="content">
-            <div className="">
-              {width > 1200 ? (
-                <>
-                  {singlePost.recap && (
-                    <div className="recap">
-                      <BlockContent blocks={singlePost.recap} />
-                    </div>
-                  )}
-                  <div className="content">
-                    <div className="flex-row justifyBetween header">
-                      <h2>Project details</h2>
-                      <img
-                        src="../assets/Arrowright.svg"
-                        className="arrow"
-                        alt="down arrow button"
-                        style={{
-                          transform: "rotate(90deg)",
-                        }}
-                      />
-                    </div>
 
-                    <BlockContent blocks={singlePost.body} />
+          {width > 1200 ? (
+            <div className="content">
+              <div className="">
+                {singlePost.recap && (
+                  <div className="recap">
+                    <BlockContent blocks={singlePost.recap} />
                   </div>
-                </>
-              ) : null}
+                )}
+                <div className="content">
+                  <div className="flex-row justifyBetween header">
+                    <h2>Project details</h2>
+                    <img
+                      src="../assets/Arrowright.svg"
+                      className="arrow"
+                      alt="down arrow button"
+                      style={{
+                        transform: "rotate(90deg)",
+                      }}
+                    />
+                  </div>
+
+                  <BlockContent blocks={singlePost.body} />
+                </div>
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
         <div
           className="flex-column detailColumn normPaddingMobile"
