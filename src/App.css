@@ -1478,7 +1478,8 @@ input::placeholder {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    margin-right: 24px;
+    margin-right: 22px;
+    margin-bottom: 22px;
   }
 
   .featured_post_card_image {
@@ -1539,7 +1540,7 @@ input::placeholder {
 
   .tag_grid {
     margin-top: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
 
   .product_card {
@@ -1788,6 +1789,10 @@ input::placeholder {
   .horizontalScroll .tag_button {
     margin-bottom: 30px;
   }
+
+  .horizontalScroll .tag_button {
+    margin-bottom: 22px;
+  }
 }
 
 @media only screen and (max-width: 570px) {
@@ -1799,9 +1804,12 @@ input::placeholder {
     padding-top: 140px;
     min-height: 90vh;
   }
+  .categoryTitle {
+    margin-top: 13px;
+  }
 
   .regContainer {
-    padding-top: 15px;
+    padding-top: 40px;
   }
 
   .header-object {

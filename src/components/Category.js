@@ -47,7 +47,7 @@ export default function Category() {
     <div className="content-container ">
       <div className="fullWidthPadded category_details">
         {category && category.title ? (
-          <h1 className="noMargin">{category.title}</h1>
+          <h1 className="noMargin categoryTitle">{category.title}</h1>
         ) : null}
 
         {/* <h1 className="subheadline">Filter projects by tags</h1> */}
