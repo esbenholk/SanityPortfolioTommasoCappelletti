@@ -65,7 +65,7 @@ export default function Footer() {
             <NavLink to="/">
               {info.logo && (
                 <img
-                  className="logo footerLogo"
+                  className="footerLogo"
                   src={info.footerlogo.asset.url}
                   alt=""
                 />

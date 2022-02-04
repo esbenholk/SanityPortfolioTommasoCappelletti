@@ -76,17 +76,23 @@ export default function SinglePost({ updatebasket, basket }) {
 
   function handleStickyness(node) {
     node.classList.add("detailColumnfixed");
-    parentContainer.current.classList.remove("align-bottom");
+    if (parentContainer.current) {
+      parentContainer.current.classList.remove("align-bottom");
+    }
   }
 
   function handleNormalBehaviour(node) {
     node.classList.remove("detailColumnfixed");
-    parentContainer.current.classList.remove("align-bottom");
+    if (parentContainer.current) {
+      parentContainer.current.classList.remove("align-bottom");
+    }
   }
 
   function handleStickynesssToBottom(node) {
     node.classList.remove("detailColumnfixed");
-    parentContainer.current.classList.add("align-bottom");
+    if (parentContainer.current) {
+      parentContainer.current.classList.add("align-bottom");
+    }
   }
 
   function clearEventHandler(scrollCallBack) {
@@ -103,8 +109,10 @@ export default function SinglePost({ updatebasket, basket }) {
         const sticky = current.offsetTop + 240;
         if (window.pageYOffset > sticky) {
           if (
+            endOfProject.current &&
             endOfProject.current.getBoundingClientRect().top <
-            current.offsetTop + fixedRef.current.getBoundingClientRect().height
+              current.offsetTop +
+                fixedRef.current.getBoundingClientRect().height
           ) {
             handleStickynesssToBottom(current);
           } else {
@@ -167,22 +175,16 @@ export default function SinglePost({ updatebasket, basket }) {
           }}
           className="whitebox"
         >
-          <div
+          <img
             onClick={(e) => {
               e.preventDefault();
               closeLightBox();
             }}
             style={{ position: "absolute", right: "3%", top: "5%" }}
-          >
-            <img
-              src="../assets/CloseCross.svg"
-              className="closeCross"
-              alt="down arrow button"
-              style={{
-                transform: "rotate(90deg)",
-              }}
-            />
-          </div>
+            src="../assets/CloseCross.svg"
+            className="closeCross"
+            alt="down arrow button"
+          />
 
           {singlePost.videos && singlePost.videos.length >= 0 ? (
             <CustomCarousel
@@ -200,7 +202,7 @@ export default function SinglePost({ updatebasket, basket }) {
                 <VideoPlayer
                   video={video}
                   key={index}
-                  showThumb={false}
+                  showThumb={true}
                   isPlaying={isPlaying}
                 />
               ))}
@@ -263,6 +265,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       swipe={true}
                       classsss={""}
                       stopVideo={shutDownIframes}
+                      currentIndex={0}
                     >
                       {imagesGallery.map((image, index) => (
                         <div className="squareImage" key={index}>
@@ -272,7 +275,7 @@ export default function SinglePost({ updatebasket, basket }) {
 
                       {singlePost.videos.map((video, index) => (
                         <div className="squareImage" key={index}>
-                          <VideoPlayer video={video} showThumb={false} />
+                          <VideoPlayer video={video} showThumb={true} />
                         </div>
                       ))}
                     </CustomCarousel>
@@ -282,6 +285,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       swipe={true}
                       classsss={""}
                       stopVideo={shutDownIframes}
+                      currentIndex={0}
                     >
                       {imagesGallery.map((image, index) => (
                         <div className="squareImage" key={index}>
@@ -343,9 +347,7 @@ export default function SinglePost({ updatebasket, basket }) {
                 <>
                   <Image
                     image={singlePost.mainImage}
-                    class={
-                      "mainImage fullwidth fullWidthPaddedLeft normPaddingMobile"
-                    }
+                    class={"mainImage fullwidth"}
                   />
                 </>
               )}
@@ -384,7 +386,7 @@ export default function SinglePost({ updatebasket, basket }) {
           ref={parentContainer}
         >
           <div ref={fixedRef} className={"flex-column details"}>
-            <header className="flex-row align-top justifyBetween no-wrap">
+            <header className="flex-row check justifyBetween no-wrap">
               <h2 className="projectTitle">{singlePost.title}</h2>
               {singlePost.abbreviated_year ? (
                 <>

@@ -34,39 +34,21 @@ export default function Projects({ projectList }) {
       // exit={{ opacity: 0 }}
     >
       <div className="projectList-item">
-        <h1 className="categories">Category</h1>
+        <h1 className="categories">Project</h1>
         <div>
-          <h1>Project</h1>
+          <h1 className="hidden"> Category</h1>
         </div>
         {width > 900 ? <h1>Year</h1> : null}
       </div>
       {projectList &&
         projectList.map((project, index) => (
           <div key={index} className="projectList-item">
-            <div className="categories">
-              {project.categories &&
-                project.categories.map((category, index) => (
-                  <>
-                    {category.title === "Freebie" ||
-                      (category.title === "Freebie" ? (
-                        <></>
-                      ) : (
-                        <Link
-                          key={index}
-                          id={"category_" + category.title + ""}
-                          to={category.slug.current}
-                        >
-                          {category.title}
-                          {index + 1 !== project.categories.length
-                            ? ", "
-                            : null}
-                        </Link>
-                      ))}
-                  </>
-                ))}
-            </div>
             {width > 900 ? (
-              <div onMouseEnter={hover} onMouseLeave={hover}>
+              <div
+                onMouseEnter={hover}
+                onMouseLeave={hover}
+                className="categories"
+              >
                 {" "}
                 <Link to={"/projects/" + project.slug.current}>
                   {project.title ? project.title : "undefined"}
@@ -91,7 +73,7 @@ export default function Projects({ projectList }) {
                 )}
               </div>
             ) : (
-              <div>
+              <div className="categories">
                 {" "}
                 <Link to={"/projects/" + project.slug.current}>
                   {project.title ? project.title : "undefined"}
@@ -116,6 +98,28 @@ export default function Projects({ projectList }) {
                 )}
               </div>
             )}
+            <div className="projectList-item">
+              {project.categories &&
+                project.categories.map((category, index) => (
+                  <>
+                    {category.title === "Freebie" ||
+                      (category.title === "Freebie" ? (
+                        <></>
+                      ) : (
+                        <Link
+                          key={index}
+                          id={"category_" + category.title + ""}
+                          to={category.slug.current}
+                        >
+                          {category.title}
+                          {index + 1 !== project.categories.length
+                            ? ", "
+                            : null}
+                        </Link>
+                      ))}
+                  </>
+                ))}
+            </div>
 
             {width > 900 ? (
               <p className="flex-row align-left">

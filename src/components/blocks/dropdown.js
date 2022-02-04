@@ -23,7 +23,7 @@ class Dropdown extends React.Component {
           className={isOpen ? "dropdown active" : "dropdown"}
           onClick={this.handleClick}
         >
-          <div className="dropdown__text flex-row justifyBetween">
+          <div className="dropdown__text flex-row justifyBetween no-wrap">
             <div className="flex-row">
               <img
                 src="/assets/SearchIcon.svg"

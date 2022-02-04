@@ -14,9 +14,12 @@ export default function CustomCarousel({
   if (!autoplay) {
     autoplay = false;
   }
-  if (!currentIndex) {
-    currentIndex = 0;
-  }
+  console.log("current index in carousel", currentIndex);
+
+  // if (currentIndex) {
+  //   currentIndex = 0;
+  //   console.log("reset index in carousel", currentIndex);
+  // }
 
   return (
     <Carousel

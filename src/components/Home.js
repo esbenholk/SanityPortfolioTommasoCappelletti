@@ -149,9 +149,9 @@ export default function Home() {
       >
         {pressList && (
           <div className="projectList-item" style={{ marginTop: "45px" }}>
-            <h1 className="categories">Category</h1>
+            <h1 className="categories">Press</h1>
             <div>
-              <h1>Press</h1>
+              <h1 className="hidden">Category</h1>
             </div>
             {width > 900 ? <h1>Year</h1> : null}
           </div>
@@ -160,7 +160,71 @@ export default function Home() {
           pressList.map((project, index) => (
             <>
               <div key={index} className="projectList-item">
-                <div className="categories">
+                {width > 900 ? (
+                  <div
+                    onMouseEnter={hover}
+                    onMouseLeave={hover}
+                    className="categories"
+                  >
+                    {" "}
+                    <a
+                      href={project.url}
+                      target={"_blank"}
+                      rel="noopener noreferrer"
+                    >
+                      {project.title ? project.title : "undefined"}
+                    </a>
+                    {project.mainImage.hotspot ? (
+                      <img
+                        src={urlFor(project.mainImage.asset.url).url()}
+                        alt={project.mainImage.alt}
+                        style={{
+                          objectPosition: `${
+                            project.mainImage.hotspot.x * 100
+                          }% ${project.mainImage.hotspot.y * 100}%`,
+                        }}
+                        className="thumbnail minThumbnail seeOnHover hidden"
+                      />
+                    ) : (
+                      <img
+                        src={urlFor(project.mainImage.asset.url).url()}
+                        alt={project.mainImage.alt}
+                        className="thumbnail minThumbnail seeOnHover hidden"
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <div className="categories">
+                    {" "}
+                    <a
+                      href={project.url}
+                      target={"_blank"}
+                      rel="noopener noreferrer"
+                    >
+                      {project.title ? project.title : "undefined"}
+                    </a>
+                    {project.mainImage.hotspot ? (
+                      <img
+                        src={urlFor(project.mainImage.asset.url).url()}
+                        alt={project.mainImage.alt}
+                        style={{
+                          objectPosition: `${
+                            project.mainImage.hotspot.x * 100
+                          }% ${project.mainImage.hotspot.y * 100}%`,
+                        }}
+                        className="thumbnail minThumbnail seeOnHover hidden"
+                      />
+                    ) : (
+                      <img
+                        src={urlFor(project.mainImage.asset.url).url()}
+                        alt={project.mainImage.alt}
+                        className="thumbnail minThumbnail seeOnHover hidden"
+                      />
+                    )}
+                  </div>
+                )}
+
+                <div>
                   {project.categories &&
                     project.categories.map((category, index) => (
                       <>
@@ -181,34 +245,6 @@ export default function Home() {
                           ))}
                       </>
                     ))}
-                </div>
-                <div onMouseEnter={hover} onMouseLeave={hover}>
-                  {" "}
-                  <a
-                    href={project.url}
-                    target={"_blank"}
-                    rel="noopener noreferrer"
-                  >
-                    {project.title ? project.title : "undefined"}
-                  </a>
-                  {project.mainImage.hotspot ? (
-                    <img
-                      src={urlFor(project.mainImage.asset.url).url()}
-                      alt={project.mainImage.alt}
-                      style={{
-                        objectPosition: `${
-                          project.mainImage.hotspot.x * 100
-                        }% ${project.mainImage.hotspot.y * 100}%`,
-                      }}
-                      className="thumbnail minThumbnail seeOnHover hidden"
-                    />
-                  ) : (
-                    <img
-                      src={urlFor(project.mainImage.asset.url).url()}
-                      alt={project.mainImage.alt}
-                      className="thumbnail minThumbnail seeOnHover hidden"
-                    />
-                  )}
                 </div>
                 {width > 900 ? (
                   <p className="flex-row align-left">

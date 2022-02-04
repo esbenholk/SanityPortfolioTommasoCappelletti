@@ -462,7 +462,7 @@ h1 {
   box-shadow: 2px -50px 50px 34px #ffffff;
 } */
 .regContainer:last-of-type {
-  padding-bottom: 0px;
+  padding-bottom: 30px;
 }
 
 .addToCartButton {
@@ -883,7 +883,9 @@ nav .logo_container img {
 }
 
 .closeCross {
-  width: 60px;
+  width: 60px !important;
+  height: 60px !important;
+  z-index: 999999;
 }
 
 .featured_post_container {
@@ -1343,7 +1345,7 @@ input::placeholder {
   .footerLogo {
     margin: 0;
     align-self: center;
-    min-height: 94px;
+    min-height: 94px !important;
   }
   .footer-object {
     margin-right: 36px;
@@ -1600,6 +1602,9 @@ input::placeholder {
   .product_card_in_grid {
     min-width: 0;
     max-width: 100%;
+  }
+  .product_card {
+    margin-bottom: 0 !important;
   }
   .product_card:last-of-type {
     margin-right: var(--mainPaddingMobile);
@@ -2133,9 +2138,7 @@ input::placeholder {
     opacity: 0.33;
     padding-left: 10px;
   }
-  .menu_link {
-    padding: 5px 15px 5px 15px;
-  }
+
   .product_card {
     padding: 12px;
     min-width: 130px;
@@ -2162,9 +2165,29 @@ input::placeholder {
   .stars {
     font-size: 12px;
   }
+
+  .freebieSign h2 {
+    color: black;
+    padding: 2px;
+    font: normal normal bold 10px Open Sans;
+    font-style: italic;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .freebieSign {
+    position: absolute;
+    left: 50%;
+    background-color: #f8ff52;
+    box-shadow: 3px 3px 0px 0px #ff0000;
+    padding: 2px;
+    margin-top: 0px;
+  }
 }
 
 @media only screen and (max-width: 300px) {
+  .freebieSign {
+    top: 50%;
+  }
   .logo {
     min-width: 55px;
   }
@@ -2190,6 +2213,9 @@ input::placeholder {
   }
   .overscrollPadded {
     padding-left: 20px;
+  }
+  .menu_link {
+    padding: 5px 15px 5px 15px;
   }
 }
 
