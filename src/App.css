@@ -182,7 +182,7 @@ h1 {
 
 .basket {
   position: absolute;
-  right: 0;
+  right: 0px;
   top: 17px;
   display: flex;
   justify-content: center;
@@ -841,6 +841,8 @@ nav .logo_container img {
   box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
   background-color: black !important;
   opacity: 0.15 !important;
+  width: 6px !important;
+  height: 6px !important;
 }
 .dot.selected {
   opacity: 0.4 !important;
@@ -1414,8 +1416,13 @@ input::placeholder {
     text-align: center;
   }
 
+  .logo {
+    max-height: 50px;
+    min-width: 0px;
+  }
+
   .mainContainer {
-    padding-top: 200px;
+    padding-top: 190px;
     min-height: 90vh;
   }
 
@@ -1442,7 +1449,7 @@ input::placeholder {
 
   nav {
     padding: var(--mainPaddingMobile);
-    padding-top: 32px;
+    padding-top: 40px;
     padding-bottom: 0px;
     position: absolute;
     top: 0;
@@ -1613,6 +1620,13 @@ input::placeholder {
     color: #030000;
   }
 
+  .subheadline p,
+  .subheadline {
+    text-align: left;
+    font: normal normal normal 15px Open Sans;
+    letter-spacing: 0px;
+  }
+
   .aboutSection {
     max-width: 100%;
   }
@@ -1718,6 +1732,7 @@ input::placeholder {
     position: relative;
     right: 0;
     width: 100%;
+    margin-top: 20px;
     border-radius: 34px;
     transition: border-radius 2s ease;
     background: var(--menuGrey);
@@ -1725,6 +1740,10 @@ input::placeholder {
   .normPaddingMobile {
     padding-left: var(--mainPaddingMobile) !important;
     padding-right: var(--mainPaddingMobile) !important;
+  }
+
+  .basket {
+    right: 15px;
   }
 
   .basketCard .details {
@@ -1765,15 +1784,19 @@ input::placeholder {
   .buttonOnWrapList {
     margin-top: 20px;
   }
+
+  .horizontalScroll .tag_button {
+    margin-bottom: 30px;
+  }
 }
 
 @media only screen and (max-width: 570px) {
   nav {
-    padding-top: 25px;
+    padding-top: 35px;
   }
 
   .mainContainer {
-    padding-top: 135px;
+    padding-top: 140px;
     min-height: 90vh;
   }
 
@@ -1888,7 +1911,7 @@ input::placeholder {
   }
 
   .content {
-    border-top: 1px var(--menuGrey) solid;
+    border-top: 0px var(--menuGrey) solid;
     margin-bottom: 30px;
   }
   .content p {
@@ -1952,7 +1975,7 @@ input::placeholder {
     font: normal normal normal 13px Open Sans;
     letter-spacing: 0px;
     color: #000000;
-    opacity: 1;
+    opacity: 0.3;
   }
 
   .project_details {
@@ -1967,7 +1990,7 @@ input::placeholder {
 
   .basket {
     position: absolute;
-    right: 0;
+    right: 4px;
     top: 10px;
     display: flex;
     justify-content: center;
@@ -2008,7 +2031,7 @@ input::placeholder {
     max-width: 13px;
   }
   .dropdown {
-    margin-top: 5px;
+    margin-top: 10px;
   }
 
   .dropdown__text {
@@ -2055,7 +2078,7 @@ input::placeholder {
   }
 
   .carousel {
-    margin-bottom: 35px !important;
+    margin-bottom: 0px !important;
   }
   .control-dots {
     position: absolute;
@@ -2076,6 +2099,9 @@ input::placeholder {
     color: #000000;
     opacity: 0.33;
     padding-left: 10px;
+  }
+  .menu_link {
+    padding: 5px 15px 5px 15px;
   }
 }
 
