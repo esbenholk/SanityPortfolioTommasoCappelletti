@@ -47,6 +47,7 @@ export default function SinglePost({ updatebasket, basket }) {
       )
       .then((data) => {
         setSinglePost(data[0]);
+
         setImagesGallery(data[0].imagesGallery);
         sanityClient
           .fetch(
@@ -193,6 +194,7 @@ export default function SinglePost({ updatebasket, basket }) {
               classsss={"whiteboxCarousel"}
               currentIndex={lightBoxIndex}
               stopVideo={shutDownIframes}
+              id={`#2${imagesGallery._key}`}
             >
               {imagesGallery.map((image, index) => (
                 <Image image={image} key={index} />
@@ -214,6 +216,7 @@ export default function SinglePost({ updatebasket, basket }) {
               classsss={"whiteboxCarousel"}
               currentIndex={lightBoxIndex}
               stopVideo={shutDownIframes}
+              id={`#1${imagesGallery._key}`}
             >
               {imagesGallery.map((image, index) => (
                 <Image image={image} key={index} />
@@ -266,6 +269,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       classsss={""}
                       stopVideo={shutDownIframes}
                       currentIndex={0}
+                      id={`#3${imagesGallery._key}`}
                     >
                       {imagesGallery.map((image, index) => (
                         <div className="squareImage" key={index}>
@@ -286,6 +290,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       classsss={""}
                       stopVideo={shutDownIframes}
                       currentIndex={0}
+                      id={`#4${imagesGallery._key}`}
                     >
                       {imagesGallery.map((image, index) => (
                         <div className="squareImage" key={index}>

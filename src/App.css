@@ -80,6 +80,7 @@ img {
   max-width: 100%;
   max-height: 100%;
   transform: translateZ(0);
+  object-fit: contain;
 }
 
 a {
@@ -844,6 +845,11 @@ nav .logo_container img {
   min-width: 100%;
 }
 
+.carousel .slide {
+  display: flex;
+  justify-content: center;
+}
+
 .dot {
   box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
   background-color: black !important;
@@ -859,6 +865,16 @@ nav .logo_container img {
   bottom: -40px !important;
 }
 
+/* .videoCover img {
+  z-index: 9999999;
+} */
+.whiteboxCarousel .carousel .slider-wrapper .slide .videoCover img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .featuredCardArrow {
   position: absolute;
   top: 50%;
@@ -1162,7 +1178,9 @@ footer {
 .footerLogo {
   margin-right: 83px;
   min-height: 115px;
-  z-index: 999999999;
+  max-height: 115px;
+  z-index: 99999999 !important;
+  min-width: 30px;
 }
 
 .footer-object {
@@ -1258,10 +1276,9 @@ input::placeholder {
   max-height: 100% !important;
   height: 100% !important;
 }
-.whitebox img {
+.whiteboxCarousel img {
   height: 100%;
   max-height: 100%;
-  object-fit: contain;
 }
 
 .freebieSign h2 {
@@ -2137,6 +2154,13 @@ input::placeholder {
     color: #000000;
     opacity: 0.33;
     padding-left: 10px;
+  }
+
+  .footer_social_media_icon {
+    width: 25px;
+    align-self: center;
+    object-fit: contain;
+    margin-left: 36px;
   }
 
   .product_card {

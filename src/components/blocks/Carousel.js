@@ -10,20 +10,22 @@ export default function CustomCarousel({
   autoplay,
   currentIndex,
   stopVideo,
+  id,
 }) {
   if (!autoplay) {
     autoplay = false;
   }
-  console.log("current index in carousel", currentIndex);
+  console.log("current index in carousel", id);
 
-  // if (currentIndex) {
-  //   currentIndex = 0;
-  //   console.log("reset index in carousel", currentIndex);
-  // }
+  if (!currentIndex) {
+    currentIndex = 0;
+    console.log("sets index to 0", currentIndex);
+  }
 
   return (
     <Carousel
       swipeable={true}
+      key={id}
       preventMovementUntilSwipeScrollTolerance
       axis={"horizontal"}
       swipeScrollTolerance={5}
@@ -35,8 +37,9 @@ export default function CustomCarousel({
       showThumbs={false}
       autoPlay={autoplay}
       showArrows={arrows}
-      className={`carousel "${classsss}"`}
+      className={`carousel ${classsss}`}
       infiniteLoop={false}
+      // selectedItem={currentIndex}
       selectedItem={currentIndex}
       onChange={(e) => {
         if (stopVideo) {
