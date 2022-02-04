@@ -23,7 +23,7 @@ export default function CustomCarousel({
       swipeable={true}
       preventMovementUntilSwipeScrollTolerance
       axis={"horizontal"}
-      swipeScrollTolerance={100}
+      swipeScrollTolerance={50}
       stopOnHover={true}
       showIndicators={true}
       emulateTouch={true}
