@@ -330,6 +330,9 @@ h1 {
 .extraBorder {
   border: 3px solid #090206;
 }
+.extraBordergrey {
+  border: 3px solid var(--menuGrey);
+}
 
 .fullWidthPadded {
   padding-left: var(--mainPadding);
@@ -1478,8 +1481,8 @@ input::placeholder {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    margin-right: 22px;
-    margin-bottom: 22px;
+    margin-right: 19px;
+    margin-bottom: 19px;
   }
 
   .featured_post_card_image {
@@ -1540,7 +1543,7 @@ input::placeholder {
 
   .tag_grid {
     margin-top: 30px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
   }
 
   .product_card {
@@ -1791,7 +1794,7 @@ input::placeholder {
   }
 
   .horizontalScroll .tag_button {
-    margin-bottom: 22px;
+    margin-bottom: 19px;
   }
 }
 

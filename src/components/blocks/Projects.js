@@ -169,7 +169,7 @@ export default function Projects({
           {categories &&
             categories.map((category, index) => (
               <button
-                className="tag_button standard-button "
+                className="tag_button standard-button extraBordergrey"
                 key={index}
                 id={"category_" + category.title + ""}
                 onClick={() => {
@@ -185,7 +185,7 @@ export default function Projects({
         <div className="tag_grid horizontalScroll overscrollPadded">
           {tags.map((tag, index) => (
             <button
-              className="tag_button standard-button"
+              className="tag_button standard-button extraBordergrey"
               key={index}
               id={"tag_" + tag + ""}
               onClick={() => {
