@@ -16,6 +16,7 @@ export default function Projects({
   postcard,
   columns,
   shouldHaveFreebieSign,
+  columnAmountOn390,
 }) {
   const myContext = useContext(AppContext);
   if (!projectList) {
@@ -26,7 +27,7 @@ export default function Projects({
     default: columns,
     1300: 2,
     600: 2,
-    340: 1,
+    390: columnAmountOn390,
   };
 
   const [allPosts, setAllPosts] = useState(projectList);

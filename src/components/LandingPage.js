@@ -131,6 +131,7 @@ export default function LandingPage() {
             postcard={true}
             columns={3}
             shouldHaveFreebieSign={false}
+            columnAmountOn390={1}
           />
         </div>
       ) : null}

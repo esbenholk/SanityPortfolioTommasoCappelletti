@@ -65,30 +65,58 @@ export default function Projects({ projectList }) {
                   </>
                 ))}
             </div>
-            <div onMouseEnter={hover} onMouseLeave={hover}>
-              {" "}
-              <Link to={"/projects/" + project.slug.current}>
-                {project.title ? project.title : "undefined"}
-              </Link>
-              {project.mainImage.hotspot && width > 900 ? (
-                <img
-                  src={urlFor(project.mainImage.asset.url).url()}
-                  alt={project.mainImage.alt}
-                  style={{
-                    objectPosition: `${project.mainImage.hotspot.x * 100}% ${
-                      project.mainImage.hotspot.y * 100
-                    }%`,
-                  }}
-                  className="thumbnail seeOnHover hidden"
-                />
-              ) : (
-                <img
-                  src={urlFor(project.mainImage.asset.url).url()}
-                  alt={project.mainImage.alt}
-                  className="thumbnail seeOnHover hidden"
-                />
-              )}
-            </div>
+            {width > 900 ? (
+              <div onMouseEnter={hover} onMouseLeave={hover}>
+                {" "}
+                <Link to={"/projects/" + project.slug.current}>
+                  {project.title ? project.title : "undefined"}
+                </Link>
+                {project.mainImage.hotspot && width > 900 ? (
+                  <img
+                    src={urlFor(project.mainImage.asset.url).url()}
+                    alt={project.mainImage.alt}
+                    style={{
+                      objectPosition: `${project.mainImage.hotspot.x * 100}% ${
+                        project.mainImage.hotspot.y * 100
+                      }%`,
+                    }}
+                    className="thumbnail seeOnHover hidden"
+                  />
+                ) : (
+                  <img
+                    src={urlFor(project.mainImage.asset.url).url()}
+                    alt={project.mainImage.alt}
+                    className="thumbnail seeOnHover hidden"
+                  />
+                )}
+              </div>
+            ) : (
+              <div>
+                {" "}
+                <Link to={"/projects/" + project.slug.current}>
+                  {project.title ? project.title : "undefined"}
+                </Link>
+                {project.mainImage.hotspot && width > 900 ? (
+                  <img
+                    src={urlFor(project.mainImage.asset.url).url()}
+                    alt={project.mainImage.alt}
+                    style={{
+                      objectPosition: `${project.mainImage.hotspot.x * 100}% ${
+                        project.mainImage.hotspot.y * 100
+                      }%`,
+                    }}
+                    className="thumbnail seeOnHover hidden"
+                  />
+                ) : (
+                  <img
+                    src={urlFor(project.mainImage.asset.url).url()}
+                    alt={project.mainImage.alt}
+                    className="thumbnail seeOnHover hidden"
+                  />
+                )}
+              </div>
+            )}
+
             {width > 900 ? (
               <p className="flex-row align-left">
                 {project.year ? project.year : "undefined"}{" "}

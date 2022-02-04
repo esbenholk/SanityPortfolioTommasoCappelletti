@@ -221,18 +221,24 @@ export default function SinglePost({ updatebasket, basket }) {
         </div>
       )}
       <div className="flex-row project_directory_line">
-        <a href="/projects" className="tag project_tag directoryTag ">
-          {"Project >"}
+        <a
+          href="/projects"
+          className="tag project_tag directoryTag thirtypercentOpacity"
+        >
+          {"Project>"}
         </a>
         {singlePost.categories && (
           <Link
             to={"../" + singlePost.categories[0].slug.current}
-            className="tag project_tag directoryTag "
+            className="tag project_tag directoryTag thirtypercentOpacity"
           >
             {singlePost.categories[0].title + " >"}
           </Link>
         )}
-        <a href="none" className="tag project_tag directoryTag ">
+        <a
+          href="none"
+          className="tag project_tag directoryTag thirtypercentOpacity"
+        >
           {singlePost.title}
         </a>
       </div>
@@ -383,7 +389,7 @@ export default function SinglePost({ updatebasket, basket }) {
               <h2 className="projectTitle">{singlePost.title}</h2>
               {singlePost.abbreviated_year ? (
                 <>
-                  <div className="project_year_price year_price flex-row align-top">
+                  <div className=" year_price flex-row align-top">
                     <p>20</p>
                     <p>{singlePost.abbreviated_year}</p>
                   </div>

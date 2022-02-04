@@ -353,10 +353,14 @@ h1 {
 .tag_button {
   margin-right: 15px;
 }
+.tag {
+  margin-bottom: 0 !important;
+}
 .tag.active,
 .tag_button.active {
   color: white;
   background-color: black;
+  border: 3px solid black;
 }
 
 .mainImage {
@@ -458,7 +462,7 @@ h1 {
   box-shadow: 2px -50px 50px 34px #ffffff;
 } */
 .regContainer:last-of-type {
-  padding-bottom: 100px;
+  padding-bottom: 0px;
 }
 
 .addToCartButton {
@@ -1380,6 +1384,9 @@ input::placeholder {
     max-width: 100%;
     width: 100%;
   }
+  .project_details {
+    border-top: 0px var(--menuGrey) solid;
+  }
 
   .normPaddingMobile {
     padding-left: var(--mainPadding) !important;
@@ -1560,6 +1567,12 @@ input::placeholder {
     min-width: 173px;
     min-height: 263px;
   }
+
+  .minHeightAdjustment {
+    min-height: 36px;
+    align-content: flex-start;
+  }
+
   .griddedMasonry .my-masonry-grid_column .product_card {
     max-width: 100% !important;
     border-bottom: 2px var(--menuGrey) solid;
@@ -1576,6 +1589,12 @@ input::placeholder {
   }
   .griddedMasonry .my-masonry-grid_column:last-of-type {
     border-left: 1px var(--menuGrey) solid;
+    /* border-right: 0px var(--menuGrey) solid; */
+  }
+
+  .griddedMasonry .my-masonry-grid_column:only-of-type {
+    border-left: 0px var(--menuGrey) solid;
+    border-right: 2px var(--menuGrey) solid;
   }
 
   .product_card_in_grid {
@@ -1772,7 +1791,7 @@ input::placeholder {
   }
 
   .addToCartButton:first-of-type {
-    margin-top: 22px;
+    margin-top: 30px;
   }
   .addToCartButton:last-of-type {
     margin-bottom: 22px;
@@ -1812,7 +1831,14 @@ input::placeholder {
   }
 
   .regContainer {
-    padding-top: 40px;
+    padding-top: 50px;
+  }
+
+  .categoryGrid {
+    padding: 0;
+  }
+  .product_card {
+    padding: 12px;
   }
 
   .header-object {
@@ -1986,12 +2012,9 @@ input::placeholder {
     font: normal normal normal 13px Open Sans;
     letter-spacing: 0px;
     color: #000000;
-    opacity: 0.3;
+    opacity: 1;
   }
 
-  .project_details {
-    border-top: 1px var(--menuGrey) solid;
-  }
   .project_details h3 {
     text-align: left;
     font: normal normal bold 12px/17px Open Sans;
@@ -2089,20 +2112,19 @@ input::placeholder {
   }
 
   .carousel {
-    margin-bottom: 0px !important;
+    margin-bottom: 20px !important;
   }
   .control-dots {
     position: absolute;
     top: 99%;
   }
 
-  .categoryGrid .my-masonry-grid_column .product_card {
-    margin-top: 20px;
-    padding-bottom: 20px;
+  .contactDetails {
+    margin-top: 80px;
   }
 }
 
-@media only screen and (max-width: 340px) {
+@media only screen and (max-width: 390px) {
   .dropdown__text p {
     text-align: left;
     font: normal normal normal 12px Galvji;
@@ -2114,13 +2136,68 @@ input::placeholder {
   .menu_link {
     padding: 5px 15px 5px 15px;
   }
+  .product_card {
+    padding: 12px;
+    min-width: 130px;
+  }
+  .product_card h1 {
+    font-size: 11px;
+    /* min-height: 24px; */
+  }
+  .product_card .tag {
+    font-size: 11px;
+    /* min-height: 24px; */
+  }
+  .minHeightAdjustment {
+    min-height: 20px;
+    align-content: flex-start;
+  }
+
+  .year_price p {
+    font: normal normal bold 14px Open Sans !important;
+  }
+  .year_price p:last-of-type {
+    font: normal normal bold 22px Open Sans !important;
+  }
+  .stars {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .logo {
+    min-width: 55px;
+  }
+  .menu_link {
+    padding: 5px 15px 5px 15px;
+  }
+  .product_card {
+    padding: 3px;
+    min-width: 130px;
+  }
+  .fullWidthPadded {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .categoryGrid {
+    padding: 0;
+  }
+  .basket {
+    top: 5px;
+  }
+  .header-objet {
+    font-size: 10px;
+  }
+  .overscrollPadded {
+    padding-left: 20px;
+  }
 }
 
 .thirtypercent {
   color: var(--menuGrey) !important;
 }
 .thirtypercentOpacity {
-  opacity: 60%;
+  opacity: 60% !important;
 }
 .inactive {
   opacity: 40%;

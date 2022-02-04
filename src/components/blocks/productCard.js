@@ -62,7 +62,7 @@ export default function ProductCard(props) {
       <div className="details" style={{ color: color }}>
         <h1>{post.title}</h1>
 
-        <div className="flex-row align-left">
+        <div className="flex-row align-left minHeightAdjustment">
           {post.tags ? (
             post.tags.map((tag, index) => (
               <p className="tag" key={index}>

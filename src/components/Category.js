@@ -65,6 +65,7 @@ export default function Category() {
             show_tags={true}
             columns={4}
             shouldHaveFreebieSign={shouldHaveFreebieSign}
+            columnAmountOn390={2}
           />
         ) : null}
       </Suspense>
