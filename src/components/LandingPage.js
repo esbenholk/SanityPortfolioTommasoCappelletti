@@ -42,9 +42,11 @@ export default function LandingPage() {
     // animate={{ opacity: 1 }}
     // exit={{ opacity: 0 }}
     >
-      <motion.h1 className="headline flex-column fullWidthPadded">
-        {info.greeting}
-      </motion.h1>
+      {info.greeting && (
+        <motion.h1 className="headline flex-column fullWidthPadded">
+          {info.greeting}
+        </motion.h1>
+      )}
 
       <>
         {info.mainImages ? (
@@ -91,12 +93,20 @@ export default function LandingPage() {
       </>
 
       {myContext.hasFeaturedPosts && featuredProjects ? (
-        <div className="regContainer">
-          <motion.h1 className="headline flex-column fullWidthPadded">
-            {info.featured_project_title}
-          </motion.h1>
+        <div
+          className={
+            info.mainImage || info.mainImages.length > 0
+              ? "regContainer"
+              : "regContainer no-top"
+          }
+        >
+          {info.featured_project_title ? (
+            <motion.h1 className="headline flex-column fullWidthPadded">
+              {info.featured_project_title}
+            </motion.h1>
+          ) : null}
 
-          {width > 900 ? (
+          {width > 1050 ? (
             <div className="fullWidthPadded">
               <CustomCarousel
                 arrows={true}

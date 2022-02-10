@@ -34,7 +34,9 @@ export default function Projects({ projectList }) {
       // exit={{ opacity: 0 }}
     >
       <div className="projectList-item">
-        <h1 className="categories">Project</h1>
+        <h1 className={width > 900 ? "categories" : "categories headline"}>
+          Project
+        </h1>
         <div>
           <h1 className="hidden"> Category</h1>
         </div>

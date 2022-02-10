@@ -46,6 +46,7 @@ export default function ContactUs(basket) {
           Your email
         </h2>
         <input
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
           type="email"
           name="from_email"
           style={{ flex: "2" }}
@@ -61,6 +62,7 @@ export default function ContactUs(basket) {
         style={{ display: "none" }}
       >
         <input
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
           type="text"
           name="subject"
           style={{ flex: "2" }}
@@ -77,6 +79,7 @@ export default function ContactUs(basket) {
           style={{ flex: "2" }}
           name="message"
           placeholder="Hello, I am interested in the following projects:"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </div>
       <input

@@ -368,7 +368,7 @@ export default function SinglePost({ updatebasket, basket }) {
                   </div>
                 )}
                 <div className="content">
-                  <div className="flex-row justifyBetween header">
+                  <div className="flex-row justifyBetween header  topLineOnDesktop">
                     <h2>Project details</h2>
                     <img
                       src="../assets/Arrowright.svg"
@@ -414,7 +414,7 @@ export default function SinglePost({ updatebasket, basket }) {
             </div>
 
             {singlePost.star_rating ? (
-              <p className="stars">{singlePost.star_rating}</p>
+              <p className="stars singelPageStars">{singlePost.star_rating}</p>
             ) : null}
 
             <AddToCartButton

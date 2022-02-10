@@ -369,8 +369,12 @@ export default function SinglePost({ updatebasket, basket }) {
               </div>
 
               {singlePost.star_rating ? (
-                <p className="stars">{singlePost.star_rating}</p>
+                <p className="stars singelPageStars">
+                  {singlePost.star_rating}
+                </p>
               ) : null}
+
+              <h1>hhhhhh</h1>
 
               <AddToCartButton
                 project={singlePost}

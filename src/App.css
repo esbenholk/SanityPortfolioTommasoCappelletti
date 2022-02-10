@@ -11,6 +11,15 @@
 }
 
 @font-face {
+  font-family: "OpenSansSemiBold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("OpenSansSemiBold"),
+    url(./fonts/OpenSans-SemiBold.ttf) format("truetype"),
+    url(./fonts/OpenSans-SemiBold.woff) format("woff");
+}
+
+@font-face {
   font-family: "OpenSansLight";
   font-style: normal;
   font-weight: normal;
@@ -102,6 +111,9 @@ p {
 .footer_menu_link,
 .menu_link {
   padding: 8px 20px 8px 20px;
+}
+.footer_menu_link {
+  margin-right: 25px;
 }
 .menu_link:hover {
   border-radius: 25px;
@@ -367,6 +379,7 @@ h1 {
 .mainImage {
   margin: 0;
   min-height: 580px;
+  max-height: 650px;
   object-fit: cover;
 }
 
@@ -376,15 +389,23 @@ h1 {
 .productCard-stars {
   margin-top: -9px;
 }
+.singelPageStars {
+  font-size: 20px !important;
+}
 .project_directory_line {
   padding-bottom: 7px;
   margin-left: var(--mainPadding);
   margin-right: var(--mainPadding);
   margin-bottom: 45px;
-  border-bottom: 1px solid var(--menuGrey);
+  border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
 }
+
 .project_directory_line > * {
   margin-right: 10px;
+}
+
+.topLineOnDesktop {
+  border-top: 1px rgba(0, 0, 0, 0.3) solid;
 }
 
 /*HOME ABOUT SECTION*/
@@ -458,10 +479,14 @@ h1 {
   position: relative;
   /* background-color: white; */
 }
+.no-top {
+  padding-top: 0px !important;
+}
 
 /* .cover {
   box-shadow: 2px -50px 50px 34px #ffffff;
 } */
+
 .regContainer:last-of-type {
   padding-bottom: 30px;
 }
@@ -912,7 +937,7 @@ nav .logo_container img {
 .featured_post_card {
   height: 100%;
   min-height: 580px;
-  max-height: 1011px;
+  max-height: 650px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -1064,15 +1089,15 @@ nav .logo_container img {
 }
 .recap p {
   text-align: left;
-  font: normal normal 600 25px Open Sans;
+  font: normal normal 300 25px Open Sans !important;
   letter-spacing: 0px;
   color: #030000;
   opacity: 1;
 }
 
-.content {
+/* .content {
   border-top: 1px var(--menuGrey) solid;
-}
+} */
 .content p {
   text-align: left;
   font: normal normal normal 18px Open Sans;
@@ -1126,11 +1151,12 @@ nav .logo_container img {
   color: #000000;
   opacity: 1;
 }
-.directoryTag {
-  font-size: 18px !important;
-}
+
 .project_details {
-  border-top: 1px var(--menuGrey) solid;
+  border-top: 1px rgba(0, 0, 0, 0.3) solid;
+}
+.project_details .content {
+  border-top: 1px rgba(0, 0, 0, 0.3) solid;
 }
 .project_details h3 {
   text-align: left;
@@ -1299,6 +1325,10 @@ input::placeholder {
   margin-top: -10px;
 }
 
+.buttonOnWrapList {
+  margin-top: 20px;
+}
+
 @keyframes gelatine {
   from,
   to {
@@ -1331,27 +1361,7 @@ input::placeholder {
     padding-right: var(--mainPadding);
   }
 }
-
-@media only screen and (max-width: 1200px) {
-  h3 {
-    text-align: left;
-    font: normal normal bold 31px Open Sans;
-    letter-spacing: 0px;
-    color: black;
-    opacity: 1;
-  }
-  .featured_post_card_overlay {
-    padding: 108px 26px 26px 26px;
-    min-width: 20px;
-  }
-
-  .featured_post_card_image {
-    flex-grow: 2;
-    max-width: 50%;
-    height: 100%;
-    object-fit: cover;
-  }
-
+@media only screen and (max-width: 1310px) {
   footer {
     min-height: 225px;
     /* margin-top: 93px; */
@@ -1392,6 +1402,27 @@ input::placeholder {
   }
   .justifyBetween.footer_top {
     justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  h3 {
+    text-align: left;
+    font: normal normal bold 31px Open Sans;
+    letter-spacing: 0px;
+    color: black;
+    opacity: 1;
+  }
+  .featured_post_card_overlay {
+    padding: 108px 26px 26px 26px;
+    min-width: 20px;
+  }
+
+  .featured_post_card_image {
+    flex-grow: 2;
+    max-width: 50%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .contentColumn {
@@ -1498,8 +1529,8 @@ input::placeholder {
 
   .featured_post_card {
     height: 502px;
-    min-width: 298px !important;
-    max-width: 298px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
     flex-grow: none;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -1513,7 +1544,7 @@ input::placeholder {
 
   .featured_post_card_image {
     min-height: 50%;
-    min-width: 298px !important;
+    min-width: 320px !important;
     object-fit: cover;
   }
   .featured_post_card_overlay {
@@ -1563,6 +1594,7 @@ input::placeholder {
     opacity: 1;
     margin-right: 15px;
   }
+
   .subheadline {
     margin-bottom: 0px;
   }
@@ -1749,7 +1781,7 @@ input::placeholder {
   .project_directory_line {
     padding-bottom: 7px;
     margin-bottom: 0px;
-    border-bottom: 1px solid var(--menuGrey);
+    border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
   }
 
   .my-masonry-grid_column {
@@ -1826,9 +1858,6 @@ input::placeholder {
     height: 40px;
     right: 0;
   }
-  .buttonOnWrapList {
-    margin-top: 20px;
-  }
 
   .horizontalScroll .tag_button {
     margin-bottom: 30px;
@@ -1836,6 +1865,10 @@ input::placeholder {
 
   .horizontalScroll .tag_button {
     margin-bottom: 19px;
+  }
+
+  .fcButton {
+    padding: 5px 10px 5px 10px;
   }
 }
 
@@ -1961,9 +1994,10 @@ input::placeholder {
     margin-top: 100px;
     margin-bottom: 25px;
   }
+
   .recap p {
     text-align: left;
-    font: normal normal 600 15px Open Sans;
+    font: normal normal 300 20px Open Sans !important;
     letter-spacing: 0px;
     color: #030000;
     opacity: 1;
@@ -1989,7 +2023,7 @@ input::placeholder {
   .content .header h2,
   .projectTitle {
     text-align: left;
-    font: normal normal bold 15px/20px Open Sans;
+    font: normal normal bold 20px Open Sans;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -2144,6 +2178,14 @@ input::placeholder {
   .contactDetails {
     margin-top: 80px;
   }
+
+  .projectList-item div {
+    flex-grow: 0;
+  }
+
+  .projectList-item:first-of-type {
+    margin-bottom: 15px;
+  }
 }
 
 @media only screen and (max-width: 390px) {
@@ -2205,6 +2247,16 @@ input::placeholder {
     box-shadow: 3px 3px 0px 0px #ff0000;
     padding: 2px;
     margin-top: 0px;
+  }
+  .footerLogo {
+    /* margin-right: 83px; */
+    min-height: 30px;
+    max-height: 90px;
+    z-index: 99999999 !important;
+    min-width: 30px;
+  }
+  footer {
+    min-height: 200px;
   }
 }
 

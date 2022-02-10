@@ -63,16 +63,16 @@ export default function FeaturedCard({ post }) {
               ))}
           </div>
         </div>
-        <div className="flex-row post_category_list">
+        <div className="flex-row align-center post_category_list">
           {post.categories &&
             post.categories.map((category, index) => (
-              <div key={index}>
+              <div key={index} className="buttonOnWrapList">
                 {category.title === "Freebie" ||
                   (category.title === "Freebie" ? (
                     <></>
                   ) : (
                     <a
-                      className="standardTransparent-button buttonOnWrapList"
+                      className="standardTransparent-button fcButton"
                       key={index}
                       href={category.slug.current}
                     >
@@ -84,7 +84,7 @@ export default function FeaturedCard({ post }) {
             ))}
           <Link
             to={"/projects/" + post.slug.current}
-            className="w-full teaser-link standard-button tag active extraBorder buttonOnWrapList"
+            className="w-full teaser-link standard-button tag active extraBorder buttonOnWrapList fcButton"
           >
             See project
           </Link>

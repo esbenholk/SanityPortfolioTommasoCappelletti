@@ -72,7 +72,7 @@ export default function Footer() {
               )}
             </NavLink>
 
-            {width > 1200 ? (
+            {width > 1310 ? (
               <div className="flex-row">
                 <NavLink to="/about" className={"footer_menu_link menu_limk"}>
                   <h2 className="header-object">About</h2>
@@ -93,7 +93,7 @@ export default function Footer() {
             ) : null}
           </div>
 
-          {width > 1200 ? (
+          {width > 1310 ? (
             <div className="flex-row ">
               {info.socialMediaHandles &&
                 info.socialMediaHandles.slice(0, 4).map((handle, index) => (
@@ -114,7 +114,7 @@ export default function Footer() {
         </div>
 
         <div className="footer_bottom">
-          {width > 1200 && info.contact ? (
+          {width > 1310 && info.contact ? (
             <div className="blockContent thirtypercentOpacity ">
               <BlockContent blocks={info.contact} />
             </div>

@@ -88,10 +88,7 @@ function App() {
             const category = post.categories[index];
 
             if (categories.some((item) => item.title === category.title)) {
-            } else if (
-              category.title !== "Freebie" ||
-              category.title === "Freebie"
-            ) {
+            } else if (category.title !== "Freebie") {
               categories.push(category);
             }
           }
