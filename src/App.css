@@ -1266,13 +1266,22 @@ footer {
 input {
   border-bottom: 2px var(--menuGrey) solid !important;
   padding: 5px;
+  font-size: 16px;
 }
 input::placeholder {
   text-align: left;
-  font: normal normal normal 14px Open Sans;
+  font: normal normal normal 16px Open Sans !important;
   letter-spacing: 0px;
   color: #000000;
   opacity: 0.6;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
 }
 
 /* loading-animation */
