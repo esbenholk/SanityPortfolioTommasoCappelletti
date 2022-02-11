@@ -1,6 +1,6 @@
 import React from "react";
 import sanityClient from "../../client";
-// import { Image } from "react-native";
+import { motion } from "framer-motion";
 
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -20,7 +20,10 @@ export default function Image(props) {
       {image && (
         <>
           {image.hotspot ? (
-            <img
+            <motion.img
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               src={urlFor(image.asset)}
               key={image.asset._ref}
               alt={image.alt}
@@ -32,7 +35,10 @@ export default function Image(props) {
               className={classs}
             />
           ) : (
-            <img
+            <motion.img
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               src={urlFor(image.asset)}
               key={image.asset._ref}
               alt={image.alt}

@@ -6,7 +6,8 @@ import "./App.css";
 import sanityClient from "./client";
 import Header from "./components/Header_function";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+
 import Footer from "./components/Footer";
 
 import AppContext from "./globalState";
@@ -68,11 +69,25 @@ function App() {
         setProjectList(data);
       })
       .catch(console.error);
+
+    sanityClient
+      .fetch('*[_type == "category"]{ title, slug, description, priority}')
+      .then((data) => {
+        data.sort((a, b) => a.priority - b.priority);
+        console.log("has categories", data);
+        // for (let index = 0; index < data.length; index++) {
+        //   const category = data[index];
+        //   if (category.title !== "Freebie") {
+        //     categories.push(category);
+        //   }
+        // }
+        setCategories(data);
+      })
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
     var tags = [];
-    var categories = [];
     if (projectList) {
       for (let index = 0; index < projectList.length; index++) {
         const post = projectList[index];
@@ -83,23 +98,9 @@ function App() {
             tags.push(tag);
           }
         }
-        if (post.categories != null && Array.isArray(post.categories)) {
-          for (let index = 0; index < post.categories.length; index++) {
-            const category = post.categories[index];
-
-            if (categories.some((item) => item.title === category.title)) {
-            } else if (category.title !== "Freebie") {
-              categories.push(category);
-            }
-          }
-        }
       }
-
       let sortedTags = [...new Set(tags)];
       setTags(sortedTags);
-
-      let sortedCategories = [...new Set(categories)];
-      setCategories(sortedCategories);
     }
   }, [projectList]);
 
@@ -167,7 +168,13 @@ function App() {
             )}
 
             <AnimatePresence>
-              <div className="mainContainer" ref={mainRef}>
+              <motion.div
+                className="mainContainer"
+                ref={mainRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
                 <ScrollToTop>
                   <Switch>
                     <Route exact path="/">
@@ -195,7 +202,7 @@ function App() {
                     </Route>
                   </Switch>
                 </ScrollToTop>
-              </div>
+              </motion.div>
             </AnimatePresence>
             {siteSettings && <Footer />}
           </BrowserRouter>

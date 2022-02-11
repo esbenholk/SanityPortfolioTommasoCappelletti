@@ -41,6 +41,8 @@ export default function Category() {
         setProjectList(data[0].posts);
       })
       .catch(console.error);
+    
+  
   }, [slug]);
 
   return (

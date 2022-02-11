@@ -678,14 +678,17 @@ h1 {
   border-bottom: 1px solid var(--menuGrey);
 }
 
-.basketCard_image {
+.basketCard_image_link {
   width: 30%;
   /* padding-bottom: 50%; */
   position: relative;
   overflow: hidden;
   position: relative;
 }
-.basketCard_image img {
+.basketCard_image_link .basketCard_image {
+  width: 100%;
+}
+.basketCard_image_link .basketCard_image img {
   position: absolute;
   top: 0;
   right: 0;
@@ -844,6 +847,7 @@ nav .logo_container img {
   width: auto;
   position: relative;
   margin-right: 3px;
+  white-space: nowrap;
 }
 
 .thumbnail {
@@ -1267,12 +1271,16 @@ input {
   border-bottom: 2px var(--menuGrey) solid !important;
   padding: 5px;
   font-size: 16px;
+  text-align: left;
+  font: normal normal normal 16px Open Sans !important;
+  letter-spacing: 0px;
+  color: #000000;
 }
 input::placeholder {
   text-align: left;
   font: normal normal normal 16px Open Sans !important;
   letter-spacing: 0px;
-  color: #000000;
+  color: black;
   opacity: 0.6;
 }
 
@@ -1281,6 +1289,10 @@ input::placeholder {
   textarea,
   input {
     font-size: 16px;
+    text-align: left;
+    font: normal normal normal 16px Open Sans !important;
+    letter-spacing: 0px;
+    color: #000000;
   }
 }
 
@@ -1348,6 +1360,15 @@ input::placeholder {
   }
   100% {
     transform: scale(-1, -1);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

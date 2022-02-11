@@ -6,13 +6,29 @@ class Loader extends React.Component {
 
     this.state = {};
   }
+  componentWillUnmount() {
+    console.log("unmo");
+  }
 
   render() {
     return (
       <>
-        <div className="cell">
+        {/* <div className="cell">
           <div className="circle gelatine"></div>
-        </div>
+        </div> */}
+        <div
+          style={{
+            position: "fixed",
+            top: "0",
+            right: "0",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "white",
+            zIndex: "99999999999999999",
+            opacity: "1",
+            animation: `fadeOut 2s`,
+          }}
+        ></div>
       </>
     );
   }

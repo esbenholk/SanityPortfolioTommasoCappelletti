@@ -367,21 +367,24 @@ export default function SinglePost({ updatebasket, basket }) {
                     <BlockContent blocks={singlePost.recap} />
                   </div>
                 )}
-                <div className="content">
-                  <div className="flex-row justifyBetween header  topLineOnDesktop">
-                    <h2>Project details</h2>
-                    <img
-                      src="../assets/Arrowright.svg"
-                      className="arrow"
-                      alt="down arrow button"
-                      style={{
-                        transform: "rotate(90deg)",
-                      }}
-                    />
-                  </div>
 
-                  <BlockContent blocks={singlePost.body} />
-                </div>
+                {singlePost.body && (
+                  <div className="content">
+                    <div className="flex-row justifyBetween header  topLineOnDesktop">
+                      <h2>Project details</h2>
+                      <img
+                        src="../assets/Arrowright.svg"
+                        className="arrow"
+                        alt="down arrow button"
+                        style={{
+                          transform: "rotate(90deg)",
+                        }}
+                      />
+                    </div>
+
+                    <BlockContent blocks={singlePost.body} />
+                  </div>
+                )}
               </div>
             </div>
           ) : null}
@@ -395,7 +398,7 @@ export default function SinglePost({ updatebasket, basket }) {
               <h2 className="projectTitle">{singlePost.title}</h2>
               {singlePost.abbreviated_year ? (
                 <>
-                  <div className=" year_price flex-row align-top">
+                  <div className=" year_price flex-row align-top no-wrap">
                     <p>20</p>
                     <p>{singlePost.abbreviated_year}</p>
                   </div>
@@ -532,21 +535,23 @@ export default function SinglePost({ updatebasket, basket }) {
                       <BlockContent blocks={singlePost.recap} />
                     </div>
                   )}
-                  <div className="content">
-                    <div className="flex-row justifyBetween header">
-                      <h2>Project details</h2>
-                      <img
-                        src="../assets/Arrowright.svg"
-                        className="arrow"
-                        alt="down arrow button"
-                        style={{
-                          transform: "rotate(90deg)",
-                        }}
-                      />
-                    </div>
+                  {singlePost.body && (
+                    <div className="content">
+                      <div className="flex-row justifyBetween header">
+                        <h2>Project details</h2>
+                        <img
+                          src="../assets/Arrowright.svg"
+                          className="arrow"
+                          alt="down arrow button"
+                          style={{
+                            transform: "rotate(90deg)",
+                          }}
+                        />
+                      </div>
 
-                    <BlockContent blocks={singlePost.body} />
-                  </div>
+                      <BlockContent blocks={singlePost.body} />
+                    </div>
+                  )}
                 </>
               ) : null}
             </div>

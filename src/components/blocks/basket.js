@@ -31,13 +31,25 @@ export default function Basket({
     );
   };
 
-  const FullCart = (props) => {
+  const FullCart = (mail) => {
     return (
       <>
         {basket_message ? (
           <>
-            <h2>{basket_message}</h2>
-            <p onClick={() => updatebasket("")}>Continue browsing</p>
+            {basket_message !== "remove" ? (
+              <>
+                {" "}
+                <h2>
+                  {basket_message}{" "}
+                  <p onClick={() => updatebasket("")}>Continue browsing</p>
+                </h2>{" "}
+              </>
+            ) : (
+              <>
+                <h2>Something catches your eye! Wanna drop a line?</h2>
+                <a href={"mailto:" + mail}>Contact me</a>
+              </>
+            )}
           </>
         ) : (
           <h2>Something catches your eye! Wanna drop a line?</h2>
@@ -96,7 +108,7 @@ export default function Basket({
               {basket.length === 0 ? (
                 <EmptyCart email={info.email} />
               ) : (
-                <FullCart />
+                <FullCart email={info.email} />
               )}
             </div>
             <div className="foldoutDiv">

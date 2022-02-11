@@ -79,6 +79,7 @@ export default function ContactUs(basket) {
           style={{ flex: "2" }}
           name="message"
           placeholder="Hello, I am interested in the following projects:"
+          autocomplete="off"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </div>

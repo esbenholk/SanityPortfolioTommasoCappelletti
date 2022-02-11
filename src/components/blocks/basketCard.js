@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Link } from "react-router-dom";
 
@@ -11,8 +11,6 @@ export default function BasketCard({
   removeFromCart,
   openMenu,
 }) {
-  const [isShown, setIsShown] = useState(false);
-
   function remove() {
     removeFromCart(post);
   }
@@ -22,29 +20,24 @@ export default function BasketCard({
 
   return (
     <div className={classssss + " flex-row align-top basketCard"}>
-      {post.productImage ? (
-        <div
-          className="basketCard_image"
-          onMouseEnter={() => setIsShown(true)}
-          onMouseLeave={() => setIsShown(false)}
-        >
-          <>
-            {isShown ? (
-              <div className="squareImage">
-                <Image image={post.mainImage} />
-              </div>
-            ) : (
-              <div className="squareImage">
-                <Image image={post.productImage} />
-              </div>
-            )}
-          </>
-        </div>
-      ) : (
-        <div className="squareImage">
-          <Image image={post.mainImage} />
-        </div>
-      )}
+      <Link
+        to={"/projects/" + post.slug.current}
+        key={post.slug.current + ""}
+        className="basketCard_image_link"
+        onClick={closeMenuLocal}
+      >
+        {post.productImage ? (
+          <div className="basketCard_image">
+            <div className="squareImage">
+              <Image image={post.productImage} />
+            </div>
+          </div>
+        ) : (
+          <div className="squareImage">
+            <Image image={post.mainImage} />
+          </div>
+        )}
+      </Link>
 
       <div className="details">
         <Link
