@@ -22,11 +22,26 @@ export default function Basket({
   const EmptyCart = (mail) => {
     return (
       <>
-        <h2>Your cart is empty.</h2>
-        <p>
-          If your want to contact me without project references{" "}
-          <a href={"mailto:" + mail}>Send email now</a>
-        </p>
+        {basket_message ? (
+          <>
+            {basket_message !== "Thanks for shopping with us" ? (
+              <>
+                <h2>Your cart is empty.</h2>
+                <p>
+                  If your want to contact me without project references{" "}
+                  <a href={"mailto:" + mail}>Send email now</a>
+                </p>
+              </>
+            ) : (
+              <>
+                <h2> {basket_message} </h2>
+                {/* <a href={"mailto:" + mail}>Contact me</a> */}
+              </>
+            )}
+          </>
+        ) : (
+          <h2>Something catches your eye! Wanna drop a line?</h2>
+        )}
       </>
     );
   };
@@ -73,7 +88,7 @@ export default function Basket({
   function emptyBasket() {
     var emptyBasket = [];
     myContext.setBasket(emptyBasket);
-    updatebasket("Thank you for reaching out");
+    updatebasket("Thanks for shopping with us");
   }
   return (
     <>

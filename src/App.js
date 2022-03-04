@@ -122,27 +122,15 @@ function App() {
 
   function updatebasket(string) {
     if (string !== "remove") {
-      setIsBasketOpen(!isBasketOpen);
+      if (string !== "Thanks for shopping with us") {
+        setIsBasketOpen(!isBasketOpen);
+      }
     }
     setBasket_message(string);
   }
 
   return (
     <>
-      {/* <Head>
-        <title>{post[0]?.title}</title>
-        <meta name="description" content={`${post[0]?.excerpt}`} />
-        <meta property="og:title" content={post[0]?.title} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${fullUrl}`} />
-        <meta
-          property="og:image"
-          content={`${
-            post[0]?.featured_image?.formats?.thumbnail?.url ||
-            post[0]?.featured_image?.url
-          }`}
-        />
-      </Head> */}
       <main>
         <Suspense fallback={<Loader />}>
           <AppContext.Provider value={globalContext}>
