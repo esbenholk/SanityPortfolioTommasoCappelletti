@@ -102,9 +102,11 @@ export default function Home() {
         }
       >
         {info ? (
-          <div className="flex-row align-top">
+          <div className="flex-row align-top reverse-direction">
             {width > 900 && info.authorImage ? (
-              <Image image={info.authorImage} class={"authorImage"} />
+              <>
+                <Image image={info.authorImage} class={"authorImage"} />
+              </>
             ) : null}
             <div className="aboutSection">
               <div>
@@ -116,13 +118,6 @@ export default function Home() {
                   About Tomato Cappelletti
                 </motion.h1>
 
-                {width < 900 && info.authorImage ? (
-                  <Image
-                    image={info.authorImage}
-                    class={"mainImage fullwidth authorImage"}
-                  />
-                ) : null}
-
                 {info.about ? (
                   <div
                     className={
@@ -133,6 +128,13 @@ export default function Home() {
                   >
                     <BlockContent blocks={info.about} />
                   </div>
+                ) : null}
+
+                {width < 900 && info.authorImage ? (
+                  <Image
+                    image={info.authorImage}
+                    class={"mainImage fullwidth authorImage"}
+                  />
                 ) : null}
               </div>
             </div>
@@ -148,7 +150,7 @@ export default function Home() {
         }
       >
         {pressList && (
-          <div className="projectList-item" style={{ marginTop: "45px" }}>
+          <div className="projectList-item">
             <h1 className="categories">Press</h1>
             <div>
               <h1 className="hidden">Category</h1>

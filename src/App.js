@@ -128,87 +128,106 @@ function App() {
   }
 
   return (
-    <main>
-      <Suspense fallback={<Loader />}>
-        <AppContext.Provider value={globalContext}>
-          <BrowserRouter>
-            {siteSettings && (
-              <>
-                {" "}
-                {width > 1050 ? (
-                  <nav className="fullWidthPadded normPaddingMobile">
-                    <Header />
-                    <div className="flex-row" style={{ minWidth: "40%" }}>
-                      <Dropdown categories={categories} mainRef={mainRef} />
-                      <Basket
-                        basket={basket}
-                        basket_message={basket_message}
-                        isBasketOpen={isBasketOpen}
-                        updatebasket={updatebasket}
-                      />
-                    </div>
-                  </nav>
-                ) : (
-                  <>
-                    <nav className="fullWidthPadded" style={{ width: "100%" }}>
-                      <div className="flex-row" style={{ width: "100%" }}>
-                        <Header />
+    <>
+      {/* <Head>
+        <title>{post[0]?.title}</title>
+        <meta name="description" content={`${post[0]?.excerpt}`} />
+        <meta property="og:title" content={post[0]?.title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${fullUrl}`} />
+        <meta
+          property="og:image"
+          content={`${
+            post[0]?.featured_image?.formats?.thumbnail?.url ||
+            post[0]?.featured_image?.url
+          }`}
+        />
+      </Head> */}
+      <main>
+        <Suspense fallback={<Loader />}>
+          <AppContext.Provider value={globalContext}>
+            <BrowserRouter>
+              {siteSettings && (
+                <>
+                  {" "}
+                  {width > 1050 ? (
+                    <nav className="fullWidthPadded normPaddingMobile">
+                      <Header />
+                      <div className="flex-row" style={{ minWidth: "40%" }}>
+                        <Dropdown categories={categories} mainRef={mainRef} />
                         <Basket
                           basket={basket}
-                          isBasketOpen={isBasketOpen}
                           basket_message={basket_message}
+                          isBasketOpen={isBasketOpen}
                           updatebasket={updatebasket}
                         />
                       </div>
-                      <Dropdown categories={categories} mainRef={mainRef} />
                     </nav>
-                  </>
-                )}
-              </>
-            )}
+                  ) : (
+                    <>
+                      <nav
+                        className="fullWidthPadded"
+                        style={{ width: "100%" }}
+                      >
+                        <div className="flex-row" style={{ width: "100%" }}>
+                          <Header />
+                          <Basket
+                            basket={basket}
+                            isBasketOpen={isBasketOpen}
+                            basket_message={basket_message}
+                            updatebasket={updatebasket}
+                          />
+                        </div>
+                        <Dropdown categories={categories} mainRef={mainRef} />
+                      </nav>
+                    </>
+                  )}
+                </>
+              )}
 
-            <AnimatePresence>
-              <motion.div
-                className="mainContainer"
-                ref={mainRef}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <ScrollToTop>
-                  <Switch>
-                    <Route exact path="/">
-                      {siteSettings && (
-                        <LandingPage
-                          info={siteSettings}
-                          projectList={projectList}
-                        />
-                      )}
-                    </Route>
-                    <Route exact path="/projects/:slug">
-                      <SinglePost updatebasket={updatebasket} />
-                    </Route>
-                    <Route path="/projects">
-                      <ProjectList projectList={projectList} />
-                    </Route>
-                    <Route path="/about">
-                      <Home info={siteSettings} projectList={projectList} />
-                    </Route>
-                    <Route path="/loader">
-                      <Loader />
-                    </Route>
-                    <Route path="/:slug">
-                      <Category />
-                    </Route>
-                  </Switch>
-                </ScrollToTop>
-              </motion.div>
-            </AnimatePresence>
-            {siteSettings && <Footer />}
-          </BrowserRouter>
-        </AppContext.Provider>
-      </Suspense>
-    </main>
+              <AnimatePresence>
+                <motion.div
+                  className="mainContainer"
+                  ref={mainRef}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <ScrollToTop>
+                    <Switch>
+                      <Route exact path="/">
+                        {siteSettings && (
+                          <LandingPage
+                            info={siteSettings}
+                            projectList={projectList}
+                          />
+                        )}
+                      </Route>
+                      <Route exact path="/projects/:slug">
+                        <SinglePost updatebasket={updatebasket} />
+                      </Route>
+                      <Route path="/projects">
+                        <ProjectList projectList={projectList} />
+                      </Route>
+                      <Route path="/about">
+                        <Home info={siteSettings} projectList={projectList} />
+                      </Route>
+                      <Route path="/loader">
+                        <Loader />
+                      </Route>
+                      <Route path="/:slug">
+                        <Category />
+                      </Route>
+                    </Switch>
+                  </ScrollToTop>
+                </motion.div>
+              </AnimatePresence>
+              {siteSettings && <Footer />}
+            </BrowserRouter>
+          </AppContext.Provider>
+        </Suspense>
+      </main>
+    </>
   );
 }
 

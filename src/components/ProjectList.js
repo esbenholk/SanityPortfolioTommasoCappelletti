@@ -35,7 +35,7 @@ export default function Projects({ projectList }) {
     >
       <div className="projectList-item">
         <h1 className={width > 900 ? "categories" : "categories headline"}>
-          Project
+          Projects
         </h1>
         <div>
           <h1 className="hidden"> Category</h1>
@@ -80,24 +80,6 @@ export default function Projects({ projectList }) {
                 <Link to={"/projects/" + project.slug.current}>
                   {project.title ? project.title : "undefined"}
                 </Link>
-                {project.mainImage.hotspot && width > 900 ? (
-                  <img
-                    src={urlFor(project.mainImage.asset.url).url()}
-                    alt={project.mainImage.alt}
-                    style={{
-                      objectPosition: `${project.mainImage.hotspot.x * 100}% ${
-                        project.mainImage.hotspot.y * 100
-                      }%`,
-                    }}
-                    className="thumbnail seeOnHover hidden"
-                  />
-                ) : (
-                  <img
-                    src={urlFor(project.mainImage.asset.url).url()}
-                    alt={project.mainImage.alt}
-                    className="thumbnail seeOnHover hidden"
-                  />
-                )}
               </div>
             )}
             <div className="projectList-item">

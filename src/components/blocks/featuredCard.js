@@ -22,6 +22,7 @@ export default function FeaturedCard({ post }) {
 
   return (
     <div className="featured_post_card" key={post}>
+      {/* <Link to={"/projects/" + post.slug.current} key={post.slug.current}> */}
       {post.mainImage.hotspot ? (
         <img
           src={urlFor(post.mainImage.asset.url)}
@@ -40,6 +41,7 @@ export default function FeaturedCard({ post }) {
           className="featured_post_card_image"
         />
       )}
+      {/* </Link> */}
       <div
         className="featured_post_card_overlay"
         style={{ backgroundColor: color }}

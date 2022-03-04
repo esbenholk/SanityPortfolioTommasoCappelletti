@@ -230,7 +230,7 @@ export default function SinglePost({ updatebasket, basket }) {
           href="/projects"
           className="tag project_tag directoryTag thirtypercentOpacity"
         >
-          {"Project>"}
+          {"Project >"}
         </a>
         {singlePost.categories && (
           <Link
@@ -251,6 +251,22 @@ export default function SinglePost({ updatebasket, basket }) {
         className="flex-row align-top justifyBetween"
         style={{ alignItems: "stretch" }}
       >
+        <button
+          // onClick={clickHandler}
+          className="backArrow"
+          // onClick={(e) => {
+          //   clickHandler();
+          //   if (stopVideo) {
+          //     stopVideo();
+          //   }
+          // }}
+        >
+          <img
+            style={{ height: "22px", width: "22px" }}
+            src={`../assets/arrow_back.svg`}
+            alt="nextArrow"
+          />
+        </button>
         <div
           className={
             width < 600

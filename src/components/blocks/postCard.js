@@ -31,7 +31,7 @@ export default function PostCard({ post }) {
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
     >
-      {width > 700 && isShown ? (
+      {width > 700 && !isShown ? (
         <div
           className="post_card_overlay seeOnHover"
           style={{ backgroundColor: color }}
@@ -55,7 +55,7 @@ export default function PostCard({ post }) {
                 ))}
             </div>
           </div>
-          <div className="flex-row">
+          <div className="flex-row post_card_overlay_buttons">
             {post.categories &&
               post.categories.map((category, index) => (
                 <>
