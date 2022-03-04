@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import sanityClient from "../client";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 // import BlockContent from "@sanity/block-content-to-react";
 import ProductCard from "./blocks/productCard";
 import AddToCartButton from "./blocks/addToCart";
@@ -37,6 +37,8 @@ export default function SinglePost({ updatebasket, basket }) {
   const [lightBoxIndex, setLightBoxIndex] = useState(0);
 
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     sanityClient
@@ -251,16 +253,7 @@ export default function SinglePost({ updatebasket, basket }) {
         className="flex-row align-top justifyBetween"
         style={{ alignItems: "stretch" }}
       >
-        <button
-          // onClick={clickHandler}
-          className="backArrow"
-          // onClick={(e) => {
-          //   clickHandler();
-          //   if (stopVideo) {
-          //     stopVideo();
-          //   }
-          // }}
-        >
+        <button className="backArrow" onClick={() => history.goBack()}>
           <img
             style={{ height: "22px", width: "22px" }}
             src={`../assets/arrow_back.svg`}

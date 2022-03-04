@@ -93,7 +93,7 @@ export default function Basket({
 
       <div>
         <div
-          className={isBasketOpen ? "overlay active" : "overlay"}
+          className={isBasketOpen ? "megaOverlay active" : "overlay"}
           onClick={() => updatebasket("")}
         ></div>
         <div className={isBasketOpen ? "foldout active" : "foldout"}>

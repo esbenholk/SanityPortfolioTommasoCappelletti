@@ -129,12 +129,17 @@ export default function LandingPage() {
 
       {projectList ? (
         <div className="regContainer">
-          <motion.h1 className="flex-column fullWidthPadded noMargin">
-            More skills and ideas
-          </motion.h1>
-          <motion.h1 className="subheadline flex-column fullWidthPadded">
-            What do you want to see more of?
-          </motion.h1>
+          {info.More_skills_and_ideas && (
+            <motion.h1 className="flex-column fullWidthPadded noMargin">
+              {info.More_skills_and_ideas}{" "}
+            </motion.h1>
+          )}
+          {info.More_skills_and_ideas2 && (
+            <motion.h1 className="subheadline flex-column fullWidthPadded">
+              {info.More_skills_and_ideas2}{" "}
+            </motion.h1>
+          )}
+
           <Projects
             projectList={projectList}
             show_categories={true}

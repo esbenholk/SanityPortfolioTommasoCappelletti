@@ -94,6 +94,8 @@ export default function Projects({ projectList }) {
                           key={index}
                           id={"category_" + category.title + ""}
                           to={category.slug.current}
+                          onMouseEnter={hover}
+                          onMouseLeave={hover}
                         >
                           {category.title}
                           {index + 1 !== project.categories.length
@@ -106,7 +108,11 @@ export default function Projects({ projectList }) {
             </div>
 
             {width > 900 ? (
-              <p className="flex-row align-left">
+              <p
+                className="flex-row align-left"
+                onMouseEnter={hover}
+                onMouseLeave={hover}
+              >
                 {project.year ? project.year : "undefined"}{" "}
                 {project.yearString ? <u>{project.yearString}</u> : null}
               </p>
