@@ -1396,7 +1396,7 @@ input::placeholder {
   background-color: rgba(0, 0, 0, 0);
   border: rgba(0, 0, 0, 0);
   padding: 30px 27px 30px 25px;
-  z-index: 9999999999;
+  z-index: 9;
   mix-blend-mode: difference;
   opacity: 0.4;
   display: none;
