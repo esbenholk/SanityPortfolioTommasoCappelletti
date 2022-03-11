@@ -51,13 +51,14 @@ export default function Projects({ projectList }) {
               <>
                 <div key={index} className="projectList-item">
                   {width > 900 ? (
-                    <div
-                      onMouseEnter={hover}
-                      onMouseLeave={hover}
-                      className="categories"
-                    >
+                    <div className="categories">
                       {" "}
-                      <Link to={project.slug.current}>
+                      <Link
+                        to={project.slug.current}
+                        class="underlined"
+                        onMouseEnter={hover}
+                        onMouseLeave={hover}
+                      >
                         {project.title ? project.title : "undefined"}
                       </Link>
                       {project.mainImage.hotspot && width > 900 ? (
@@ -82,7 +83,7 @@ export default function Projects({ projectList }) {
                   ) : (
                     <div className="categories">
                       {" "}
-                      <Link to={project.slug.current}>
+                      <Link to={project.slug.current} class="underlined">
                         {project.title ? project.title : "undefined"}
                       </Link>
                     </div>
@@ -99,6 +100,7 @@ export default function Projects({ projectList }) {
                                 key={index}
                                 id={"category_" + category.title + ""}
                                 to={"/category/" + category.slug.current}
+                                class="underlined"
                               >
                                 {category.title}
                                 {index + 1 !== project.categories.length

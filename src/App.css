@@ -678,7 +678,8 @@ h1 {
   width: 90%;
 }
 .foldoutHeader h2 {
-  margin-top: 40px;
+  margin-top: 70px;
+  font-size: 27px;
 }
 .foldoutHeader p {
   text-align: left;
@@ -1529,6 +1530,11 @@ input::placeholder {
 @media only screen and (max-width: 1050px) {
   .backArrow {
     display: block;
+  }
+
+  .foldoutHeader h2 {
+    margin-top: 40px;
+    font-size: 19px;
   }
 
   .foldout {
@@ -2406,6 +2412,7 @@ iframe {
   width: 100% !important;
   min-width: 100% !important;
 }
+.underlined,
 .externalLink {
   text-decoration: underline !important;
 }

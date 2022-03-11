@@ -35,12 +35,34 @@ export default function Basket({
             ) : (
               <>
                 <h2> {basket_message} </h2>
-                {/* <a href={"mailto:" + mail}>Contact me</a> */}
+
+                {basket_message !== "Thanks for shopping with us" ? (
+                  <></>
+                ) : (
+                  <>
+                    <p>
+                      We've delivered your cart selection to your mailbox! We
+                      received your message.{" "}
+                      <u
+                        onClick={() => updatebasket("")}
+                        className="underlined"
+                      >
+                        Continue browsing
+                      </u>
+                    </p>
+                  </>
+                )}
               </>
             )}
           </>
         ) : (
-          <h2>Something catches your eye! Wanna drop a line?</h2>
+          <>
+            <h2>Your cart is empty.</h2>
+            <p>
+              Add something in your cart to contact me.{" "}
+              <a href={"mailto:" + mail}>Or drop a line</a>
+            </p>
+          </>
         )}
       </>
     );
@@ -56,18 +78,34 @@ export default function Basket({
                 {" "}
                 <h2>
                   {basket_message}{" "}
-                  <p onClick={() => updatebasket("")}>Continue browsing</p>
+                  <p onClick={() => updatebasket("")} className="underlined">
+                    Continue browsing
+                  </p>
                 </h2>{" "}
               </>
             ) : (
               <>
-                <h2>Something catches your eye! Wanna drop a line?</h2>
-                <a href={"mailto:" + mail}>Contact me</a>
+                <h2>Something catches your eye!</h2>
+                <p>
+                  Wanna drop a line? We'll get your message and your cart
+                  selection, and send a copy to your inbox.
+                </p>
               </>
             )}
           </>
         ) : (
-          <h2>Something catches your eye! Wanna drop a line?</h2>
+          <>
+            <h2>Something catches your eye!</h2>
+            <p
+              className="underlined"
+              onClick={() => {
+                setEmailIsOpen(!emailIsOpen);
+                updatebasket("remove");
+              }}
+            >
+              Contact me
+            </p>
+          </>
         )}
       </>
     );
@@ -89,6 +127,7 @@ export default function Basket({
     var emptyBasket = [];
     myContext.setBasket(emptyBasket);
     updatebasket("Thanks for shopping with us");
+    setEmailIsOpen(!emailIsOpen);
   }
   return (
     <>
@@ -169,7 +208,10 @@ export default function Basket({
                       {!emailIsOpen ? (
                         <button
                           className="addToCartButton"
-                          onClick={() => setEmailIsOpen(!emailIsOpen)}
+                          onClick={() => {
+                            setEmailIsOpen(!emailIsOpen);
+                            updatebasket("remove");
+                          }}
                         >
                           Contact Me
                         </button>

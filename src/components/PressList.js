@@ -21,7 +21,7 @@ function hover(e) {
   toggleHover({ e });
 }
 
-export default function Projects({}) {
+export default function Projects() {
   const { width } = useWindowDimensions();
   const [pressList, setPressList] = useState();
 
@@ -72,6 +72,7 @@ export default function Projects({}) {
                         href={project.url}
                         target={"_blank"}
                         rel="noopener noreferrer"
+                        class="underlined"
                       >
                         {project.title ? project.title : "undefined"}
                       </a>
@@ -97,7 +98,7 @@ export default function Projects({}) {
                   ) : (
                     <div className="categories">
                       {" "}
-                      <Link to={project.slug.current}>
+                      <Link to={project.slug.current} class="underlined">
                         {project.title ? project.title : "undefined"}
                       </Link>
                     </div>
@@ -112,6 +113,7 @@ export default function Projects({}) {
                             ) : (
                               <Link
                                 key={index}
+                                class="underlined"
                                 id={"category_" + category.title + ""}
                                 to={"/category/" + category.slug.current}
                               >
