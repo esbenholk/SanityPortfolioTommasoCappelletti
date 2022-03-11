@@ -410,6 +410,21 @@ export default function SinglePost({ updatebasket, basket }) {
                     </div>
 
                     <BlockContent blocks={singlePost.body} />
+
+                    {/* {singlePost.videos && singlePost.videos.length >= 0 ? (
+                      <>
+                        {singlePost.videos.map((video, index) => (
+                          <VideoPlayer
+                            video={video}
+                            key={index}
+                            showThumb={true}
+                            isPlaying={isPlaying}
+                          />
+                        ))}
+                      </>
+                    ) : (
+                      <></>
+                    )} */}
                   </div>
                 )}
               </div>
@@ -585,21 +600,6 @@ export default function SinglePost({ updatebasket, basket }) {
                   )}
                 </>
               ) : null}
-
-              {singlePost.videos && singlePost.videos.length >= 0 ? (
-                <>
-                  {singlePost.videos.map((video, index) => (
-                    <VideoPlayer
-                      video={video}
-                      key={index}
-                      showThumb={true}
-                      isPlaying={isPlaying}
-                    />
-                  ))}
-                </>
-              ) : (
-                <></>
-              )}
             </div>
           </div>
         </div>
