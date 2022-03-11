@@ -133,6 +133,27 @@ function App() {
 
   return (
     <>
+      {siteSettings && (
+        <html>
+          <head>
+            <meta
+              property="og:URL"
+              content={siteSettings.mainImage.asset.url}
+            />
+            <meta
+              property="og:image"
+              content={siteSettings.mainImage.asset.url}
+            />{" "}
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+          </head>
+          <noscript>You need to enable JavaScript to run this app.</noscript>
+          <div id="root"></div>
+        </html>
+      )}
+
       <main>
         <Suspense fallback={<Loader />}>
           <AppContext.Provider value={globalContext}>
