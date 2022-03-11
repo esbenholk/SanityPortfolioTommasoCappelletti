@@ -32,7 +32,7 @@ export default function ProductCard(props) {
   return (
     <div className={"product_card"}>
       <Link
-        to={post.slug.current}
+        to={"../" + post.slug.current}
         // href={"/projects/" + post.slug.current}
         key={post.slug.current + "productCard"}
         className="w-full teaser-link"
@@ -79,7 +79,12 @@ export default function ProductCard(props) {
         {post.abbreviated_year ? (
           <>
             <div className="year_price flex-row align-top">
-              <p>20</p>
+              {post.abbreviated_year2 ? (
+                <p>{post.abbreviated_year2}</p>
+              ) : (
+                <p>20</p>
+              )}
+
               <p>{post.abbreviated_year}</p>
             </div>
           </>

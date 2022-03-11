@@ -34,6 +34,15 @@ export default function Header() {
               ) : null}
             </>
           ) : null}
+          {width > 1500 ? (
+            <>
+              {width > 1500 || width < 1050 ? (
+                <NavLink to="/press" className={"menu_link"}>
+                  <h2 className="header-object">Press</h2>
+                </NavLink>
+              ) : null}
+            </>
+          ) : null}
         </div>
       </div>
     </>

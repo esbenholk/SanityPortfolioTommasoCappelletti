@@ -1,6 +1,5 @@
-import React from "react";
-
 import sanityClient from "../client";
+import React, { useState, useEffect } from "react";
 
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -22,8 +21,20 @@ function hover(e) {
   toggleHover({ e });
 }
 
-export default function Projects({ projectList }) {
+export default function Projects({}) {
   const { width } = useWindowDimensions();
+  const [pressList, setPressList] = useState();
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        '*[_type == "press"]{title,mainImage{asset->{_id,url}, hotspot, alt}, url, year, categories[]->{title, slug}, yearString}'
+      )
+      .then((press) => {
+        setPressList(press);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <motion.div
@@ -35,15 +46,15 @@ export default function Projects({ projectList }) {
     >
       <div className="projectList-item">
         <h1 className={width > 900 ? "categories" : "categories headline"}>
-          Projects
+          Press
         </h1>
         <div>
           <h1 className="hidden"> Category</h1>
         </div>
         {width > 900 ? <h1>Year</h1> : null}
       </div>
-      {projectList &&
-        projectList.map((project, index) => (
+      {pressList &&
+        pressList.map((project, index) => (
           <>
             {project.categories[0].title === "Creative" ? (
               <></>
@@ -57,9 +68,13 @@ export default function Projects({ projectList }) {
                       className="categories"
                     >
                       {" "}
-                      <Link to={project.slug.current}>
+                      <a
+                        href={project.url}
+                        target={"_blank"}
+                        rel="noopener noreferrer"
+                      >
                         {project.title ? project.title : "undefined"}
-                      </Link>
+                      </a>
                       {project.mainImage.hotspot && width > 900 ? (
                         <img
                           src={urlFor(project.mainImage.asset.url).url()}

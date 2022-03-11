@@ -24,7 +24,7 @@ class Dropdown extends React.Component {
           onClick={this.handleClick}
         >
           <div className="dropdown__text flex-row justifyBetween no-wrap">
-            <div className="flex-row no-wrap">
+            <div className="flex-row no-wrap fullwidth">
               <img
                 src="/assets/SearchIcon.svg"
                 alt="search icon"

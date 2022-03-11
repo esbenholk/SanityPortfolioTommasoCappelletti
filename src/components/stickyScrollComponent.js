@@ -53,7 +53,7 @@ export default function SinglePost({ updatebasket, basket }) {
         setImagesGallery(data[0].imagesGallery);
         sanityClient
           .fetch(
-            '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
+            '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year,abbreviated_year2, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}'
           )
           .then((relatedData) => {
             const relatedProjects = [];
@@ -228,12 +228,20 @@ export default function SinglePost({ updatebasket, basket }) {
         </div>
       )}
       <div className="flex-row project_directory_line">
-        <a
-          href="/projects"
-          className="tag project_tag directoryTag thirtypercentOpacity"
-        >
-          {"Project >"}
-        </a>
+        <>
+          {" "}
+          {singlePost.categories[0].title === "Creative" ? (
+            <></>
+          ) : (
+            <a
+              href="/projects"
+              className="tag project_tag directoryTag thirtypercentOpacity"
+            >
+              {"Project >"}
+            </a>
+          )}
+        </>
+
         {singlePost.categories && (
           <Link
             to={"../" + singlePost.categories[0].slug.current}
@@ -380,7 +388,7 @@ export default function SinglePost({ updatebasket, basket }) {
                 {singlePost.body && (
                   <div className="content">
                     <div className="flex-row justifyBetween header  topLineOnDesktop">
-                      <h2>Project details</h2>
+                      <h2>Details</h2>
                       <img
                         src="../assets/Arrowright.svg"
                         className="arrow"
@@ -408,7 +416,11 @@ export default function SinglePost({ updatebasket, basket }) {
               {singlePost.abbreviated_year ? (
                 <>
                   <div className=" year_price flex-row align-top no-wrap">
-                    <p>20</p>
+                    {singlePost.abbreviated_year2 ? (
+                      <p>{singlePost.abbreviated_year2}</p>
+                    ) : (
+                      <p>20</p>
+                    )}
                     <p>{singlePost.abbreviated_year}</p>
                   </div>
                 </>

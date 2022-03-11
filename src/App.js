@@ -24,6 +24,8 @@ import Loader from "./components/blocks/loader";
 const SinglePost = lazy(() => import("./components/stickyScrollComponent.js"));
 const LandingPage = lazy(() => import("./components/LandingPage.js"));
 const ProjectList = lazy(() => import("./components/ProjectList.js"));
+const PressList = lazy(() => import("./components/PressList.js"));
+
 const Category = lazy(() => import("./components/Category.js"));
 // const Home = lazy(() => import("./components/Home.js"));
 
@@ -62,7 +64,7 @@ function App() {
     ////get all the projects
     sanityClient
       .fetch(
-        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, star_rating ,slug, categories[]->{title, slug}, tags, color, recap,description, yearString}'
+        '*[_type == "project"]{title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, abbreviated_year2, star_rating ,slug, categories[]->{title, slug}, tags, color, recap,description, yearString}'
       )
       .then((data) => {
         data.sort((a, b) => b.year - a.year);
@@ -203,6 +205,9 @@ function App() {
                       </Route>
                       <Route path="/category/:slug">
                         <Category />
+                      </Route>
+                      <Route exact path="/press">
+                        <PressList />
                       </Route>
                       <Route exact path="/:slug">
                         <SinglePost updatebasket={updatebasket} />
