@@ -39,6 +39,10 @@ export default class VideoPlayer extends React.Component {
             style={{
               width: "100%",
               height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+              alignItems: "center",
             }}
           >
             <ReactPlayer
