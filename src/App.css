@@ -2411,27 +2411,29 @@ input::placeholder {
 
 .videoContainer div:nth-child(1),
 .videoContainer div:nth-child(2) {
-  position: absolute;
-  top: 0;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
   bottom: 0;
-  left: 0;
+  left: 0 !important;
   right: 0;
   width: 100px;
-  min-width: 100%;
+  min-width: 100% !important;
   height: 100px;
-  min-height: 100%;
+  min-height: 100% !important;
+}
 }
 iframe {
-  display: block;
-  position: absolute;
-  top: 0;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
   bottom: 0;
-  left: 0;
+  left: 0 !important;
   right: 0;
   width: 100px;
-  min-width: 100%;
+  min-width: 100% !important;
   height: 100px;
-  min-height: 100%;
+  min-height: 100% !important;
 }
 .underlined,
 .externalLink {

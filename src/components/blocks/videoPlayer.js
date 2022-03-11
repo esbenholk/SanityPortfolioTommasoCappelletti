@@ -47,6 +47,7 @@ export default class VideoPlayer extends React.Component {
               position: "absolute",
               top: "0",
               left: "0",
+              border: "2px solid pink",
             }}
             className="videoContainer"
           >
@@ -101,6 +102,7 @@ export default class VideoPlayer extends React.Component {
               alignContent: "center",
               alignItems: "center",
               backgroundColor: "red",
+              border: "2px solid green",
             }}
             className="videoContainer"
           >
