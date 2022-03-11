@@ -333,6 +333,9 @@ export default function SinglePost({ updatebasket, basket }) {
                   breakpointCols={breakpointColumnsObj}
                   className="my-masonry-grid"
                   columnClassName="my-masonry-grid_column singleProjectMasonry"
+                  style={{
+                    backgroundColor: "yellow",
+                  }}
                 >
                   {imagesGallery.map((image, index) => (
                     <div
@@ -352,6 +355,9 @@ export default function SinglePost({ updatebasket, basket }) {
                       {singlePost.videos.map((video, index) => (
                         <div
                           className="squareImage"
+                          style={{
+                            backgroundColor: "pink",
+                          }}
                           key={index}
                           onClick={(e) => {
                             e.preventDefault();
