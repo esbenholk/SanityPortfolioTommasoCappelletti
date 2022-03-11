@@ -2408,6 +2408,19 @@ input::placeholder {
 .inactive {
   opacity: 40%;
 }
+
+.videoContainer div:nth-child(1),
+.videoContainer div:nth-child(2) {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100px;
+  min-width: 100%;
+  height: 100px;
+  min-height: 100%;
+}
 iframe {
   display: block;
   position: absolute;
