@@ -39,8 +39,6 @@ export default class VideoPlayer extends React.Component {
             style={{
               width: "100%",
               height: "100%",
-              position: "absolute",
-              top: "0",
             }}
           >
             <ReactPlayer
@@ -75,10 +73,10 @@ export default class VideoPlayer extends React.Component {
                 this.setState({ shouldPlay: true });
 
                 handleThumbnail();
-                // e.target.classList.add("hidden");
+                // e.target.classList.add("hidden")
               }}
             >
-              <Image image={this.state.video.thumbnail} />
+              <Image image={this.state.video.thumbnail} class={"cover"} />
             </div>
           </div>
         ) : (
