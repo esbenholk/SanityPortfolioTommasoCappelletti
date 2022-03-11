@@ -33,7 +33,7 @@ export default function Category() {
           slug, 
           description,
           "posts": *[_type == "project" && references(^._id)]
-          {title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, post.abbreviated_year2, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}
+          {title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, year, abbreviated_year, abbreviated_year2, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString}
         }`
       )
       .then((data) => {
