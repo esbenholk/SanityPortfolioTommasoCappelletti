@@ -29,7 +29,7 @@ export default function Basket({
                 <h2>Your cart is empty.</h2>
                 <p>
                   If your want to contact me without project references{" "}
-                  <a href={"mailto:" + mail}>Send email now</a>
+                  <a href={"mailto:" + info.email}>Send email now</a>
                 </p>
               </>
             ) : (
@@ -60,7 +60,7 @@ export default function Basket({
             <h2>Your cart is empty.</h2>
             <p>
               Add something in your cart to contact me.{" "}
-              <a href={"mailto:" + mail}>Or drop a line</a>
+              <a href={"mailto:" + info.email}>Or drop a line</a>
             </p>
           </>
         )}
