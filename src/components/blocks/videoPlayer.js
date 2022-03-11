@@ -85,25 +85,37 @@ export default class VideoPlayer extends React.Component {
             </div>
           </div>
         ) : (
-          <ReactPlayer
-            width="100%"
-            height="100%"
-            url={this.state.url}
-            playing={this.state.shouldPlay}
-            controls
-            onPause={handleThumbnail}
-            playsinline
-            config={{
-              youtube: {
-                playerVars: { modestbranding: 1 },
-              },
-              file: {
-                attributes: {
-                  controlsList: "nofullscreen",
-                },
-              },
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+              alignItems: "center",
+              backgroundColor: "red",
             }}
-          />
+          >
+            <ReactPlayer
+              width="100%"
+              height="100%"
+              url={this.state.url}
+              playing={this.state.shouldPlay}
+              controls
+              onPause={handleThumbnail}
+              playsinline
+              config={{
+                youtube: {
+                  playerVars: { modestbranding: 1 },
+                },
+                file: {
+                  attributes: {
+                    controlsList: "nofullscreen",
+                  },
+                },
+              }}
+            />
+          </div>
         )}
       </>
     );
