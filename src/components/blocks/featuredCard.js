@@ -23,7 +23,7 @@ export default function FeaturedCard({ post }) {
   return (
     <div className="featured_post_card" key={post}>
       <Link
-        to={"/projects/" + post.slug.current}
+        to={post.slug.current}
         key={post.slug.current}
         className="featured_post_card_image"
       >
@@ -50,7 +50,7 @@ export default function FeaturedCard({ post }) {
       >
         <div className="details">
           <Link
-            to={"/projects/" + post.slug.current}
+            to={post.slug.current}
             key={post.slug.current}
             className="w-full teaser-link"
           >
@@ -78,7 +78,7 @@ export default function FeaturedCard({ post }) {
                     <a
                       className="standardTransparent-button fcButton"
                       key={index}
-                      href={category.slug.current}
+                      href={"/category/" + category.slug.current}
                     >
                       {" "}
                       {category.title}{" "}
@@ -87,7 +87,7 @@ export default function FeaturedCard({ post }) {
               </div>
             ))}
           <Link
-            to={"/projects/" + post.slug.current}
+            to={post.slug.current}
             className="w-full teaser-link standard-button tag active extraBorder buttonOnWrapList fcButton"
           >
             See project

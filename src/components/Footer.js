@@ -39,7 +39,14 @@ export default function Footer() {
             className="overscrollPadded horizontalScroll2 horizontal"
           >
             {projectList.map((post, index) => (
-              <ProductCard post={post} key={index} />
+              <>
+                {" "}
+                {post.categories[0].title === "Creative" ? (
+                  <></>
+                ) : (
+                  <ProductCard post={post} key={index} />
+                )}
+              </>
             ))}
           </div>
         ) : null}

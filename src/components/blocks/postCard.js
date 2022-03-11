@@ -38,7 +38,7 @@ export default function PostCard({ post }) {
         >
           <div className="details">
             <Link
-              to={"/projects/" + post.slug.current}
+              to={post.slug.current}
               key={post.slug.current}
               className="w-full teaser-link"
             >
@@ -66,7 +66,7 @@ export default function PostCard({ post }) {
                       <a
                         className="standardTransparent-button"
                         key={index}
-                        href={category.slug.current}
+                        href={"/category/" + category.slug.current}
                       >
                         {" "}
                         {category.title}{" "}
@@ -75,7 +75,7 @@ export default function PostCard({ post }) {
                 </>
               ))}
             <Link
-              to={"/projects/" + post.slug.current}
+              to={post.slug.current}
               key={post.slug.current}
               className="w-full teaser-link standard-button tag active extraBorder"
             >
@@ -85,7 +85,7 @@ export default function PostCard({ post }) {
         </div>
       ) : null}
 
-      <Link to={"/projects/" + post.slug.current} key={post.slug.current}>
+      <Link to={post.slug.current} key={post.slug.current}>
         {post.mainImage.hotspot ? (
           <img
             src={urlFor(post.mainImage.asset.url)}

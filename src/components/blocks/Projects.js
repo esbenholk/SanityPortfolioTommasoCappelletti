@@ -169,16 +169,23 @@ export default function Projects({
         <div className="tag_grid horizontalScroll overscrollPadded">
           {categories &&
             categories.map((category, index) => (
-              <button
-                className="tag_button standard-button extraBordergrey"
-                key={index}
-                id={"category_" + category.title + ""}
-                onClick={() => {
-                  setCategory({ category });
-                }}
-              >
-                {category.title}
-              </button>
+              <>
+                {category.title === "Freebie" ||
+                  (category.title === "Creative" ? (
+                    <></>
+                  ) : (
+                    <button
+                      className="tag_button standard-button extraBordergrey"
+                      key={index}
+                      id={"category_" + category.title + ""}
+                      onClick={() => {
+                        setCategory({ category });
+                      }}
+                    >
+                      {category.title}
+                    </button>
+                  ))}
+              </>
             ))}
         </div>
       )}
@@ -207,7 +214,14 @@ export default function Projects({
         >
           {sortedPosts &&
             sortedPosts.map((post, index) => (
-              <PostCard post={post} key={index} />
+              <>
+                {" "}
+                {post.categories[0].title === "Creative" ? (
+                  <></>
+                ) : (
+                  <PostCard post={post} key={index} />
+                )}
+              </>
             ))}
         </Masonry>
       ) : (

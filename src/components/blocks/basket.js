@@ -134,11 +134,18 @@ export default function Basket({
                   {projectList ? (
                     <div className="flex-column">
                       {projectList.map((post, index) => (
-                        <BasketCard
-                          post={post}
-                          key={index}
-                          openMenu={updatebasket}
-                        />
+                        <>
+                          {" "}
+                          {post.categories[0].title === "Creative" ? (
+                            <></>
+                          ) : (
+                            <BasketCard
+                              post={post}
+                              key={index}
+                              openMenu={updatebasket}
+                            />
+                          )}
+                        </>
                       ))}
                     </div>
                   ) : null}

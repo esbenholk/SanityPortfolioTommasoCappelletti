@@ -237,7 +237,7 @@ export default function Home() {
                             <Link
                               key={index}
                               id={"category_" + category.title + ""}
-                              to={category.slug.current}
+                              to={"/category/" + category.slug.current}
                             >
                               {category.title}
                               {index + 1 !== project.categories.length

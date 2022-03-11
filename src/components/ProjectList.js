@@ -44,80 +44,88 @@ export default function Projects({ projectList }) {
       </div>
       {projectList &&
         projectList.map((project, index) => (
-          <div key={index} className="projectList-item">
-            {width > 900 ? (
-              <div
-                onMouseEnter={hover}
-                onMouseLeave={hover}
-                className="categories"
-              >
-                {" "}
-                <Link to={"/projects/" + project.slug.current}>
-                  {project.title ? project.title : "undefined"}
-                </Link>
-                {project.mainImage.hotspot && width > 900 ? (
-                  <img
-                    src={urlFor(project.mainImage.asset.url).url()}
-                    alt={project.mainImage.alt}
-                    style={{
-                      objectPosition: `${project.mainImage.hotspot.x * 100}% ${
-                        project.mainImage.hotspot.y * 100
-                      }%`,
-                    }}
-                    className="thumbnail seeOnHover hidden"
-                  />
-                ) : (
-                  <img
-                    src={urlFor(project.mainImage.asset.url).url()}
-                    alt={project.mainImage.alt}
-                    className="thumbnail seeOnHover hidden"
-                  />
-                )}
-              </div>
+          <>
+            {project.categories[0].title === "Creative" ? (
+              <></>
             ) : (
-              <div className="categories">
-                {" "}
-                <Link to={"/projects/" + project.slug.current}>
-                  {project.title ? project.title : "undefined"}
-                </Link>
-              </div>
-            )}
-            <div className="projectList-item">
-              {project.categories &&
-                project.categories.map((category, index) => (
-                  <>
-                    {category.title === "Freebie" ||
-                      (category.title === "Freebie" ? (
-                        <></>
+              <>
+                <div key={index} className="projectList-item">
+                  {width > 900 ? (
+                    <div
+                      onMouseEnter={hover}
+                      onMouseLeave={hover}
+                      className="categories"
+                    >
+                      {" "}
+                      <Link to={project.slug.current}>
+                        {project.title ? project.title : "undefined"}
+                      </Link>
+                      {project.mainImage.hotspot && width > 900 ? (
+                        <img
+                          src={urlFor(project.mainImage.asset.url).url()}
+                          alt={project.mainImage.alt}
+                          style={{
+                            objectPosition: `${
+                              project.mainImage.hotspot.x * 100
+                            }% ${project.mainImage.hotspot.y * 100}%`,
+                          }}
+                          className="thumbnail seeOnHover hidden"
+                        />
                       ) : (
-                        <Link
-                          key={index}
-                          id={"category_" + category.title + ""}
-                          to={category.slug.current}
-                          onMouseEnter={hover}
-                          onMouseLeave={hover}
-                        >
-                          {category.title}
-                          {index + 1 !== project.categories.length
-                            ? ", "
-                            : null}
-                        </Link>
+                        <img
+                          src={urlFor(project.mainImage.asset.url).url()}
+                          alt={project.mainImage.alt}
+                          className="thumbnail seeOnHover hidden"
+                        />
+                      )}
+                    </div>
+                  ) : (
+                    <div className="categories">
+                      {" "}
+                      <Link to={project.slug.current}>
+                        {project.title ? project.title : "undefined"}
+                      </Link>
+                    </div>
+                  )}
+                  <div className="projectList-item">
+                    {project.categories &&
+                      project.categories.map((category, index) => (
+                        <>
+                          {category.title === "Freebie" ||
+                            (category.title === "Freebie" ? (
+                              <></>
+                            ) : (
+                              <Link
+                                key={index}
+                                id={"category_" + category.title + ""}
+                                to={"/category/" + category.slug.current}
+                                onMouseEnter={hover}
+                                onMouseLeave={hover}
+                              >
+                                {category.title}
+                                {index + 1 !== project.categories.length
+                                  ? ", "
+                                  : null}
+                              </Link>
+                            ))}
+                        </>
                       ))}
-                  </>
-                ))}
-            </div>
+                  </div>
 
-            {width > 900 ? (
-              <p
-                className="flex-row align-left"
-                onMouseEnter={hover}
-                onMouseLeave={hover}
-              >
-                {project.year ? project.year : "undefined"}{" "}
-                {project.yearString ? <u>{project.yearString}</u> : null}
-              </p>
-            ) : null}
-          </div>
+                  {width > 900 ? (
+                    <p
+                      className="flex-row align-left"
+                      onMouseEnter={hover}
+                      onMouseLeave={hover}
+                    >
+                      {project.year ? project.year : "undefined"}{" "}
+                      {project.yearString ? <u>{project.yearString}</u> : null}
+                    </p>
+                  ) : null}
+                </div>
+              </>
+            )}
+          </>
         ))}
     </motion.div>
   );

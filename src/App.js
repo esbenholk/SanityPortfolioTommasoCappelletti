@@ -25,7 +25,7 @@ const SinglePost = lazy(() => import("./components/stickyScrollComponent.js"));
 const LandingPage = lazy(() => import("./components/LandingPage.js"));
 const ProjectList = lazy(() => import("./components/ProjectList.js"));
 const Category = lazy(() => import("./components/Category.js"));
-const Home = lazy(() => import("./components/Home.js"));
+// const Home = lazy(() => import("./components/Home.js"));
 
 function App() {
   const [siteSettings, setSiteSettings] = useState();
@@ -191,20 +191,21 @@ function App() {
                           />
                         )}
                       </Route>
-                      <Route exact path="/projects/:slug">
-                        <SinglePost updatebasket={updatebasket} />
-                      </Route>
+
                       <Route path="/projects">
                         <ProjectList projectList={projectList} />
                       </Route>
-                      <Route path="/about">
+                      {/* <Route path="/about">
                         <Home info={siteSettings} projectList={projectList} />
-                      </Route>
+                      </Route> */}
                       <Route path="/loader">
                         <Loader />
                       </Route>
-                      <Route path="/:slug">
+                      <Route path="/category/:slug">
                         <Category />
+                      </Route>
+                      <Route exact path="/:slug">
+                        <SinglePost updatebasket={updatebasket} />
                       </Route>
                     </Switch>
                   </ScrollToTop>

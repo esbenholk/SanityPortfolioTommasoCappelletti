@@ -484,7 +484,7 @@ export default function SinglePost({ updatebasket, basket }) {
                   <div className="flex-row align-left">
                     {singlePost.categories.map((category, index) => (
                       <Link
-                        to={"../" + category.slug.current}
+                        to={"../category/" + category.slug.current}
                         className="tag project_tag"
                         key={index}
                       >

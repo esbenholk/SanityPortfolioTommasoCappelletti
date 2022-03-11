@@ -21,7 +21,7 @@ export default function BasketCard({
   return (
     <div className={classssss + " flex-row align-top basketCard"}>
       <Link
-        to={"/projects/" + post.slug.current}
+        to={post.slug.current}
         key={post.slug.current + ""}
         className="basketCard_image_link"
         onClick={closeMenuLocal}
@@ -41,7 +41,7 @@ export default function BasketCard({
 
       <div className="details">
         <Link
-          to={"/projects/" + post.slug.current}
+          to={post.slug.current}
           key={post.slug.current + ""}
           className="w-full teaser-link"
           onClick={closeMenuLocal}

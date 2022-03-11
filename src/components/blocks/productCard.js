@@ -32,7 +32,7 @@ export default function ProductCard(props) {
   return (
     <div className={"product_card"}>
       <Link
-        to={"/projects/" + post.slug.current}
+        to={post.slug.current}
         // href={"/projects/" + post.slug.current}
         key={post.slug.current + "productCard"}
         className="w-full teaser-link"
@@ -91,7 +91,7 @@ export default function ProductCard(props) {
           {shouldHaveFreebieSign && (
             <div className="freebieSign">
               <Link
-                to={"/projects/" + post.slug.current}
+                to={post.slug.current}
                 // href={"/projects/" + post.slug.current}
                 key={post.slug.current + "productCard"}
                 className="w-full teaser-link"

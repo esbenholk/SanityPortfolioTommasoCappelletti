@@ -28,7 +28,7 @@ export default function Header() {
           {width > 950 ? (
             <>
               {width > 1300 || width < 1050 ? (
-                <NavLink to="/freebies" className={"menu_link"}>
+                <NavLink to="/category/freebies" className={"menu_link"}>
                   <h2 className="header-object">Freebies</h2>
                 </NavLink>
               ) : null}
