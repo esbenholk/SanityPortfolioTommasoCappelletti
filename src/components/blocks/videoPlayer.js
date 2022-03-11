@@ -35,7 +35,14 @@ export default class VideoPlayer extends React.Component {
     return (
       <>
         {this.state.video.thumbnail && this.state.showThumb ? (
-          <div style={{ width: "100%", height: "100%" }}>
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              top: "0",
+            }}
+          >
             <ReactPlayer
               width="100%"
               height="100%"

@@ -182,6 +182,7 @@ export default function SinglePost({ updatebasket, basket }) {
             onClick={(e) => {
               e.preventDefault();
               closeLightBox();
+              shutDownIframes();
             }}
             style={{ position: "absolute", right: "3%", top: "5%" }}
             src="../assets/CloseCross.svg"
@@ -244,7 +245,7 @@ export default function SinglePost({ updatebasket, basket }) {
 
         {singlePost.categories && (
           <Link
-            to={"../" + singlePost.categories[0].slug.current}
+            to={"../category/" + singlePost.categories[0].slug.current}
             className="tag project_tag directoryTag thirtypercentOpacity"
           >
             {singlePost.categories[0].title + " >"}
@@ -559,7 +560,7 @@ export default function SinglePost({ updatebasket, basket }) {
                   {singlePost.body && (
                     <div className="content">
                       <div className="flex-row justifyBetween header">
-                        <h2>Project details</h2>
+                        <h2>Details</h2>
                         <img
                           src="../assets/Arrowright.svg"
                           className="arrow"

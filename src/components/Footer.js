@@ -40,10 +40,7 @@ export default function Footer() {
           >
             {projectList.map((post, index) => (
               <>
-                {" "}
-                {post.categories[0].title === "Creative" ? (
-                  <></>
-                ) : (
+                {post.categories[0].title !== "Creative" && (
                   <ProductCard post={post} key={index} />
                 )}
               </>
