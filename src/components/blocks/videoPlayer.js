@@ -35,22 +35,7 @@ export default class VideoPlayer extends React.Component {
     return (
       <>
         {this.state.video.thumbnail && this.state.showThumb ? (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-              alignItems: "center",
-              backgroundColor: "red",
-              position: "absolute",
-              top: "0",
-              left: "0",
-              border: "2px solid pink",
-            }}
-            className="videoContainer"
-          >
+          <div className="videoContainer">
             <ReactPlayer
               width="100%"
               height="100%"
@@ -74,6 +59,9 @@ export default class VideoPlayer extends React.Component {
               style={{
                 position: "absolute",
                 top: "0",
+                left: "0",
+                right: "0",
+                bottom: "0",
                 width: "100%",
                 height: "100%",
               }}

@@ -2409,6 +2409,20 @@ input::placeholder {
   opacity: 40%;
 }
 
+.videoContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center !important;
+  align-content: center !important;
+  align-items: center !important;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid pink;
+}
+
 .videoContainer div:nth-child(1),
 .videoContainer div:nth-child(2) {
   position: absolute !important;
@@ -2420,6 +2434,7 @@ input::placeholder {
   min-width: 100% !important;
   height: 100px;
   min-height: 100% !important;
+  padding: 10%;
 }
 iframe {
   display: block !important;
