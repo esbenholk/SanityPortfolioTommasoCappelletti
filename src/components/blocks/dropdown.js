@@ -80,7 +80,10 @@ class Dropdown extends React.Component {
           alt="search icon"
           style={{ height: "19px" }}
         ></img>
-        <a key={item.slug.current.toString()} href={`../${item.slug.current}`}>
+        <a
+          key={item.slug.current.toString()}
+          href={`../category/${item.slug.current}`}
+        >
           {item.title}
         </a>
       </div>
