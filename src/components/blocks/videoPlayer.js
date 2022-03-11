@@ -44,13 +44,16 @@ export default class VideoPlayer extends React.Component {
               alignContent: "center",
               alignItems: "center",
               backgroundColor: "red",
+              position: "absolute",
+              top: "0",
+              left: "0",
             }}
           >
             <ReactPlayer
               width="100%"
               height="100%"
               url={this.state.url}
-              playing={this.state.shouldPlay}
+              // playing={this.state.shouldPlay}
               controls
               onPause={handleThumbnail}
               playsinline
@@ -87,6 +90,9 @@ export default class VideoPlayer extends React.Component {
         ) : (
           <div
             style={{
+              position: "absolute",
+              top: "0",
+              left: "0",
               width: "100%",
               height: "100%",
               display: "flex",
