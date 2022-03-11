@@ -43,6 +43,7 @@ export default class VideoPlayer extends React.Component {
               justifyContent: "center",
               alignContent: "center",
               alignItems: "center",
+              backgroundColor: "red",
             }}
           >
             <ReactPlayer
