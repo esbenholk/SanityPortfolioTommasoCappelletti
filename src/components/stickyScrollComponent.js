@@ -44,7 +44,7 @@ export default function SinglePost({ updatebasket, basket }) {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, abbreviated_year2, imagesGallery, external_links, description, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, Link, downloadfile{asset->{url}}, freebie
+          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, abbreviated_year2, imagesGallery, external_links, description, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, Link, FreebieButtonText, downloadfile{asset->{url}}, freebie
         }`
       )
       .then((data) => {
@@ -484,7 +484,11 @@ export default function SinglePost({ updatebasket, basket }) {
                       rel="noopener noreferrer"
                       className="addToCartButton yellow"
                     >
-                      Get this freebie
+                      {singlePost.FreebieButtonText ? (
+                        <>{singlePost.FreebieButtonText}</>
+                      ) : (
+                        "get this freebie"
+                      )}
                     </button>
                   </>
                 ) : null}
@@ -496,7 +500,11 @@ export default function SinglePost({ updatebasket, basket }) {
                     }}
                     className="addToCartButton yellow"
                   >
-                    Get this freebie
+                    {singlePost.FreebieButtonText ? (
+                      <>{singlePost.FreebieButtonText}</>
+                    ) : (
+                      "get this freebie"
+                    )}
                   </button>
                 ) : null}
               </>

@@ -67,12 +67,27 @@ export default function Footer() {
         <div className="flex-row justifyBetween footer_top">
           <div className="flex-row ">
             <NavLink to="/">
-              {info.logo && (
-                <img
-                  className="footerLogo"
-                  src={info.footerlogo.asset.url}
-                  alt=""
-                />
+              {width > 1310 ? (
+                <>
+                  {" "}
+                  {info.desktopfooterlogo && (
+                    <img
+                      className="footerLogo"
+                      src={info.desktopfooterlogo.asset.url}
+                      alt=""
+                    />
+                  )}
+                </>
+              ) : (
+                <>
+                  {info.footerlogo && (
+                    <img
+                      className="footerLogo"
+                      src={info.footerlogo.asset.url}
+                      alt=""
+                    />
+                  )}
+                </>
               )}
             </NavLink>
 

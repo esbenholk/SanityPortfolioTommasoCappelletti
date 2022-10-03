@@ -384,7 +384,7 @@ h1 {
 .mainImage {
   margin: 0;
   min-height: 580px;
-  max-height: 650px;
+  max-height: 850px;
   object-fit: cover;
 }
 
@@ -550,6 +550,40 @@ h1 {
   visibility: hidden;
   pointer-events: none;
 }
+.popupcontainer {
+  visibility: visible;
+
+  pointer-events: all;
+}
+.popup {
+  z-index: 99999999999;
+  width: 80%;
+  height: auto;
+  opacity: 1;
+  max-width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popupheader {
+  margin-top: -5px;
+  height: 30px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: white;
+}
+.popupheader img {
+  height: 30px;
+}
+.popupheader button {
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  border: rgba(0, 0, 0, 0) solid 1px;
+}
+
 .megaOverlay {
   position: fixed;
   top: 0;

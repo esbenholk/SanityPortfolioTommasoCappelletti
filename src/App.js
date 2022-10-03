@@ -32,6 +32,7 @@ const Category = lazy(() => import("./components/Category.js"));
 function App() {
   const [siteSettings, setSiteSettings] = useState();
   const [projectList, setProjectList] = useState();
+  const [shouldShowPopUp, setshouldShowPopUp] = useState(true);
 
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -52,7 +53,7 @@ function App() {
     ///get the site settings and basic info
     sanityClient
       .fetch(
-        '*[_type == "siteSettings"]{title, greeting, More_skills_and_ideas, More_skills_and_ideas2, featured_project_title, mainImage{asset->{_id,url}, hotspot, alt}, mainImages, authorImage{asset->{_id,url}, hotspot, alt},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}, contactDetails, contactHours, email}'
+        '*[_type == "siteSettings"]{title, greeting, More_skills_and_ideas, More_skills_and_ideas2, featured_project_title, mainImage{asset->{_id,url}, hotspot, alt}, mainImages, authorImage{asset->{_id,url}, hotspot, alt}, shouldpopup, popupimage{asset->{_id,url}},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}}, desktopfooterlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}, contactDetails, contactHours, email}'
       )
       .then((data) => {
         setSiteSettings(data[0]);
@@ -238,6 +239,35 @@ function App() {
                 </motion.div>
               </AnimatePresence>
               {siteSettings && <Footer />}
+              {siteSettings &&
+              siteSettings.shouldpopup &&
+              siteSettings.popupimage &&
+              shouldShowPopUp ? (
+                <>
+                  <div className="overlay popupcontainer"></div>
+                  <div className="popup">
+                    <img
+                      src={siteSettings.popupimage.asset.url}
+                      style={{
+                        width: "100%",
+                      }}
+                      alt="popupimage"
+                    ></img>
+                    <div className="popupheader">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setshouldShowPopUp(false);
+                        }}
+                      >
+                        <img alt="closeicon" src="assets/CloseCross.svg"></img>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
             </BrowserRouter>
           </AppContext.Provider>
         </Suspense>
