@@ -1,3 +1,5 @@
+// | cat >build/\_redirects
+
 # React App with @React-Three/fiber (and assocaited)
 
 The application is hosted serverlessly on Netlify, with npm build React App, and has a proxy server on Heroku.
