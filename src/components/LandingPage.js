@@ -11,6 +11,8 @@ import FeaturedCard from "./blocks/featuredCard";
 import CustomCarousel from "./blocks/Carousel";
 import Image from "./blocks/image";
 
+import { Link } from "react-router-dom";
+
 import useWindowDimensions from "./functions/useWindowDimensions";
 
 export default function LandingPage() {
@@ -60,9 +62,26 @@ export default function LandingPage() {
                 currentIndex={0}
               >
                 {info.mainImages.map((image, index) => (
-                  <div key={index}>
-                    <Image image={image} class={"mainImage fullwidth"} />
-                  </div>
+                  <>
+                    {info.mainImageLinks[index].includes("http") ? (
+                      <a
+                        href={info.mainImageLinks[index]}
+                        key={index}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <div key={index}>
+                          <Image image={image} class={"mainImage fullwidth"} />
+                        </div>
+                      </a>
+                    ) : (
+                      <Link to={info.mainImageLinks[index]} key={index}>
+                        <div key={index}>
+                          <Image image={image} class={"mainImage fullwidth"} />
+                        </div>
+                      </Link>
+                    )}{" "}
+                  </>
                 ))}
               </CustomCarousel>
             ) : (
@@ -74,9 +93,26 @@ export default function LandingPage() {
                 currentIndex={0}
               >
                 {info.mainImages.map((image, index) => (
-                  <div key={index}>
-                    <Image image={image} class={"mainImage fullwidth"} />
-                  </div>
+                  <>
+                    {info.mainImageLinks[index].includes("http") ? (
+                      <a
+                        href={info.mainImageLinks[index]}
+                        key={index}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <div key={index}>
+                          <Image image={image} class={"mainImage fullwidth"} />
+                        </div>
+                      </a>
+                    ) : (
+                      <Link to={info.mainImageLinks[index]} key={index}>
+                        <div key={index}>
+                          <Image image={image} class={"mainImage fullwidth"} />
+                        </div>
+                      </Link>
+                    )}{" "}
+                  </>
                 ))}
               </CustomCarousel>
             )}

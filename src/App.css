@@ -499,7 +499,7 @@ h1 {
 }
 
 .addToCartButton {
-  background-color: #4bc35d !important;
+  background-color: #4bc35d;
   border-radius: 49px;
   opacity: 1;
   color: white;
@@ -525,7 +525,7 @@ h1 {
 }
 
 .addToCartButton.yellow {
-  background-color: #ffa700 !important;
+  background-color: #ffa700;
 }
 
 .addToCartButton.grey {
@@ -566,10 +566,12 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.popup img {
+  border-radius: 20px;
+}
 .popupheader {
   margin-top: -5px;
-  height: 30px;
+  height: 0px;
   width: 100%;
   position: absolute;
   top: 0;
@@ -582,6 +584,8 @@ h1 {
   height: 30px;
   background-color: rgba(0, 0, 0, 0);
   border: rgba(0, 0, 0, 0) solid 1px;
+  margin-top: 10px;
+  margin-left: 5px;
 }
 
 .megaOverlay {

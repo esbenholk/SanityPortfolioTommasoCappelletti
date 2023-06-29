@@ -53,7 +53,7 @@ function App() {
     ///get the site settings and basic info
     sanityClient
       .fetch(
-        '*[_type == "siteSettings"]{title, greeting, More_skills_and_ideas, More_skills_and_ideas2, featured_project_title, mainImage{asset->{_id,url}, hotspot, alt}, mainImages, authorImage{asset->{_id,url}, hotspot, alt}, shouldpopup, popupimage{asset->{_id,url}},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}}, desktopfooterlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}, contactDetails, contactHours, email}'
+        '*[_type == "siteSettings"]{title, greeting, More_skills_and_ideas, More_skills_and_ideas2, featured_project_title, mainImage{asset->{_id,url}, hotspot, alt}, mainImages, mainImageLinks, authorImage{asset->{_id,url}, hotspot, alt}, shouldpopup, popupimage{asset->{_id,url}},  logo{asset->{_id,url}}, footerlogo{asset->{_id,url}}, desktopfooterlogo{asset->{_id,url}},featuredProjects, about, contact, socialMediaHandles[]{logo{asset->{_id,url}},url, URLName}, contactDetails, contactHours, email}'
       )
       .then((data) => {
         setSiteSettings(data[0]);

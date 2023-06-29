@@ -44,7 +44,7 @@ export default function SinglePost({ updatebasket, basket }) {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, abbreviated_year2, imagesGallery, external_links, description, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, Link, FreebieButtonText, downloadfile{asset->{url}}, freebie
+          title,mainImage{asset->{_id,url}, hotspot, alt}, productImage{asset->{_id,url}, hotspot, alt}, body, year, abbreviated_year, abbreviated_year2, imagesGallery, external_links, description, videos, star_rating ,slug, categories[]->{title, slug}, tags, color, recap, yearString, client, Link, FreebieButtonText, FreebieButtonColor, downloadfile{asset->{url}}, freebie
         }`
       )
       .then((data) => {
@@ -161,7 +161,7 @@ export default function SinglePost({ updatebasket, basket }) {
   }
 
   if (!singlePost) return <Loader />;
-
+  console.log("PROJECT", singlePost);
   return (
     <>
       {lightBoxIsOpen && (
@@ -483,6 +483,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="addToCartButton yellow"
+                      style={{ backgroundColor: singlePost.FreebieButtonColor }}
                     >
                       {singlePost.FreebieButtonText ? (
                         <>{singlePost.FreebieButtonText}</>
@@ -499,6 +500,7 @@ export default function SinglePost({ updatebasket, basket }) {
                       window.location.href = `${singlePost.downloadfile.asset.url}?dl=`;
                     }}
                     className="addToCartButton yellow"
+                    style={{ backgroundColor: singlePost.FreebieButtonColor }}
                   >
                     {singlePost.FreebieButtonText ? (
                       <>{singlePost.FreebieButtonText}</>
