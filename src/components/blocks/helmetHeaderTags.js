@@ -18,21 +18,12 @@ export const HeadTags = (props) => {
         key="og:description"
         content={props.description}
       />
-      <meta
-        property="og:image"
-        key="og:image"
-        content={`https://cdn.sanity.io/images/2748ynqv/production/54016871c5bb2c6dd5a343b1d1cef1664c83e0d4-2355x2355.jpg`}
-      />
-
       <meta property="og:title" content={props.title} />
       <meta property="og:url" content="" />
       <meta property="og:description" content={props.description} />
       <meta property="twitter:title" content={props.title} />
       <meta property="twitter:description" content={props.description} />
-      <meta
-        property="twitter:image"
-        content={`https://cdn.sanity.io/images/2748ynqv/production/54016871c5bb2c6dd5a343b1d1cef1664c83e0d4-2355x2355.jpg`}
-      />
+
       <meta property="twitter:card" content="" />
     </Helmet>
   );
