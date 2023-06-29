@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Suspense } from "react";
 import sanityClient from "../client";
 import { useParams } from "react-router-dom";
 import Projects from "./blocks/Projects";
 
 import BlockContent from "./blocks/BlockContent";
+import { HeadTags } from "./blocks/helmetHeaderTags";
+import AppContext from "../globalState";
 
 export default function Category() {
   const { slug } = useParams();
   const [projectList, setProjectList] = useState();
   const [category, setCategory] = useState();
   const [shouldHaveFreebieSign, setShouldHaveFreebieSign] = useState(false);
+  const myContext = useContext(AppContext);
+  const info = myContext.siteSettings;
 
   useEffect(() => {
     if (slug === "freebies") {
@@ -45,6 +49,13 @@ export default function Category() {
 
   return (
     <div className="content-container ">
+      {info && (
+        <HeadTags
+          title={info.title}
+          description={info.description}
+          image={info.mainImage.asset.url}
+        />
+      )}
       <div className="fullWidthPadded category_details">
         {category && category.title ? (
           <h1 className="noMargin categoryTitle">{category.title}</h1>

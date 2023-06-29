@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import sanityClient from "../client";
 
@@ -11,7 +11,8 @@ import { toggleHover } from "./functions/toggleHover";
 import useWindowDimensions from "./functions/useWindowDimensions";
 
 import { Link } from "react-router-dom";
-
+import { HeadTags } from "./blocks/helmetHeaderTags";
+import AppContext from "../globalState";
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(sanityClient);
 
@@ -24,6 +25,8 @@ function hover(e) {
 
 export default function Projects({ projectList }) {
   const { width } = useWindowDimensions();
+  const myContext = useContext(AppContext);
+  const info = myContext.siteSettings;
 
   return (
     <motion.div
@@ -33,6 +36,13 @@ export default function Projects({ projectList }) {
       // animate={{ opacity: 1 }}
       // exit={{ opacity: 0 }}
     >
+      {info && (
+        <HeadTags
+          title={info.title}
+          description={info.description}
+          image={info.mainImage.asset.url}
+        />
+      )}
       <div className="projectList-item">
         <h1 className={width > 900 ? "categories" : "categories headline"}>
           Projects

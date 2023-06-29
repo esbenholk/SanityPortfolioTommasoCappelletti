@@ -1,13 +1,15 @@
 import sanityClient from "../client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import imageUrlBuilder from "@sanity/image-url";
 
 import { motion } from "framer-motion";
 
 import { toggleHover } from "./functions/toggleHover";
+import AppContext from "../globalState";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
+import { HeadTags } from "./blocks/helmetHeaderTags";
 
 import { Link } from "react-router-dom";
 
@@ -24,6 +26,8 @@ function hover(e) {
 export default function Projects() {
   const { width } = useWindowDimensions();
   const [pressList, setPressList] = useState();
+  const myContext = useContext(AppContext);
+  const info = myContext.siteSettings;
 
   useEffect(() => {
     sanityClient
@@ -44,6 +48,13 @@ export default function Projects() {
       // animate={{ opacity: 1 }}
       // exit={{ opacity: 0 }}
     >
+      {info && (
+        <HeadTags
+          title={info.title}
+          description={info.greeting}
+          image={info.mainImage.asset.url}
+        />
+      )}
       <div className="projectList-item">
         <h1 className={width > 900 ? "categories" : "categories headline"}>
           Press
