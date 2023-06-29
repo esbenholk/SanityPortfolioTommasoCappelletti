@@ -140,6 +140,7 @@ function App() {
         <HeadTags
           title={siteSettings.title}
           description={siteSettings.description}
+          image={siteSettings.mainImage.asset.url}
         />
       )}
 

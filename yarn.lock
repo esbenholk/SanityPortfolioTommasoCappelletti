@@ -9670,6 +9670,11 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha512-PhmXi5XmoyKw1Un4E+opM2KcsJInDvKyuOumcjjw3waw86ZNjHwVUOOWLc4bCzLdcKNaWBH9e99sbWzDQsVaYg==
 
+prerender-node@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/prerender-node/-/prerender-node-3.7.0.tgz#30de48138b52ceb2f70da7cf0401f2c3a05ec99f"
+  integrity sha512-FuhXsH0RIjxMbR/K/+S6lpnFu+lgkYd7Vy9qTob2Tp7h7p7n1NYmslPpCEz8xLYwIMgbU9vrTOoxXy5/gRY8mA==
+
 pretty-bytes@^5.1.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.6.0.tgz#356256f643804773c82f64723fe78c92c62beaeb"

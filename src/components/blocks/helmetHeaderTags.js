@@ -18,11 +18,15 @@ export const HeadTags = (props) => {
         key="og:description"
         content={props.description}
       />
+      <meta property="og:image" key="og:image" content={props.image} />
+
       <meta property="og:title" content={props.title} />
       <meta property="og:url" content="" />
       <meta property="og:description" content={props.description} />
       <meta property="twitter:title" content={props.title} />
       <meta property="twitter:description" content={props.description} />
+
+      <meta property="twitter:image" content={props.image} />
 
       <meta property="twitter:card" content="" />
     </Helmet>
