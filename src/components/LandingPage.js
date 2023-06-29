@@ -12,6 +12,7 @@ import CustomCarousel from "./blocks/Carousel";
 import Image from "./blocks/image";
 
 import { Link } from "react-router-dom";
+import { HeadTags } from "./blocks/helmetHeaderTags";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
 
@@ -48,6 +49,14 @@ export default function LandingPage() {
         <motion.h1 className="headline flex-column fullWidthPadded">
           {info.greeting}
         </motion.h1>
+      )}
+
+      {info && (
+        <HeadTags
+          title={info.title}
+          description={info.greeting}
+          image={info.mainImage.asset.url}
+        />
       )}
 
       <>

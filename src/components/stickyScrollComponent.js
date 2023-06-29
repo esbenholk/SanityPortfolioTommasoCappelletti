@@ -168,7 +168,7 @@ export default function SinglePost({ updatebasket, basket }) {
       {singlePost && (
         <HeadTags
           title={singlePost.title}
-          description={singlePost.body}
+          description={singlePost.recap[0].children[0].text}
           image={singlePost.mainImage.asset.url}
         />
       )}
