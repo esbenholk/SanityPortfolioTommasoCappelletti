@@ -6,7 +6,7 @@ import "./App.css";
 import sanityClient from "./client";
 import Header from "./components/Header_function";
 
-import { Helmet } from "react-helmet";
+import { HeadTags } from "./components/blocks/helmetHeaderTags";
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -137,20 +137,10 @@ function App() {
   return (
     <>
       {siteSettings && (
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>My Title</title>
-          <link rel="canonical" href="http://mysite.com/example" />
-          <meta
-            property="og:image"
-            content={siteSettings.mainImage.asset.url}
-          />{" "}
-          <meta property="og:URL" content={siteSettings.mainImage.asset.url} />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1"
-          />{" "}
-        </Helmet>
+        <HeadTags
+          title={siteSettings.title}
+          description={siteSettings.description}
+        />
       )}
 
       <main>
