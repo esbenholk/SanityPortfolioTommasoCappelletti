@@ -27,8 +27,7 @@ export const HeadTags = (props) => {
       <meta property="twitter:description" content={props.description} />
 
       <meta property="twitter:image" content={props.image} />
-
-      <meta property="twitter:card" content="" />
+      <meta name="twitter:card" content="summary_large_image" />
     </Helmet>
   );
 };

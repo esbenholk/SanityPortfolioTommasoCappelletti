@@ -6,8 +6,6 @@ import "./App.css";
 import sanityClient from "./client";
 import Header from "./components/Header_function";
 
-import { HeadTags } from "./components/blocks/helmetHeaderTags";
-
 import { AnimatePresence, motion } from "framer-motion";
 
 import Footer from "./components/Footer";
@@ -136,14 +134,6 @@ function App() {
 
   return (
     <>
-      {siteSettings && (
-        <HeadTags
-          title={siteSettings.title}
-          description={siteSettings.description}
-          image={siteSettings.mainImage.asset.url}
-        />
-      )}
-
       <main>
         <Suspense fallback={<Loader />}>
           <AppContext.Provider value={globalContext}>

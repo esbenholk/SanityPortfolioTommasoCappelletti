@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import BlockContent from "./blocks/BlockContent";
 
 import Masonry from "react-masonry-css";
+import { HeadTags } from "./blocks/helmetHeaderTags";
 
 import useWindowDimensions from "./functions/useWindowDimensions";
 
@@ -164,6 +165,13 @@ export default function SinglePost({ updatebasket, basket }) {
   console.log("PROJECT", singlePost);
   return (
     <>
+      {singlePost && (
+        <HeadTags
+          title={singlePost.title}
+          description={singlePost.body}
+          image={singlePost.mainImage.asset.url}
+        />
+      )}
       {lightBoxIsOpen && (
         <div
           style={{
