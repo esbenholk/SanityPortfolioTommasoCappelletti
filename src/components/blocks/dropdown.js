@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 class Dropdown extends React.Component {
   constructor(props) {
@@ -80,12 +81,13 @@ class Dropdown extends React.Component {
           alt="search icon"
           style={{ height: "19px" }}
         ></img>
-        <a
+        <NavLink
+          to={`../category/${item.slug.current}`}
           key={item.slug.current.toString()}
-          href={`../category/${item.slug.current}`}
+          // href={`../category/${item.slug.current}`}
         >
           {item.title}
-        </a>
+        </NavLink>
       </div>
     ));
     return <div className="dropdown__items"> {list} </div>;

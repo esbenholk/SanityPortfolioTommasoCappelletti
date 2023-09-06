@@ -239,7 +239,10 @@ function App() {
                           setshouldShowPopUp(false);
                         }}
                       >
-                        <img alt="closeicon" src="assets/CloseCross.svg"></img>
+                        <img
+                          alt="closeicon"
+                          src="../assets/CloseCross.svg"
+                        ></img>
                       </button>
                     </div>
                   </div>
