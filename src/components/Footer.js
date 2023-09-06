@@ -109,7 +109,7 @@ export default function Footer() {
                   <h2 className="header-object">Freebies</h2>
                 </NavLink>{" "}
                 <NavLink
-                  to="/category/press"
+                  to="/press"
                   className={"footer_menu_link menu_limk"}
                 >
                   <h2 className="header-object">Press</h2>
